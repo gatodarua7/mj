@@ -1,0 +1,282 @@
+[
+  {
+    "pk": "1191484a-4ab1-4662-8c41-269fc1e66e22",
+    "model": "pessoas.Servidor",
+    "fields": {
+      "nome": "JOSE MARIA",
+      "nome_social": "",
+      "cpf": "33245741022",
+      "rg": "01234567",
+      "orgao_expedidor": null,
+      "genero": "96637461-43cb-4d55-893b-c09fe514ecf7",
+      "raca": null,
+      "estado_civil": "3c2c263e-0713-4bf1-a707-903fe601e6ae",
+      "nacionalidade": [
+        1
+      ],
+      "estado": null,
+      "naturalidade": null,
+      "nome_mae": "MARIA",
+      "nome_pai": "JOSE",
+      "grau_instrucao": "a414408d-aee8-44a7-b513-f7084fde2beb",
+      "necessidade_especial": [
+        "b83cb47a-dbdb-49e4-9ef7-34fcec39443f"
+      ],
+      "orientacao_sexual": "fd9341f3-4c70-43a2-9e12-1e2da2d0ae4e",
+      "religiao": "1c063b46-2b96-41a9-831d-4fed804ae05e",
+      "enderecos": [],
+      "telefones": [
+        "90924433-e856-4d21-abf2-e14b09cf4042"
+      ],
+      "data_nascimento": null,
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "updated_at": null,
+      "delete_at": null,
+      "usuario_cadastro": 1,
+      "usuario_edicao": null,
+      "usuario_exclusao": null,
+      "excluido": true,
+      "mae_falecido": false,
+      "mae_nao_declarado": false,
+      "pai_falecido": false,
+      "pai_nao_declarado": false,
+      "email_pessoal": "teste@teste.com",
+      "email_profissional": "teste@mj.gov.br",
+      "matricula": "12345678",
+      "data_admissao": "2020-01-01",
+      "lotacao": "f70266ac-74ea-4494-bd75-3fed4dd05848",
+      "cargos": "05ebe3b6-a127-4c3b-9bf2-8c3034adea10",
+      "funcao": [
+        "5f68a414-038c-4454-9c57-16d660d23e5b"
+      ],
+      "documentos": [],
+      "telefones_funcionais": [
+        "eb43b191-cfad-4011-879d-b2da2466e8ea"
+      ]
+    }
+  },
+  {
+    "pk": "816dec89-24ff-43ef-9bec-af7ef75b4594",
+    "model": "pessoas.Servidor",
+    "fields": {
+      "nome": "MARIA JOSE",
+      "nome_social": "",
+      "cpf": "30094488053",
+      "rg": "01234567",
+      "orgao_expedidor": "96637461-43cb-4d55-893b-c09fe514ebf7",
+      "genero": "96637461-43cb-4d55-893b-c09fe514ecf7",
+      "raca": "6dee8d2d-4cfb-4d44-b9ce-1857e4895ac7",
+      "estado_civil": "3c2c263e-0713-4bf1-a707-903fe601e6ae",
+      "nacionalidade": [
+        1
+      ],
+      "estado": null,
+      "naturalidade": null,
+      "nome_mae": "MARIA",
+      "nome_pai": "JOSE",
+      "grau_instrucao": "a414408d-aee8-44a7-b513-f7084fde2beb",
+      "necessidade_especial": [
+        "b83cb47a-dbdb-49e4-9ef7-34fcec39443f"
+      ],
+      "orientacao_sexual": "fd9341f3-4c70-43a2-9e12-1e2da2d0ae4e",
+      "religiao": "48edba8f-6303-496c-903e-1855be521a91",
+      "enderecos": [],
+      "telefones": [
+        "90924433-e856-4d21-abf2-e14b09cf4042"
+      ],
+      "data_nascimento": null,
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "updated_at": null,
+      "delete_at": null,
+      "usuario_cadastro": 1,
+      "usuario_edicao": null,
+      "usuario_exclusao": null,
+      "excluido": false,
+      "mae_falecido": false,
+      "mae_nao_declarado": false,
+      "pai_falecido": false,
+      "pai_nao_declarado": false,
+      "email_pessoal": "teste@teste.com",
+      "email_profissional": "teste@mj.gov.br",
+      "matricula": "12345678",
+      "data_admissao": "2020-01-01",
+      "lotacao": "f70266ac-74ea-4494-bd75-3fed4dd05848",
+      "cargos": "05ebe3b6-a127-4c3b-9bf2-8c3034adea10",
+      "funcao": [
+        "5f68a414-038c-4454-9c57-16d660d23e5b"
+      ],
+      "documentos": [],
+      "telefones_funcionais": [
+        "eb43b191-cfad-4011-879d-b2da2466e8ea"
+      ]
+    }
+  },
+  {
+    "pk": "f7c12c0a-ae08-4c5d-af7a-55f9dc72e0b1",
+    "model": "pessoas.Servidor",
+    "fields": {
+      "nome": "Jose",
+      "nome_social": "",
+      "cpf": "17081402046",
+      "rg": "01234567",
+      "orgao_expedidor": null,
+      "genero": "96637461-43cb-4d55-893b-c09fe514ecf7",
+      "raca": null,
+      "estado_civil": "3c2c263e-0713-4bf1-a707-903fe601e6ae",
+      "nacionalidade": [
+        1
+      ],
+      "estado": null,
+      "naturalidade": null,
+      "nome_mae": "MARIA",
+      "nome_pai": "JOSE",
+      "grau_instrucao": "a414408d-aee8-44a7-b513-f7084fde2beb",
+      "necessidade_especial": [
+        "b83cb47a-dbdb-49e4-9ef7-34fcec39443f"
+      ],
+      "orientacao_sexual": "fd9341f3-4c70-43a2-9e12-1e2da2d0ae4e",
+      "religiao": "1c063b46-2b96-41a9-831d-4fed804ae05e",
+      "enderecos": [],
+      "telefones": [
+        "90924433-e856-4d21-abf2-e14b09cf4042"
+      ],
+      "data_nascimento": null,
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "updated_at": null,
+      "delete_at": null,
+      "usuario_cadastro": 1,
+      "usuario_edicao": null,
+      "usuario_exclusao": null,
+      "excluido": false,
+      "mae_falecido": false,
+      "mae_nao_declarado": false,
+      "pai_falecido": false,
+      "pai_nao_declarado": false,
+      "email_pessoal": "teste@teste.com",
+      "email_profissional": "teste@mj.gov.br",
+      "matricula": "12345678",
+      "data_admissao": "2020-01-01",
+      "lotacao": "f70266ac-74ea-4494-bd75-3fed4dd05848",
+      "cargos": "05ebe3b6-a127-4c3b-9bf2-8c3034adea10",
+      "funcao": [
+        "5f68a414-038c-4454-9c57-16d660d23e5b"
+      ],
+      "documentos": [],
+      "telefones_funcionais": [
+        "eb43b191-cfad-4011-879d-b2da2466e8ea"
+      ]
+    }
+  },
+  {
+    "pk": "c50fbd9a-a5f5-4b5d-8713-ed80a072f2c1",
+    "model": "pessoas.Servidor",
+    "fields": {
+      "nome": "ZEZO",
+      "nome_social": "",
+      "cpf": "73712469004",
+      "rg": "01234567",
+      "orgao_expedidor": null,
+      "genero": "96637461-43cb-4d55-893b-c09fe514ecf7",
+      "raca": null,
+      "estado_civil": "3c2c263e-0713-4bf1-a707-903fe601e6ae",
+      "nacionalidade": [
+        1
+      ],
+      "estado": null,
+      "naturalidade": null,
+      "nome_mae": "MARIA",
+      "nome_pai": "JOSE",
+      "grau_instrucao": "a414408d-aee8-44a7-b513-f7084fde2beb",
+      "necessidade_especial": [
+        "b83cb47a-dbdb-49e4-9ef7-34fcec39443f"
+      ],
+      "orientacao_sexual": "fd9341f3-4c70-43a2-9e12-1e2da2d0ae4e",
+      "religiao": "1c063b46-2b96-41a9-831d-4fed804ae05e",
+      "enderecos": [],
+      "telefones": [
+        "90924433-e856-4d21-abf2-e14b09cf4042"
+      ],
+      "data_nascimento": null,
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "updated_at": null,
+      "delete_at": null,
+      "usuario_cadastro": 1,
+      "usuario_edicao": null,
+      "usuario_exclusao": null,
+      "excluido": false,
+      "mae_falecido": false,
+      "mae_nao_declarado": false,
+      "pai_falecido": false,
+      "pai_nao_declarado": false,
+      "email_pessoal": "teste@teste.com",
+      "email_profissional": "teste@mj.gov.br",
+      "matricula": "12345678",
+      "data_admissao": "2020-01-01",
+      "lotacao": "f70266ac-74ea-4494-bd75-3fed4dd05848",
+      "cargos": "05ebe3b6-a127-4c3b-9bf2-8c3034adea10",
+      "funcao": [
+        "5f68a414-038c-4454-9c57-16d660d23e5b"
+      ],
+      "documentos": [],
+      "telefones_funcionais": [
+        "eb43b191-cfad-4011-879d-b2da2466e8ea"
+      ]
+    }
+  },
+  {
+    "pk": "11b6fece-3354-4d13-8dd3-89efea7bd4fa",
+    "model": "pessoas.Servidor",
+    "fields": {
+      "nome": "ZE",
+      "nome_social": "",
+      "cpf": "34813398014",
+      "rg": "01234567",
+      "orgao_expedidor": null,
+      "genero": "96637461-43cb-4d55-893b-c09fe514ecf7",
+      "raca": null,
+      "estado_civil": "3c2c263e-0713-4bf1-a707-903fe601e6ae",
+      "nacionalidade": [
+        1
+      ],
+      "estado": null,
+      "naturalidade": null,
+      "nome_mae": "MARIA",
+      "nome_pai": "JOSE",
+      "grau_instrucao": "a414408d-aee8-44a7-b513-f7084fde2beb",
+      "necessidade_especial": [
+        "b83cb47a-dbdb-49e4-9ef7-34fcec39443f"
+      ],
+      "orientacao_sexual": "fd9341f3-4c70-43a2-9e12-1e2da2d0ae4e",
+      "religiao": "1c063b46-2b96-41a9-831d-4fed804ae05e",
+      "enderecos": [],
+      "telefones": [
+        "90924433-e856-4d21-abf2-e14b09cf4042"
+      ],
+      "data_nascimento": null,
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "updated_at": null,
+      "delete_at": null,
+      "usuario_cadastro": 1,
+      "usuario_edicao": null,
+      "usuario_exclusao": null,
+      "excluido": false,
+      "mae_falecido": false,
+      "mae_nao_declarado": false,
+      "pai_falecido": false,
+      "pai_nao_declarado": false,
+      "email_pessoal": "teste@teste.com",
+      "email_profissional": "teste@mj.gov.br",
+      "matricula": "12345678",
+      "data_admissao": "2020-01-01",
+      "lotacao": "f70266ac-74ea-4494-bd75-3fed4dd05848",
+      "cargos": "05ebe3b6-a127-4c3b-9bf2-8c3034adea10",
+      "funcao": [
+        "5f68a414-038c-4454-9c57-16d660d23e5b"
+      ],
+      "documentos": [],
+      "telefones_funcionais": [
+        "eb43b191-cfad-4011-879d-b2da2466e8ea"
+      ]
+    }
+  }
+]

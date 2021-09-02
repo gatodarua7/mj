@@ -1,0 +1,48 @@
+[
+    {
+      "pk": "15764e55-46a8-49ee-aa3e-56152dcb0c65",
+      "model": "cadastros.foto",
+      "fields": {
+        "foto_temp": "media/fotos/baixa.jpg",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    },
+    {
+      "pk": "efcd3306-0c77-4f93-945c-9672ff72e256",
+      "model": "cadastros.foto",
+      "fields": {
+        "foto_temp": "media/fotos/imagem.jpg",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "delete_at": "2020-01-01T00:00:00-03:00",
+        "usuario_exclusao": 1,
+        "excluido": true
+      }
+    },
+    {
+      "pk": "c6e4fe66-2601-4383-b485-0dfc7ec12f84",
+      "model": "cadastros.foto",
+      "fields": {
+        "foto_temp": "media/fotos/imagem.jpg",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": false,
+        "excluido": false
+      }
+    },
+    {
+      "pk": "f07fd02a-7e8f-465d-ba15-ce116f2ec105",
+      "model": "cadastros.foto",
+      "fields": {
+        "foto_temp": "media/fotos/baixa.jpg",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    }
+  ]

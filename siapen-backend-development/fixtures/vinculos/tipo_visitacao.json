@@ -1,0 +1,16 @@
+[
+    {
+      "pk": 1,
+      "model": "vinculos.TipoVisitacao",
+      "fields": {
+        "descricao": "PRESENCIAL"
+      }
+    },
+    {
+      "pk": 2,
+      "model": "vinculos.TipoVisitacao",
+      "fields": {
+        "descricao": "PARLATÓRIO"
+      }
+    }
+  ]

@@ -1,0 +1,41 @@
+[
+  {
+    "pk": "96637461-43cb-4d55-89cb-c09fe514ebf7",
+    "model": "cadastros.Periculosidade",
+    "fields": {
+      "nome": "PPP",
+      "sigla": "p",
+      "observacao": "periculoso",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "24b81a5b-b377-4fd9-b05c-5db5b9db9461",
+    "model": "cadastros.Periculosidade",
+    "fields": {
+      "nome": "Segue o Jogo",
+      "sigla": "SJ",
+      "observacao": "Nada",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "1379b972-4701-4389-806c-a078fe59e056",
+    "model": "cadastros.Periculosidade",
+    "fields": {
+      "nome": "Fugido",
+      "sigla": "f",
+      "observacao": "Nao sei onde está",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "pk": "b790d23e-9e25-4054-915e-5ff90e628bf1",
+    "model": "social.Profissao",
+    "fields": {
+      "nome": "PEDREIRO",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "734f6446-b960-4b86-a884-9d14ea574e9c",
+    "model": "social.Profissao",
+    "fields": {
+      "nome": "CARPINTEIRO(A)",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "734f6446-b960-4b86-a884-9d14ea574e9d",
+    "model": "social.Profissao",
+    "fields": {
+      "nome": "ENGENHEIRO(A)",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  }
+]

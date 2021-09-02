@@ -1,0 +1,43 @@
+[
+    {
+      "pk": "8daa2753-4a87-4d40-ab8d-4ffdc2706f19",
+      "model": "prisional.bloco",
+      "fields": {
+        "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
+        "unidade": "fb5bc99e-b885-40ce-ad86-0fe2021a488b",
+        "nome": "Bloco A",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "35b1f0e2-d177-48ca-b94a-86107b85f1f4",
+      "model": "prisional.bloco",
+      "fields": {
+        "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
+        "unidade": "fb5bc99e-b885-40ce-ad86-0fe2021a488b",
+        "bloco_pai": "8daa2753-4a87-4d40-ab8d-4ffdc2706f19",
+        "nome": "Bloco B",      
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "281bba94-19a4-4684-b5e1-2811f8c00b04",
+      "model": "prisional.bloco",
+      "fields": {
+        "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
+        "unidade": "fb5bc99e-b885-40ce-ad86-0fe2021a488b",
+        "bloco_pai": "35b1f0e2-d177-48ca-b94a-86107b85f1f4",
+        "nome": "Bloco C",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": true,
+        "ativo": true
+      }
+    }
+  ]

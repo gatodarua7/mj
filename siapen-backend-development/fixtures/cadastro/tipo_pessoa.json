@@ -1,0 +1,37 @@
+[
+    {
+      "pk": 1,
+      "model": "cadastros.ModeloTipoPessoa",
+      "fields": {
+        "descricao": "INTERNO"
+      }
+    },
+    {
+      "pk": 2,
+      "model": "cadastros.ModeloTipoPessoa",
+      "fields": {
+        "descricao": "ADVOGADO"
+      }
+    },
+    {
+      "pk": 3,
+      "model": "cadastros.ModeloTipoPessoa",
+      "fields": {
+        "descricao": "VISITANTE"
+      }
+    },
+    {
+      "pk": 4,
+      "model": "cadastros.ModeloTipoPessoa",
+      "fields": {
+        "descricao": "AFEP"
+      }
+    },
+    {
+      "pk": 5,
+      "model": "cadastros.ModeloTipoPessoa",
+      "fields": {
+        "descricao": "CORRESPONDÊNCIA"
+      }
+    }
+  ]

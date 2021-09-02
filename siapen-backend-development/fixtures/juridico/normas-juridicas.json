@@ -1,0 +1,71 @@
+[
+    {
+        "model": "juridico.NormasJuridicas",
+        "pk": "c4582a1a-0c55-4780-a80c-c9810568bd74",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-05-10T21:20:11.838Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "descricao": "Descrição de Primeiro titulo",
+            "titulo": "568f98d3-a883-4b7d-8485-a138c5432244",
+            "norma_juridica": "RESOLUÇÃO",
+            "motivo_ativacao": null,
+            "motivo_inativacao": null,
+            "data_ativacao": null,
+            "data_inativacao": null,
+            "usuario_ativacao": null,
+            "usuario_inativacao": null
+        }
+    },
+    {
+        "model": "juridico.NormasJuridicas",
+        "pk": "c4582a1a-0c55-4780-a80c-c9810568bd84",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-05-11T21:20:11.838Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "descricao": "Descrição da Lei delegada",
+            "titulo": "568f98d3-a883-4b7d-8485-a138c5432245",
+            "norma_juridica": "LEI_DELEGADA",
+            "motivo_ativacao": null,
+            "motivo_inativacao": null,
+            "data_ativacao": null,
+            "data_inativacao": null,
+            "usuario_ativacao": null,
+            "usuario_inativacao": null
+        }
+    },
+    {
+        "model": "juridico.NormasJuridicas",
+        "pk": "c4582a1a-0c55-4780-a80c-c9810568bd94",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-05-12T21:20:11.838Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "descricao": "",
+            "titulo": "568f98d3-a883-4b7d-8485-a138c5432264",
+            "norma_juridica": "MEDIDA_PROVISORIA",
+            "motivo_ativacao": null,
+            "motivo_inativacao": null,
+            "data_ativacao": null,
+            "data_inativacao": null,
+            "usuario_ativacao": null,
+            "usuario_inativacao": null
+        }
+    }
+]

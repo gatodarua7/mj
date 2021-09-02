@@ -1,0 +1,24 @@
+[
+    {
+      "pk": "1c063b46-2b96-41a9-831d-4fed804ae05e",
+      "model": "social.Religiao",
+      "fields": {
+        "nome": "CRISTÃO",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    },
+    {
+      "pk": "48edba8f-6303-496c-903e-1855be521a91",
+      "model": "social.Religiao",
+      "fields": {
+        "nome": "JUDEU",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    }
+  ]

@@ -1,0 +1,128 @@
+[
+  {
+    "pk": 1,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CPF"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "OAB"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "RG"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "PASSAPORTE"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CERTIDÃO NASCIMENTO"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CERTIDÃO NEGATIVA ANTECEDENTES JUSTIÇA FEDERAL"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CERTIDÃO NEGATIVA ANTECEDENTES JUSTIÇA ESTADUAL"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CÉDULA DE IDENTIDADE PARA ESTRANGEIROS"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "AUTORIZAÇÃO DE RESIDÊNCIA PARA ESTRANGEIROS"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "COMPROVANTE DE RESIDÊNCIA"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CERTIDÃO DE CASAMENTO"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CERTIDÃO DE UNIÃO ESTAVEL"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CERTIDÃO DE CASAMENTO RELIGIOSO"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "DECLARAÇÃO ESPECIAL DO TABELIÃO"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CÓPIA DE CONTA BANCÁRIA EM COMUM"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CÓPIA DO TESTAMENTO"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "CERTIDÃO DE PROVA DE ENCARGOS DOMÉSTICOS EM COMUM"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "cadastros.TipoDocumento",
+    "fields": {
+      "nome": "OUTROS DOCUMENTOS"
+    }
+  }
+]

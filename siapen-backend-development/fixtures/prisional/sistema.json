@@ -1,0 +1,26 @@
+[
+  {
+    "pk": "21796b1d-082d-43f3-804f-57c58d803087",
+    "model": "prisional.sistemapenal",
+    "fields": {
+      "nome": "SISTEMA PENAL INICIAL",
+      "sigla": "FI",
+      "pais": 33,
+      "estado": 27,
+      "created_at": "2020-01-03T00:00:00-03:00",
+      "usuario_cadastro": 2
+    }
+  },
+  {
+    "pk": "87bdc2e5-4dbb-4405-9f5b-1a8f83830a0c",
+    "model": "prisional.sistemapenal",
+    "fields": {
+      "nome": "SISTEMA PENAL DE SERGIPE",
+      "sigla": "SPB",
+      "pais": 33,
+      "estado": 28,
+      "created_at": "2020-01-03T00:00:00-03:00",
+      "usuario_cadastro": 1
+    }
+  }
+]

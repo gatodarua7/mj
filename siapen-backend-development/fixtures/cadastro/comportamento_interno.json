@@ -1,0 +1,35 @@
+[
+    {
+      "pk": "6d5742a8-6ce9-4571-847b-b34e3eaf61fc",
+      "model": "cadastros.ComportamentoInterno",
+      "fields": {
+        "nome": "INSTAVEL",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": false,
+        "excluido": false
+      }
+    },
+    {
+      "pk": "c7f39fe4-9edd-47c6-8b25-e43a5c832399",
+      "model": "cadastros.ComportamentoInterno",
+      "fields": {
+        "nome": "BOM COMPORTAMENTO",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": true
+      }
+    },
+    {
+      "pk": "3ebde3ad-bd18-4fab-a274-4310ba0deaa9",
+      "model": "cadastros.ComportamentoInterno",
+      "fields": {
+        "nome": "BOM COMPORTAMENTO",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    }
+  ]

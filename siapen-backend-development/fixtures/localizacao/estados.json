@@ -1,0 +1,247 @@
+[
+  {
+    "pk": 11,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "RO",
+      "nome": "Rondônia"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "AC",
+      "nome": "Acre"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "AM",
+      "nome": "Amazonas"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "RR",
+      "nome": "Roraima"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "PA",
+      "nome": "Pará"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "AP",
+      "nome": "Amapá"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "TO",
+      "nome": "Tocantins"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "MA",
+      "nome": "Maranhão"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "PI",
+      "nome": "Piauí"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "CE",
+      "nome": "Ceará"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "RN",
+      "nome": "Rio Grande do Norte"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "PB",
+      "nome": "Paraíba"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "PE",
+      "nome": "Pernambuco"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "AL",
+      "nome": "Alagoas"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "SE",
+      "nome": "Sergipe"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "BA",
+      "nome": "Bahia"
+    }
+  },
+  {
+    "pk": 31,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "MG",
+      "nome": "Minas Gerais"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "ES",
+      "nome": "Espírito Santo"
+    }
+  },
+  {
+    "pk": 33,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "RJ",
+      "nome": "Rio de Janeiro"
+    }
+  },
+  {
+    "pk": 35,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "SP",
+      "nome": "São Paulo"
+    }
+  },
+  {
+    "pk": 41,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "PR",
+      "nome": "Paraná"
+    }
+  },
+  {
+    "pk": 42,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "SC",
+      "nome": "Santa Catarina"
+    }
+  },
+  {
+    "pk": 43,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "RS",
+      "nome": "Rio Grande do Sul"
+    }
+  },
+  {
+    "pk": 50,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "MS",
+      "nome": "Mato Grosso do Sul"
+    }
+  },
+  {
+    "pk": 51,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "MT",
+      "nome": "Mato Grosso"
+    }
+  },
+  {
+    "pk": 52,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "GO",
+      "nome": "Goiás"
+    }
+  },
+  {
+    "pk": 53,
+    "model": "localizacao.Estado",
+    "fields": {
+      "pais": 33,
+      "sigla": "DF",
+      "nome": "Distrito Federal"
+    }
+  }
+]
+
+

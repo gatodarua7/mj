@@ -1,0 +1,68 @@
+[
+    {
+        "model": "juridico.TituloLei",
+        "pk": "568f98d3-a883-4b7d-8485-a138c5432244",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-05-10T21:20:01.140Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "norma_juridica": "RESOLUÇÃO",
+            "nome": "Primeiro titulo",
+            "motivo_ativacao": null,
+            "motivo_inativacao": null,
+            "data_ativacao": null,
+            "data_inativacao": null,
+            "usuario_ativacao": null,
+            "usuario_inativacao": null
+        }
+    },
+    {
+        "model": "juridico.TituloLei",
+        "pk": "568f98d3-a883-4b7d-8485-a138c5432245",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-05-10T21:20:01.140Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "norma_juridica": "LEI_DELEGADA",
+            "nome": "Título da lei delegada",
+            "motivo_ativacao": null,
+            "motivo_inativacao": null,
+            "data_ativacao": null,
+            "data_inativacao": null,
+            "usuario_ativacao": null,
+            "usuario_inativacao": null
+        }
+    },
+    {
+        "model": "juridico.TituloLei",
+        "pk": "568f98d3-a883-4b7d-8485-a138c5432264",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-05-10T21:20:01.140Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "norma_juridica": "MEDIDA_PROVISORIA",
+            "nome": "Provisória",
+            "motivo_ativacao": null,
+            "motivo_inativacao": null,
+            "data_ativacao": null,
+            "data_inativacao": null,
+            "usuario_ativacao": null,
+            "usuario_inativacao": null
+        }
+    }
+]

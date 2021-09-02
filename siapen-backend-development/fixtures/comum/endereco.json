@@ -1,0 +1,68 @@
+[
+    {
+      "pk": "9e7a58db-838e-4065-aee5-e7db545e7d1b",
+      "model": "comum.endereco",
+      "fields": {
+        "logradouro": "Rua 1",
+        "bairro": "Jabutiana",
+        "numero": 50,
+        "complemento": "Condominio Jaboticaba",
+        "estado": 28,
+        "cidade": 3956,
+        "andar": 12,
+        "sala": "B",
+        "cep":"12345-678",
+        "latitude": "-16.7573",
+        "longitude": "-49.4412",
+        "observacao": "Nada para observar",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "db41afe9-9360-493d-8aae-ba89a1313386",
+      "model": "comum.endereco",
+      "fields": {
+        "logradouro": "Rua 2",
+        "bairro": "Largo da Aparecida",
+        "numero": 32,
+        "complemento": "Final da Rua",
+        "estado": 28,
+        "cidade": 295,
+        "andar": 5,
+        "sala": "2A",
+        "cep":"09876-123",
+        "latitude": "-16.7573",
+        "longitude": "-49.4412",
+        "observacao": "Informação para observação",
+        "usuario_cadastro": 2,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "ffd0b5e5-0e26-4417-8bcd-88ad095ddb4a",
+      "model": "comum.endereco",
+      "fields": {
+        "logradouro": "Rua 3",
+        "bairro": "13 de Julho",
+        "numero": 147,
+        "complemento": "Condominio Tahiti",
+        "estado": 28,
+        "cidade": 2285,
+        "andar": 9,
+        "sala": "1",
+        "cep":"45234-098",
+        "latitude": "-16.7573",
+        "longitude": "-49.4412",
+        "observacao": "",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    }
+  ]

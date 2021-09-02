@@ -1,0 +1,288 @@
+[
+    {
+      "pk": "816579b4-0c3b-4c2f-a6d5-97e1dbc36444",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "PAI",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "ed3dc56f-c2bf-492a-9c5e-d869e166c89b",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "MÃE",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "86a6b279-6ea2-48d8-a7a5-27f82dede88b",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "FILHO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "89d675ce-1baf-4d92-abab-ba66ff35dea6",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "AVÔ(Ó)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "97e27f66-2aa0-480a-9d95-4e77dfa7eca7",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "TIO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "e1485a08-be8c-4df3-853a-d4d2a15330b6",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "IRMÃO(Ã)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": 7,
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "PRIMO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "af2e75c2-90f5-4757-a599-2c561cbac7c8",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "SOBRINHO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "f170a442-bf25-4c3a-9760-ef54e869c43d",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "AFILHADO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": 10,
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "GENRO",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "c414d488-275b-4a53-9ca4-56f3546288f3",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "NORA",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "d7203857-5fd8-460d-859b-01aa3d9cdece",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "SOGRO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "e2824422-23fc-4c96-9c88-e54a035f32ab",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "MARIDO / COMPANHEIRO",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "b149c579-a71c-47a8-90ba-9d33ffee9e4a",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "ESPOSA / COMPANHEIRA",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "02567522-d530-4c5b-9da2-73c392d86cf3",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "AMIGO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": 16,
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "ENTEADO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "6fa62511-3640-4644-8a4d-826f85d56179",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "CUNHADO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "ff28cb9f-c464-4091-9c0b-b8b8fe13e65d",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "NETO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },    
+    {
+      "pk": "51f35d8f-064f-4977-92b8-35a28d573ed1",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "COMADRE",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "ab43b7f3-b66c-4a39-b623-d19f3e709a2c",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "COMPADRE",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "254c11fc-3133-475b-b64c-09beb36596ce",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "MADRASTA",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "1a5e2ffd-a1ef-4710-ae2f-a3c5957ab714",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "PADRASTO",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "a6e49985-0867-4474-93ae-7b20d6cb9f57",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "EX-COMPANHEIRO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "2bc57bfa-5c6b-407d-a09e-43c707f60806",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "EX-ESPOSA",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "845ee3b1-6d98-4e4a-980c-6f18b8a31b46",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "EX-MARIDO",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+    },
+    {
+      "pk": "dc2be0c0-2046-4a1d-8ee9-478ca63f87b2",
+      "model": "vinculos.TipoVinculo",
+      "fields": {
+        "nome": "ADVOGADO(A)",
+        "usuario_cadastro": 1,
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "excluido": false,
+        "ativo": true
+      }
+  }
+]

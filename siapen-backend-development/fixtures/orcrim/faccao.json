@@ -1,0 +1,57 @@
+[
+  {
+    "pk": "967a3657-09fe-4e1b-83c8-f6d8cbd53a84",
+    "model": "orcrim.faccao",
+    "fields": {
+      "nome": "Primeiro Comando da Capital",
+      "sigla": "PCC",
+      "pais": [33],
+      "estado": [12],
+      "ativo": true,
+      "excluido": false,
+      "usuario_cadastro": 1,
+      "created_at": "2020-01-03T00:00:00-03:00"
+    }
+  },
+  {
+    "pk": "4e354096-0b68-4039-90d5-09267cbf1302",
+    "model": "orcrim.faccao",
+    "fields": {
+      "nome": "Primeiro TComando da Capital",
+      "sigla": "PCTC",
+      "pais": [33],
+      "estado": [12],
+      "ativo": true,
+      "excluido": false,
+      "usuario_cadastro": 1,
+      "created_at": "2020-01-03T00:00:00-03:00"
+    }
+  },
+  {
+    "pk": "bd1f5e21-75bf-4c5c-87ed-7b5b8124a426",
+    "model": "orcrim.faccao",
+    "fields": {
+      "nome": "Comando Vermelho",
+      "sigla": "CV",
+      "pais": [33],
+      "estado": [15],
+      "ativo": true,
+      "excluido": true,
+      "usuario_cadastro": 1,
+      "created_at": "2020-01-03T00:00:00-03:00"
+    }
+  },
+  {
+    "pk": "8def3930-1da5-4ccb-a09d-ed013cdaa3bd",
+    "model": "orcrim.faccao",
+    "fields": {
+      "nome": "Família do Norte",
+      "sigla": "FDN",
+      "pais": [32],
+      "ativo": true,
+      "excluido": true,
+      "usuario_cadastro": 1,
+      "created_at": "2020-01-03T00:00:00-03:00"
+    }
+  }
+]

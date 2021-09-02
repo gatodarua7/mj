@@ -1,0 +1,35 @@
+[
+  {
+    "pk": "a2c5d4ab-0d63-4c67-906a-e9a59f8bc77f",
+    "model": "cadastros.funcao",
+    "fields": {
+      "descricao": "AG. DE INTELIGENCIA",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "5f68a414-038c-4454-9c57-16d660d23e5b",
+    "model": "cadastros.funcao",
+    "fields": {
+      "descricao": "ANALISTA JURIDICO",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": false,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "4491448e-86fb-4316-ad80-f10101f17804",
+    "model": "cadastros.funcao",
+    "fields": {
+      "descricao": "ANALISTA CRIMINAL",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": true
+    }
+  }
+]

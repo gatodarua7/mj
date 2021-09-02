@@ -1,0 +1,66 @@
+[
+  {
+    "pk": "1191484a-4ab1-4662-8c41-269fc1e66e25",
+    "model": "pessoas.RG",
+    "fields": {
+      "numero": "123",
+      "orgao_expedidor": "24b81a5b-b377-4fd9-b05e-5db5b9db9461",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "interno": "816dec89-24ff-43ef-9bec-af7ef75b4595",
+      "updated_at": null,
+      "delete_at": null,
+      "usuario_cadastro": 1,
+      "usuario_edicao": null,
+      "usuario_exclusao": null,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "1191484a-4ab1-4662-8c41-269fc1e66e26",
+    "model": "pessoas.RG",
+    "fields": {
+      "numero": "456",
+      "orgao_expedidor": "24b81a5b-b377-4fd9-b05e-5db5b9db9461",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "interno": "816dec89-24ff-43ef-9bec-af7ef75b4595",
+      "updated_at": null,
+      "delete_at": null,
+      "usuario_cadastro": 1,
+      "usuario_edicao": null,
+      "usuario_exclusao": null,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "1191484a-4ab1-4662-8c41-269fc1e66e27",
+    "model": "pessoas.RG",
+    "fields": {
+      "numero": "789",
+      "orgao_expedidor": "24b81a5b-b377-4fd9-b05e-5db5b9db9461",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "interno": "816dec89-24ff-43ef-9bec-af7ef75b4595",
+      "updated_at": null,
+      "delete_at": null,
+      "usuario_cadastro": 1,
+      "usuario_edicao": null,
+      "usuario_exclusao": null,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "1191484a-4ab1-4662-8c41-269fc1e66e28",
+    "model": "pessoas.RG",
+    "fields": {
+      "numero": "1.234.567-8",
+      "orgao_expedidor": "24b81a5b-b377-4fd9-b05e-5db5b9db9461",
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "interno": "816dec89-24ff-43ef-9bec-af7ef75b4595",
+      "updated_at": null,
+      "delete_at": null,
+      "usuario_cadastro": 1,
+      "usuario_edicao": null,
+      "usuario_exclusao": null,
+      "excluido": false
+    }
+  }
+]

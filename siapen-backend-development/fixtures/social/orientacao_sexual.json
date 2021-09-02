@@ -1,0 +1,35 @@
+[
+    {
+      "pk": "fd9341f3-4c70-43a2-9e12-1e2da2d0ae4e",
+      "model": "social.OrientacaoSexual",
+      "fields": {
+        "nome": "ASSEXUAL",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    },
+    {
+    "pk": "7590718b-8ab2-4aec-9d48-e4bf058559f4",
+      "model": "social.OrientacaoSexual",
+      "fields": {
+        "nome": "HOMOSSEXUAL",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    },
+    {
+      "pk": "061fb1ae-5e74-4e05-ad33-de2494133cbc",
+      "model": "social.OrientacaoSexual",
+      "fields": {
+        "nome": "HETEROSSEXUAL",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    }
+  ]

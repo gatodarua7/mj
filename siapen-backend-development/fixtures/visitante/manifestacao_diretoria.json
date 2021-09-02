@@ -1,0 +1,115 @@
+[
+    {
+        "model": "visitante.manifestacaodiretoria",
+        "pk": "48199446-6fba-4bbc-bf02-94829043ab92",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-08-18T13:55:47.466Z",
+            "updated_at": "2021-08-18T19:14:09.230Z",
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": 1,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "visitante": "08324a35-f3a3-4332-8ecb-eda9fd1cf00c",
+            "parecer": "outro parecer diretor téste",
+            "documentos": [
+                "5d40a552-2bd7-480a-8459-4ac4145a43e5"
+            ]
+        }
+    },
+    {
+        "model": "visitante.manifestacaodiretoria",
+        "pk": "49fb6507-18d8-400b-8881-8739b77f7e32",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-08-18T14:09:00.243Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "visitante": "2a02a283-389b-4b0d-9f07-5a49e2d03b8c",
+            "parecer": "manifestando anlise diretoria",
+            "documentos": [
+                "9ba7f21a-2ef8-4830-8927-a146b7e29bf4"
+            ]
+        }
+    },
+    {
+        "model": "visitante.manifestacaodiretoria",
+        "pk": "547f7820-5dd0-4099-9c99-a55e49308d81",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-08-18T14:02:23.077Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "visitante": "08324a35-f3a3-4332-8ecb-eda9fd1cf00c",
+            "parecer": "a",
+            "documentos": []
+        }
+    },
+    {
+        "model": "visitante.manifestacaodiretoria",
+        "pk": "8233fdf8-dec5-44a5-a311-4d1aa210033e",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-08-18T13:55:04.343Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "visitante": "08324a35-f3a3-4332-8ecb-eda9fd1cf00c",
+            "parecer": "parecer do diretor",
+            "documentos": [
+                "d601e1e1-28a8-47cf-8293-0fbfbf3a36a0",
+                "dfab0e54-5e24-45c9-a3e7-ebfdc2f515c1"
+            ]
+        }
+    },
+    {
+        "model": "visitante.manifestacaodiretoria",
+        "pk": "b74b3baa-ef92-444c-8101-f29dfc55d88c",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-08-18T19:23:36.182Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "visitante": "b2849859-7db4-40f5-adf1-45da9549caf7",
+            "parecer": "Início parecer",
+            "documentos": [
+                "286e0a91-a9de-4bd9-a76b-bb5e5949fbc2"
+            ]
+        }
+    },
+    {
+        "model": "visitante.manifestacaodiretoria",
+        "pk": "c14e368e-cfbe-4537-8b3b-b82bb2341d28",
+        "fields": {
+            "ativo": true,
+            "created_at": "2021-08-18T14:10:51.863Z",
+            "updated_at": null,
+            "delete_at": null,
+            "usuario_cadastro": 1,
+            "usuario_edicao": null,
+            "usuario_exclusao": null,
+            "excluido": false,
+            "visitante": "2a02a283-389b-4b0d-9f07-5a49e2d03b8c",
+            "parecer": "outra",
+            "documentos": [
+                "4f86de65-0f41-47d1-bd7b-28dbefb1ba06"
+            ]
+        }
+    }
+]

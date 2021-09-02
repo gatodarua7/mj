@@ -1,0 +1,11 @@
+sudo -u postgres psql -c "DROP SCHEMA public CASCADE;"
+sudo -u postgres psql -c "CREATE SCHEMA public;"
+sudo -u postgres psql -c "DROP DATABASE siapen;"
+sudo -u postgres psql -c "CREATE USER siapen WITH ENCRYPTED PASSWORD 'siapen';"
+sudo -u postgres psql -c "DROP DATABASE siapen;"
+sudo -u postgres psql -c "CREATE DATABASE siapen;"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE siapen TO siapen;"
+# Necessário dar permissão de super usuário para criar extensão, mas removendo logo em seguida.
+sudo -u postgres psql -c "ALTER USER siapen WITH SUPERUSER;"
+PGPASSWORD=siapen psql -h localhost -d siapen -U siapen -c "CREATE EXTENSION unaccent;"
+#sudo -u postgres psql -c "ALTER USER siapen WITH NOSUPERUSER;"

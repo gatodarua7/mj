@@ -1,0 +1,38 @@
+[
+    {
+      "pk": "90924433-e856-4d21-abf2-e14b09cf4042",
+      "model": "comum.telefone",
+      "fields": {
+        "numero": 11911111111,
+        "tipo": "CELULAR",
+        "observacao": "Celular Institucional atribuído até dia 18/09/2050",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "excluido": false
+      }
+    },
+    {
+      "pk": "668b516c-d600-4485-939b-876b37e57888",
+      "model": "comum.telefone",
+      "fields": {
+        "numero": 7930234258,
+        "tipo": "RESIDENCIAL",
+        "observacao": "Telefone de teste",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "excluido": false
+      }
+    },
+    {
+      "pk": "eb43b191-cfad-4011-879d-b2da2466e8ea",
+      "model": "comum.telefone",
+      "fields": {
+        "numero": 9869,
+        "tipo": "RAMAL",
+        "observacao": "Ramal para testes",
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "excluido": false
+      }
+    }
+  ]

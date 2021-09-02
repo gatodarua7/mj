@@ -1,0 +1,59 @@
+ [
+    {
+      "pk": "f70266ac-74ea-4494-bd75-3fed4dd05848",
+      "model": "cadastros.setor",
+      "fields": {
+        "nome": "Setor 1",
+        "sigla": "S1",
+        "telefones": ["eb43b191-cfad-4011-879d-b2da2466e8ea"],
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    },
+    {
+      "pk": "4b40ac84-2476-47d1-8193-c6110540d514",
+      "model": "cadastros.setor",
+      "fields": {
+        "setor_pai": "f70266ac-74ea-4494-bd75-3fed4dd05848",
+        "nome": "Setor 2",
+        "sigla": "S2",
+        "telefones": [],
+        "created_at": "2020-01-02T00:00:00-03:00",
+        "updated_at": "2020-01-22T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "usuario_edicao": 2,
+        "ativo": false,
+        "excluido": false
+      }
+    },
+    {
+      "pk": "41bd73c5-ff97-44dd-b2a5-c954da886567",
+      "model": "cadastros.setor",
+      "fields": {
+        "nome": "Setor 3",
+        "sigla": "S3",
+        "telefones": [],
+        "created_at": "2020-01-03T00:00:00-03:00",
+        "updated_at": "2020-12-22T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "usuario_edicao": 2,
+        "ativo": true,
+        "excluido": true
+      }
+    },
+    {
+      "pk": "0b057129-4fcf-475b-a462-e2a71ea8dc87",
+      "model": "cadastros.setor",
+      "fields": {
+        "nome": "Setor 13",
+        "sigla": "S13",
+        "telefones": ["eb43b191-cfad-4011-879d-b2da2466e8ea"],
+        "created_at": "2020-01-01T00:00:00-03:00",
+        "usuario_cadastro": 1,
+        "ativo": true,
+        "excluido": false
+      }
+    }
+  ]

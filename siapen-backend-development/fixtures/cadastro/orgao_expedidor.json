@@ -1,0 +1,41 @@
+[
+  {
+    "pk": "96637461-43cb-4d55-893b-c09fe514ebf7",
+    "model": "cadastros.OrgaoExpedidor",
+    "fields": {
+      "nome": "SSSSSSSSS",
+      "sigla": "SSSSSSSSS",
+      "estado": 28,
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "24b81a5b-b377-4fd9-b05e-5db5b9db9461",
+    "model": "cadastros.OrgaoExpedidor",
+    "fields": {
+      "nome": "wwwwwww",
+      "sigla": "w",
+      "estado": 27,
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  },
+  {
+    "pk": "1379b972-4701-4389-806a-a078fe59e056",
+    "model": "cadastros.OrgaoExpedidor",
+    "fields": {
+      "nome": "aaaaaaaaaaaaaaaa",
+      "sigla": "a",
+      "estado": 13,
+      "created_at": "2020-01-01T00:00:00-03:00",
+      "usuario_cadastro": 1,
+      "ativo": true,
+      "excluido": false
+    }
+  }
+]
