@@ -463,20 +463,20 @@ class CelaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             sistema_id=sistema["sistema_id"],
         )
 
-    def perform_update(self, serializer):
-        bloco_id = self.request.data["bloco"]
-        unidade = Bloco.objects.filter(id=bloco_id).values("unidade_id").first()
-        sistema = (
-            Unidade.objects.filter(id=unidade["unidade_id"])
-            .values("sistema_id")
-            .first()
-        )
-        serializer.save(
-            usuario_edicao=user.get_user(self),
-            updated_at=datetime.now(),
-            unidade_id=unidade["unidade_id"],
-            sistema_id=sistema["sistema_id"],
-        )
+    def perform_update(self, serializer, **kwargs):
+        requisicao = self.request.data
+        if requisicao.get("bloco"):
+            unidade = Bloco.objects.filter(id=requisicao.get("bloco")).values("unidade_id").first()
+            sistema = (
+                Unidade.objects.filter(id=unidade["unidade_id"])
+                .values("sistema_id")
+                .first()
+            )
+            kwargs["unidade_id"] = unidade["unidade_id"]
+            kwargs["sistema_id"] = unidade["sistema_id"]
+        kwargs["updated_id"] = datetime.now()
+        kwargs["usuario_edicao"] = user.get_user(self)
+        serializer.save(**kwargs)
 
 
 class DefeitoCelaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
