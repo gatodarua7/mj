@@ -78,14 +78,21 @@ class CelaSerializer(serializers.ModelSerializer):
             "sistema",
         ]
 
+
     def __init__(self, *args, **kwargs):
         super(CelaSerializer, self).__init__(*args, **kwargs)
 
-        self.fields["bloco"].error_messages["blank"] = mensagens.MSG2.format(u"bloco")
-        self.fields["nome"].error_messages["blank"] = mensagens.MSG2.format(u"nome")
-        self.fields["capacidade"].error_messages["blank"] = mensagens.MSG2.format(
-            u"capacidade"
-        )
+        mandatory_fields = {
+            "bloco": mensagens.MSG2.format(u"bloco/alocação"),
+            "nome": mensagens.MSG2.format(u"nome/numero da cela"),
+            "capacidade": mensagens.MSG2.format(u"capacidade de cela"),
+            #"tipo_cela": mensagens.MSG2.format(u"tipo de cela"),
+        }
+
+        for key, value in mandatory_fields.items():
+            self.fields[key].error_messages["required"] = value
+            self.fields[key].error_messages["blank"] = value
+            self.fields[key].error_messages["null"] = value
 
     def get_bloco_nome(self, obj):
         try:

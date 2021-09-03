@@ -1,7 +1,7 @@
 
 #!/bin/sh
 # Realiza o setup do projeto
-python manage.py makemigrations assistencia cadastros comum juridico localizacao movimentacao orcrim prisional social vinculos
+python manage.py makemigrations cadastros comum juridico localizacao movimentacao orcrim prisional social vinculos
 python manage.py migrate
 
 
