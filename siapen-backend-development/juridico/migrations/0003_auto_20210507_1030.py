@@ -5,13 +5,14 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('juridico', '0002_auto_20210507_0928'),
-    ]
+    dependencies = [("juridico", "0002_auto_20210507_0928")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='titulolei',
-            options={'verbose_name': 'Título da Lei', 'verbose_name_plural': 'Títulos da Lei'},
-        ),
+            name="titulolei",
+            options={
+                "verbose_name": "Título da Lei",
+                "verbose_name_plural": "Títulos da Lei",
+            },
+        )
     ]

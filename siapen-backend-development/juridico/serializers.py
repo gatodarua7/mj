@@ -2,10 +2,7 @@ from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 from rest_flex_fields import FlexFieldsModelSerializer
 from util import mensagens
-from juridico.models import (
-    NormasJuridicas,
-    TituloLei
-)
+from juridico.models import NormasJuridicas, TituloLei
 
 
 class TituloLeiSerializer(FlexFieldsModelSerializer):
@@ -13,8 +10,17 @@ class TituloLeiSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = TituloLei
-        fields = ["id", "norma_juridica", "norma_juridica_nome", "nome", "motivo_inativacao",
-                  "motivo_ativacao", "data_inativacao", "data_ativacao", "ativo"]
+        fields = [
+            "id",
+            "norma_juridica",
+            "norma_juridica_nome",
+            "nome",
+            "motivo_inativacao",
+            "motivo_ativacao",
+            "data_inativacao",
+            "data_ativacao",
+            "ativo",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(TituloLeiSerializer, self).__init__(*args, **kwargs)
@@ -37,8 +43,19 @@ class NormasJuridicasSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = NormasJuridicas
-        fields = ["id", "norma_juridica", "norma_juridica_nome", "titulo", "titulo_nome", "descricao", "motivo_inativacao",
-                  "motivo_ativacao", "data_inativacao", "data_ativacao", "ativo"]
+        fields = [
+            "id",
+            "norma_juridica",
+            "norma_juridica_nome",
+            "titulo",
+            "titulo_nome",
+            "descricao",
+            "motivo_inativacao",
+            "motivo_ativacao",
+            "data_inativacao",
+            "data_ativacao",
+            "ativo",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(NormasJuridicasSerializer, self).__init__(*args, **kwargs)

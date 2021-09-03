@@ -5,13 +5,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('vinculos', '0001_initial'),
-    ]
+    dependencies = [("vinculos", "0001_initial")]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='vinculo',
-            name='vinculo',
-        ),
-    ]
+    operations = [migrations.RemoveField(model_name="vinculo", name="vinculo")]

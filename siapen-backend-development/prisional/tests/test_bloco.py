@@ -33,7 +33,9 @@ class TestBlocoEndpoint(SiapenTestCase):
         """
 
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -41,13 +43,10 @@ class TestBlocoEndpoint(SiapenTestCase):
         """
         Criação de objeto vazio.
         """
-        data = {
-            "unidade": None, 
-            "nome": None, 
-            "bloco_pai": None,
-            "ativo": None
-        }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        data = {"unidade": None, "nome": None, "bloco_pai": None, "ativo": None}
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -63,16 +62,16 @@ class TestBlocoEndpoint(SiapenTestCase):
         """
         List de com acento
         """
-        url = f'{self.url}?search=BLOCÓ'
+        url = f"{self.url}?search=BLOCÓ"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=BLOCO'
+        url = f"{self.url}?search=BLOCO"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -81,7 +80,7 @@ class TestBlocoEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -90,7 +89,7 @@ class TestBlocoEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -100,12 +99,14 @@ class TestBlocoEndpoint(SiapenTestCase):
         Validando o processo de remoção de registro válido.
         """
         data = {
-            "unidade": "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9", 
-            "nome": "BLOCO D", 
+            "unidade": "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9",
+            "nome": "BLOCO D",
             "bloco_pai": None,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -118,12 +119,14 @@ class TestBlocoEndpoint(SiapenTestCase):
         Validando o processo de remoção de registro inválido.
         """
         data = {
-            "unidade": "f612a4bf-0837-47b4-ade8-8ac3ad9f8bc4", 
-            "nome": "BLOCO db", 
+            "unidade": "f612a4bf-0837-47b4-ade8-8ac3ad9f8bc4",
+            "nome": "BLOCO db",
             "bloco_pai": None,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -136,12 +139,14 @@ class TestBlocoEndpoint(SiapenTestCase):
         Atualizando campos.
         """
         data = {
-            "unidade": "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9", 
-            "nome": "BLOCO AU", 
+            "unidade": "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9",
+            "nome": "BLOCO AU",
             "bloco_pai": None,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["unidade"] = "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9"
@@ -149,7 +154,9 @@ class TestBlocoEndpoint(SiapenTestCase):
             resp_json["bloco_pai"] = None
             resp_json["ativo"] = True
             url = f'{self.url}{resp_json["id"]}/'
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="Update")
 
@@ -158,12 +165,14 @@ class TestBlocoEndpoint(SiapenTestCase):
         Atualizando a ativo.
         """
         data = {
-            "unidade": "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9", 
-            "nome": "BLOCO BCU", 
+            "unidade": "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9",
+            "nome": "BLOCO BCU",
             "bloco_pai": None,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["unidade"] = "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9"
@@ -171,6 +180,8 @@ class TestBlocoEndpoint(SiapenTestCase):
             resp_json["bloco_pai"] = None
             resp_json["ativo"] = False
             url = f'{self.url}{resp_json["id"]}/'
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="Update")

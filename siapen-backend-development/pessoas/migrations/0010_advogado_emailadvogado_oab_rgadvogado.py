@@ -11,109 +11,411 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('cadastros', '0003_auto_20210428_1656'),
-        ('comum', '0001_initial'),
-        ('localizacao', '0001_initial'),
-        ('social', '0001_initial'),
-        ('pessoas', '0009_auto_20210603_1657'),
+        ("cadastros", "0003_auto_20210428_1656"),
+        ("comum", "0001_initial"),
+        ("localizacao", "0001_initial"),
+        ("social", "0001_initial"),
+        ("pessoas", "0009_auto_20210603_1657"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Advogado',
+            name="Advogado",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('ativo', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('delete_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('excluido', models.BooleanField(default=False)),
-                ('nome', models.CharField(max_length=150)),
-                ('data_nascimento', models.DateField()),
-                ('situacao', models.BooleanField(default=False)),
-                ('cpf', models.CharField(max_length=14, validators=[django.core.validators.RegexValidator(message='CPF inválido', regex='[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}')])),
-                ('motivo_ativacao', models.TextField(blank=True, default=None, max_length=200, null=True)),
-                ('motivo_inativacao', models.TextField(blank=True, default=None, max_length=200, null=True)),
-                ('data_ativacao', models.DateTimeField(blank=True, default=None, null=True)),
-                ('data_inativacao', models.DateTimeField(blank=True, default=None, null=True)),
-                ('enderecos', models.ManyToManyField(blank=True, related_name='endereco_related', to='comum.Endereco')),
-                ('estado', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='estado_advogado_pessoas_advogado_related', to='localizacao.estado')),
-                ('foto', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='fotopessoas_advogado_related', to='cadastros.foto')),
-                ('genero', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='genero_pessoas_advogado_related', to='cadastros.genero')),
-                ('nacionalidade', models.ManyToManyField(default=None, related_name='nacionalidade_advogado_pessoas_advogado_related', to='localizacao.Pais')),
-                ('naturalidade', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='naturalidade_advogado_pessoas_advogado_related', to='localizacao.cidade')),
-                ('necessidade_especial', models.ManyToManyField(blank=True, related_name='necessidades_advogadopessoas_advogado_related', to='social.NecessidadeEspecial')),
-                ('telefones', models.ManyToManyField(blank=True, related_name='telefone_related', to='comum.Telefone')),
-                ('usuario_ativacao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='ativacao_advogado_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('usuario_edicao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='updatedpessoas_advogado_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_exclusao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='deletepessoas_advogado_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_inativacao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='inativacao_advogado_related', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("ativo", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "updated_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "delete_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("excluido", models.BooleanField(default=False)),
+                ("nome", models.CharField(max_length=150)),
+                ("data_nascimento", models.DateField()),
+                ("situacao", models.BooleanField(default=False)),
+                (
+                    "cpf",
+                    models.CharField(
+                        max_length=14,
+                        validators=[
+                            django.core.validators.RegexValidator(
+                                message="CPF inválido",
+                                regex="[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}",
+                            )
+                        ],
+                    ),
+                ),
+                (
+                    "motivo_ativacao",
+                    models.TextField(
+                        blank=True, default=None, max_length=200, null=True
+                    ),
+                ),
+                (
+                    "motivo_inativacao",
+                    models.TextField(
+                        blank=True, default=None, max_length=200, null=True
+                    ),
+                ),
+                (
+                    "data_ativacao",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "data_inativacao",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "enderecos",
+                    models.ManyToManyField(
+                        blank=True, related_name="endereco_related", to="comum.Endereco"
+                    ),
+                ),
+                (
+                    "estado",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="estado_advogado_pessoas_advogado_related",
+                        to="localizacao.estado",
+                    ),
+                ),
+                (
+                    "foto",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="fotopessoas_advogado_related",
+                        to="cadastros.foto",
+                    ),
+                ),
+                (
+                    "genero",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="genero_pessoas_advogado_related",
+                        to="cadastros.genero",
+                    ),
+                ),
+                (
+                    "nacionalidade",
+                    models.ManyToManyField(
+                        default=None,
+                        related_name="nacionalidade_advogado_pessoas_advogado_related",
+                        to="localizacao.Pais",
+                    ),
+                ),
+                (
+                    "naturalidade",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="naturalidade_advogado_pessoas_advogado_related",
+                        to="localizacao.cidade",
+                    ),
+                ),
+                (
+                    "necessidade_especial",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="necessidades_advogadopessoas_advogado_related",
+                        to="social.NecessidadeEspecial",
+                    ),
+                ),
+                (
+                    "telefones",
+                    models.ManyToManyField(
+                        blank=True, related_name="telefone_related", to="comum.Telefone"
+                    ),
+                ),
+                (
+                    "usuario_ativacao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="ativacao_advogado_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_edicao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="updatedpessoas_advogado_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_exclusao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="deletepessoas_advogado_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_inativacao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="inativacao_advogado_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+            ],
+            options={"abstract": False},
+        ),
+        migrations.CreateModel(
+            name="RgAdvogado",
+            fields=[
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("ativo", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "updated_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "delete_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("excluido", models.BooleanField(default=False)),
+                ("numero", models.CharField(max_length=15)),
+                (
+                    "advogado",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="rg_advogado",
+                        to="pessoas.advogado",
+                    ),
+                ),
+                (
+                    "orgao_expedidor",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="orgao_expedidor_advogado",
+                        to="cadastros.orgaoexpedidor",
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_edicao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="updatedpessoas_rgadvogado_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_exclusao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="deletepessoas_rgadvogado_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "verbose_name": "RG Advogado",
+                "verbose_name_plural": "RG Advogado",
             },
         ),
         migrations.CreateModel(
-            name='RgAdvogado',
+            name="OAB",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('ativo', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('delete_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('excluido', models.BooleanField(default=False)),
-                ('numero', models.CharField(max_length=15)),
-                ('advogado', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='rg_advogado', to='pessoas.advogado')),
-                ('orgao_expedidor', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='orgao_expedidor_advogado', to='cadastros.orgaoexpedidor')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('usuario_edicao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='updatedpessoas_rgadvogado_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_exclusao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='deletepessoas_rgadvogado_related', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("ativo", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "updated_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "delete_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("excluido", models.BooleanField(default=False)),
+                ("numero", models.CharField(max_length=15)),
+                (
+                    "advogado",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="oab_advogado",
+                        to="pessoas.advogado",
+                    ),
+                ),
+                (
+                    "estado",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="estado_oab_pessoas_oab_related",
+                        to="localizacao.estado",
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_edicao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="updatedpessoas_oab_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_exclusao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="deletepessoas_oab_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'verbose_name': 'RG Advogado',
-                'verbose_name_plural': 'RG Advogado',
-            },
+            options={"verbose_name": "OAB", "verbose_name_plural": "OAB"},
         ),
         migrations.CreateModel(
-            name='OAB',
+            name="EmailAdvogado",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('ativo', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('delete_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('excluido', models.BooleanField(default=False)),
-                ('numero', models.CharField(max_length=15)),
-                ('advogado', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='oab_advogado', to='pessoas.advogado')),
-                ('estado', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='estado_oab_pessoas_oab_related', to='localizacao.estado')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('usuario_edicao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='updatedpessoas_oab_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_exclusao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='deletepessoas_oab_related', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("ativo", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "updated_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "delete_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("excluido", models.BooleanField(default=False)),
+                ("email", models.EmailField(blank=True, max_length=150, null=True)),
+                (
+                    "advogado",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="email_advogado",
+                        to="pessoas.advogado",
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_edicao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="updatedpessoas_emailadvogado_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_exclusao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="deletepessoas_emailadvogado_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'verbose_name': 'OAB',
-                'verbose_name_plural': 'OAB',
-            },
-        ),
-        migrations.CreateModel(
-            name='EmailAdvogado',
-            fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('ativo', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('delete_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('excluido', models.BooleanField(default=False)),
-                ('email', models.EmailField(blank=True, max_length=150, null=True)),
-                ('advogado', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='email_advogado', to='pessoas.advogado')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('usuario_edicao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='updatedpessoas_emailadvogado_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_exclusao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='deletepessoas_emailadvogado_related', to=settings.AUTH_USER_MODEL)),
-            ],
-            options={
-                'verbose_name': 'Email',
-                'verbose_name_plural': 'Emails',
-            },
+            options={"verbose_name": "Email", "verbose_name_plural": "Emails"},
         ),
     ]

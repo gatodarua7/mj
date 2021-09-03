@@ -7,15 +7,20 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pessoas', '0020_auto_20210727_1405'),
-        ('visitante', '0005_auto_20210802_1900'),
+        ("pessoas", "0020_auto_20210727_1405"),
+        ("visitante", "0005_auto_20210802_1900"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='anuencia',
-            name='interno',
-            field=models.ForeignKey(default='1191484a-4ab1-4662-8c41-269fc1e66e23', on_delete=django.db.models.deletion.PROTECT, related_name='interno_visitante_related', to='pessoas.interno'),
+            model_name="anuencia",
+            name="interno",
+            field=models.ForeignKey(
+                default="1191484a-4ab1-4662-8c41-269fc1e66e23",
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="interno_visitante_related",
+                to="pessoas.interno",
+            ),
             preserve_default=False,
-        ),
+        )
     ]

@@ -5,19 +5,17 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('juridico', '0006_auto_20210511_1823'),
-    ]
+    dependencies = [("juridico", "0006_auto_20210511_1823")]
 
     operations = [
         migrations.RenameField(
-            model_name='normasjuridicas',
-            old_name='norma_juridica_nome',
-            new_name='norma_juridica',
+            model_name="normasjuridicas",
+            old_name="norma_juridica_nome",
+            new_name="norma_juridica",
         ),
         migrations.RenameField(
-            model_name='titulolei',
-            old_name='norma_juridica_nome',
-            new_name='norma_juridica',
+            model_name="titulolei",
+            old_name="norma_juridica_nome",
+            new_name="norma_juridica",
         ),
     ]

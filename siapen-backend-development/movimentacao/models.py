@@ -56,11 +56,11 @@ class FasesPedido(BaseModel):
     motivo_inativacao = models.TextField(max_length=200, default=None, null=True, blank=True)
     data_ativacao = models.DateTimeField(default=None, blank=True, null=True)
     data_inativacao = models.DateTimeField(default=None, blank=True, null=True)
-    usuario_ativacao = models.ForeignKey(User, on_delete=models.PROTECT, 
-                                        related_name="Ativacao_fases_related", 
+    usuario_ativacao = models.ForeignKey(User, on_delete=models.PROTECT,
+                                        related_name="Ativacao_fases_related",
                                         default=None, blank=True, null=True)
-    usuario_inativacao = models.ForeignKey(User, on_delete=models.PROTECT, 
-                                        related_name="Inativação_fases_related", 
+    usuario_inativacao = models.ForeignKey(User, on_delete=models.PROTECT,
+                                        related_name="Inativação_fases_related",
                                         default=None, blank=True, null=True)
 
 
@@ -72,11 +72,11 @@ class PedidoInclusao(BaseModel):
 
     nome = models.CharField(max_length=150)
     nome_social = models.CharField(max_length=150, null=True, blank=True)
-    genero = models.ForeignKey(Genero, on_delete=models.PROTECT, null=True, blank=True, 
+    genero = models.ForeignKey(Genero, on_delete=models.PROTECT, null=True, blank=True,
         related_name="genero_%(app_label)s_%(class)s_related")
     nacionalidade = models.ManyToManyField(Pais, blank=True, default=None,
         related_name="nacionalidade_%(app_label)s_%(class)s_related")
-    estado = models.ForeignKey(Estado, blank=True, null=True, on_delete=models.PROTECT, 
+    estado = models.ForeignKey(Estado, blank=True, null=True, on_delete=models.PROTECT,
         related_name="estado_%(app_label)s_%(class)s_related")
     naturalidade = models.ForeignKey(
         Cidade, on_delete=models.PROTECT, null=True, blank=True,
@@ -104,7 +104,7 @@ class PedidoInclusao(BaseModel):
     mae_nao_declarado = models.BooleanField(default=False)
     pai_falecido = models.BooleanField(default=False)
     pai_nao_declarado = models.BooleanField(default=False)
-    necessidade_especial = models.ManyToManyField(NecessidadeEspecial, blank=True, 
+    necessidade_especial = models.ManyToManyField(NecessidadeEspecial, blank=True,
         related_name="necessidades_%(app_label)s_%(class)s_related")
     data_nascimento = models.DateField()
     vulgo = models.ManyToManyField(Vulgo, through='VulgosThroughModel')
@@ -185,7 +185,7 @@ class PedidoInclusaoMovimentacao(models.Model):
     fase_pedido = models.ForeignKey(FasesPedido, on_delete=models.PROTECT)
     motivo = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    usuario_cadastro = models.ForeignKey(User, on_delete=models.PROTECT, 
+    usuario_cadastro = models.ForeignKey(User, on_delete=models.PROTECT,
                                          related_name="usuario_movimentacao_related")
 
     def __str__(self):

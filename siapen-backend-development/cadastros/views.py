@@ -28,7 +28,7 @@ from cadastros.serializers import (
     DocumentosSerializer,
     DocumentosPostSerializer,
     SetorSerializer,
-    ComportamentoInternoSerializer
+    ComportamentoInternoSerializer,
 )
 from cadastros.models import (
     Foto,
@@ -42,7 +42,7 @@ from cadastros.models import (
     Periculosidade,
     Documentos,
     Setor,
-    ComportamentoInterno
+    ComportamentoInterno,
 )
 from comum.models import Telefone, Endereco
 from localizacao.models import Cidade
@@ -57,7 +57,7 @@ from util.busca import (
     trata_telefone,
     check_duplicidade,
     formata_data,
-    formata_data_hora
+    formata_data_hora,
 )
 from util import mensagens, validador, user
 from validate_docbr import CPF
@@ -84,7 +84,7 @@ class FotoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        
+
         if (
             request.data.get("foto_temp").name.split(".")[-1].lower()
             not in self.FORMATOS_VALIDOS
@@ -238,7 +238,6 @@ class GeneroViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             )
 
         return super(GeneroViewSet, self).update(request, *args, **kwargs)
-
 
     def destroy(self, request, pk, *args, **kwargs):
         try:
@@ -582,7 +581,9 @@ class PessoaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             pessoa_list.append(trata_campo(query.nome_pai))
             pessoa_list.append(trata_campo(query.nome_mae))
             pessoa_list.append(trata_campo(query.orgao_expedidor))
-            pessoa_list.append(trata_campo(query.genero.descricao) if query.genero else "")
+            pessoa_list.append(
+                trata_campo(query.genero.descricao) if query.genero else ""
+            )
             pessoa_list.append(trata_campo(query.raca.nome) if query.raca else "")
             pessoa_list.append(
                 trata_campo(query.estado_civil.nome) if query.estado_civil else ""
@@ -597,18 +598,24 @@ class PessoaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             pessoa_list.append(
                 trata_campo(query.grau_instrucao.nome) if query.grau_instrucao else ""
             )
-            pessoa_list.append(trata_campo(query.profissao.nome) if query.profissao else "")
+            pessoa_list.append(
+                trata_campo(query.profissao.nome) if query.profissao else ""
+            )
             pessoa_list.append(
                 trata_campo(query.orientacao_sexual.nome)
                 if query.orientacao_sexual
                 else ""
             )
-            pessoa_list.append(trata_campo(query.religiao.nome) if query.religiao else "")
+            pessoa_list.append(
+                trata_campo(query.religiao.nome) if query.religiao else ""
+            )
 
-            pessoa_list.extend([
-                trata_campo(necessidade.nome)
-                for necessidade in query.necessidade_especial.all()
-            ])
+            pessoa_list.extend(
+                [
+                    trata_campo(necessidade.nome)
+                    for necessidade in query.necessidade_especial.all()
+                ]
+            )
 
             for endereco in query.enderecos.all():
                 pessoa_list.append(trata_campo(endereco.logradouro))
@@ -619,7 +626,9 @@ class PessoaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 pessoa_list.append(trata_campo(endereco.estado.sigla))
                 pessoa_list.append(trata_campo(endereco.observacao))
                 pessoa_list.append(trata_campo(endereco.complemento))
-                pessoa_list2.append(trata_campo(endereco.cep.replace("-", "").replace(".", "")))
+                pessoa_list2.append(
+                    trata_campo(endereco.cep.replace("-", "").replace(".", ""))
+                )
                 pessoa_list.append(trata_campo(endereco.andar))
                 pessoa_list.append(trata_campo(endereco.sala))
 
@@ -654,7 +663,6 @@ class PessoaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
         return queryset
 
-
     def check_cidade(self, requisicao):
         return Cidade.objects.filter(
             Q(id=requisicao["cidade"], estado_id=requisicao["estado"])
@@ -679,7 +687,6 @@ class PessoaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             enderecos=enderecos,
             updated_at=datetime.now(),
         )
-
 
     def get_telefones(self, request):
         list_telefones = list()
@@ -745,9 +752,7 @@ class PessoaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             servidor = Servidor.objects.filter(
                 (
                     Q(telefones__numero__iexact=trata_telefone(telefone))
-                    | Q(
-                        telefones_funcionais__numero__iexact=trata_telefone(telefone)
-                    )
+                    | Q(telefones_funcionais__numero__iexact=trata_telefone(telefone))
                 )
                 & Q(excluido=False)
             ).values_list("nome", flat=True)
@@ -1023,7 +1028,6 @@ class OrgaoExpedidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
         return super(OrgaoExpedidorViewSet, self).update(request, *args, **kwargs)
 
-
     def destroy(self, request, pk, *args, **kwargs):
         try:
             if not Base().check_registro_exists(OrgaoExpedidor, pk):
@@ -1086,12 +1090,7 @@ class OrgaoExpedidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
         return queryset
 
-    @action(
-        detail=False,
-        methods=["get"],
-        url_path="ufs",
-        url_name="ufs",
-    )
+    @action(detail=False, methods=["get"], url_path="ufs", url_name="ufs")
     def get_ufs(self, request):
         uf_list = list()
         for query in OrgaoExpedidor.objects.filter(Q(excluido=False, ativo=True)):
@@ -1189,7 +1188,6 @@ class RegimePrisionalViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
         return super(RegimePrisionalViewSet, self).update(request, *args, **kwargs)
 
-
     def destroy(self, request, pk, *args, **kwargs):
         try:
             if not Base().check_registro_exists(RegimePrisional, pk):
@@ -1247,7 +1245,7 @@ class RegimePrisionalViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
     def check_vinculo_orgao_expedidor(self, id):
         return RegimePrisional.objects.filter(Q(nome=id, excluido=False)).exists()
-    
+
     def check_vinculos(self, id):
         return PedidoInclusao.objects.filter(regime_prisional=id).exists()
 
@@ -1310,7 +1308,6 @@ class PericulosidadeViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
         return super(PericulosidadeViewSet, self).update(request, *args, **kwargs)
 
-
     def destroy(self, request, pk, *args, **kwargs):
         try:
             if not Base().check_registro_exists(Periculosidade, pk):
@@ -1352,7 +1349,7 @@ class PericulosidadeViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 if busca in item:
                     queryset |= Periculosidade.objects.filter(pk=query.pk)
                     break
-      
+
         if ativo is not None:
             queryset = queryset.filter(ativo=ativo)
 
@@ -1386,7 +1383,14 @@ class DocumentosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
     search_fields = ("id", "ativo")
     filter_fields = ("id", "ativo")
     ordering_fields = ("tipo", "num_cod", "observacao")
-    ordering = ("tipo", "num_cod", "observacao", "data_validade", "created_at", "updated_at")
+    ordering = (
+        "tipo",
+        "num_cod",
+        "observacao",
+        "data_validade",
+        "created_at",
+        "updated_at",
+    )
     DEFAULT_PDF_FILE_SIZE = 15 * 1024 * 1024
     DEFAULT_IMG_FILE_SIZE = 1 * 1024 * 1024
     DEFAULT_IMAGE_SIZE = (720, 480)
@@ -1407,29 +1411,19 @@ class DocumentosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             not in self.FORMATOS_VALIDOS
         ):
             return Response(
-                {
-                    "arquivo_temp": mensagens.TIPO_PERMITIDO
-                },
+                {"arquivo_temp": mensagens.TIPO_PERMITIDO},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
         if request.data.get("arquivo_temp").content_type == "application/pdf":
             if request.data.get("arquivo_temp").size > self.DEFAULT_PDF_FILE_SIZE:
                 return Response(
-                    {
-                        "arquivo_temp": mensagens.TAM_PDF
-                    },
+                    {"arquivo_temp": mensagens.TAM_PDF},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
         else:
-            if (
-                image_size(request.data.get("arquivo_temp"))
-                < self.DEFAULT_IMAGE_SIZE
-            ):
-                if (
-                    request.data.get("arquivo_temp").size
-                    < self.DEFAULT_IMG_FILE_SIZE
-                ):
+            if image_size(request.data.get("arquivo_temp")) < self.DEFAULT_IMAGE_SIZE:
+                if request.data.get("arquivo_temp").size < self.DEFAULT_IMG_FILE_SIZE:
                     self.perform_create(serializer)
                     headers = self.get_success_headers(serializer.data)
                     response_data = {}
@@ -1437,15 +1431,11 @@ class DocumentosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                     response_data.update({"detail": mensagens.IMG_BAIXA_RESOLUCAO})
 
                     return Response(
-                        response_data,
-                        status=status.HTTP_201_CREATED,
-                        headers=headers,
+                        response_data, status=status.HTTP_201_CREATED, headers=headers
                     )
                 else:
                     return Response(
-                        {
-                            "arquivo_temp": mensagens.TAM_IMAGEM
-                        },
+                        {"arquivo_temp": mensagens.TAM_IMAGEM},
                         status=status.HTTP_400_BAD_REQUEST,
                     )
 
@@ -1453,10 +1443,7 @@ class DocumentosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         headers = self.get_success_headers(serializer.data)
         response_data = {}
         response_data.update(serializer.data)
-        return Response(
-            response_data, status=status.HTTP_201_CREATED, headers=headers
-        )
-            
+        return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
 
     def update(self, request, pk, *args, **kwargs):
         partial = kwargs.pop("partial", False)
@@ -1471,18 +1458,14 @@ class DocumentosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 not in self.FORMATOS_VALIDOS
             ):
                 return Response(
-                    {
-                        "arquivo_temp": mensagens.TIPO_PERMITIDO
-                    },
+                    {"arquivo_temp": mensagens.TIPO_PERMITIDO},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
             if request.data.get("arquivo_temp").content_type == "application/pdf":
                 if request.data.get("arquivo_temp").size > self.DEFAULT_PDF_FILE_SIZE:
                     return Response(
-                        {
-                            "arquivo_temp": mensagens.TAM_PDF
-                        },
+                        {"arquivo_temp": mensagens.TAM_PDF},
                         status=status.HTTP_400_BAD_REQUEST,
                     )
             else:
@@ -1491,38 +1474,29 @@ class DocumentosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                     < self.DEFAULT_IMAGE_SIZE
                 ):
                     return Response(
-                            {
-                                "arquivo_temp": mensagens.TAM_IMAGEM
-                            },
-                            status=status.HTTP_400_BAD_REQUEST,
-                        )
-                elif (
-                        request.data.get("arquivo_temp").size
-                        < self.DEFAULT_IMG_FILE_SIZE
-                    ):
-                        self.perform_update(serializer)
-                        headers = self.get_success_headers(serializer.data)
-                        response_data = {}
-                        response_data.update(serializer.data)
-                        response_data.update({"detail": mensagens.IMG_BAIXA_RESOLUCAO})
-                        return Response(
-                            response_data,
-                            status=status.HTTP_201_CREATED,
-                            headers=headers,
-                        )
+                        {"arquivo_temp": mensagens.TAM_IMAGEM},
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
+                elif request.data.get("arquivo_temp").size < self.DEFAULT_IMG_FILE_SIZE:
+                    self.perform_update(serializer)
+                    headers = self.get_success_headers(serializer.data)
+                    response_data = {}
+                    response_data.update(serializer.data)
+                    response_data.update({"detail": mensagens.IMG_BAIXA_RESOLUCAO})
+                    return Response(
+                        response_data, status=status.HTTP_201_CREATED, headers=headers
+                    )
 
         self.perform_update(serializer)
         headers = self.get_success_headers(serializer.data)
         response_data = {}
         response_data.update(serializer.data)
-        return Response(
-            response_data, status=status.HTTP_201_CREATED, headers=headers
-        )
+        return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
 
     def destroy(self, request, pk, *args, **kwargs):
         try:
 
-            if not Base().check_registro_exists(Documentos,pk):
+            if not Base().check_registro_exists(Documentos, pk):
                 return Response(
                     {"detail": mensagens.NAO_ENCONTRADO},
                     status=status.HTTP_404_NOT_FOUND,
@@ -1565,15 +1539,21 @@ class DocumentosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             queryset = queryset.filter(ativo=ativo)
 
         if parametros_busca.get("interno"):
-            documentos = Interno.objects.get(id=parametros_busca.get("interno")).documentos
+            documentos = Interno.objects.get(
+                id=parametros_busca.get("interno")
+            ).documentos
             doc_list = [doc.id for doc in documentos.all()]
             queryset = queryset.filter(id__in=doc_list)
         elif parametros_busca.get("servidor"):
-            documentos = Servidor.objects.get(id=parametros_busca.get("servidor")).documentos
+            documentos = Servidor.objects.get(
+                id=parametros_busca.get("servidor")
+            ).documentos
             doc_list = [doc.id for doc in documentos.all()]
             queryset = queryset.filter(id__in=doc_list)
         elif parametros_busca.get("visitante"):
-            documentos = Visitante.objects.get(id=parametros_busca.get("visitante")).documentos
+            documentos = Visitante.objects.get(
+                id=parametros_busca.get("visitante")
+            ).documentos
             doc_list = [doc.id for doc in documentos.all()]
             queryset = queryset.filter(id__in=doc_list)
 
@@ -1635,9 +1615,7 @@ class DocumentosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
             buffer.write(base64.decodebytes(bytes(obj, "utf-8")))
 
-            response = HttpResponse(
-                buffer.getvalue(),
-            )
+            response = HttpResponse(buffer.getvalue())
             response["Content-Disposition"] = "attachment;filename={0}".format(
                 nome_arquivo
             )
@@ -1698,7 +1676,9 @@ class SetorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 {"non_field_errors": "O setor pai não pode ser igual ao setor filho."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        if not requisicao.get("ativo") and Base().check_registro_inativo(Setor, requisicao):
+        if not requisicao.get("ativo") and Base().check_registro_inativo(
+            Setor, requisicao
+        ):
             return Response(
                 {"non_field_errors": mensagens.INATIVO},
                 status=status.HTTP_400_BAD_REQUEST,
@@ -1765,7 +1745,9 @@ class SetorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 setor_list.append(trata_campo(query.enderecos.estado.sigla))
                 setor_list.append(trata_campo(query.enderecos.observacao))
                 setor_list.append(trata_campo(query.enderecos.complemento))
-                setor_list2.append(trata_campo(query.enderecos.cep.replace("-", "").replace(".", "")))
+                setor_list2.append(
+                    trata_campo(query.enderecos.cep.replace("-", "").replace(".", ""))
+                )
                 setor_list.append(trata_campo(query.enderecos.andar))
                 setor_list.append(trata_campo(query.enderecos.sala))
 
@@ -1881,7 +1863,7 @@ class SetorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         return Servidor.objects.filter(
             Q(lotacao=id, excluido=False) | Q(lotacao_temporaria=id, excluido=False)
         ).exists()
-    
+
     def check_registro_inativo(self, id_setor):
         return Setor.objects.filter(Q(id=id_setor) & Q(ativo=False) & Q(excluido=False))
 
@@ -2003,12 +1985,16 @@ class ComportamentoInternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
     def update(self, request, *args, **kwargs):
         try:
             requisicao = request.data
-            if not Base().check_registro_exists(ComportamentoInterno, requisicao.get("id")):
+            if not Base().check_registro_exists(
+                ComportamentoInterno, requisicao.get("id")
+            ):
                 return Response(
                     {"detail": mensagens.NAO_ENCONTRADO},
                     status=status.HTTP_404_NOT_FOUND,
                 )
-            if Base().check_registro_excluido(ComportamentoInterno, requisicao.get("id")):
+            if Base().check_registro_excluido(
+                ComportamentoInterno, requisicao.get("id")
+            ):
                 return Response(
                     {"non_field_errors": mensagens.NAO_PERMITIDO},
                     status=status.HTTP_400_BAD_REQUEST,
@@ -2084,4 +2070,3 @@ class ComportamentoInternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
     def perform_update(self, serializer):
         serializer.save(usuario_edicao=user.get_user(self), updated_at=datetime.now())
-

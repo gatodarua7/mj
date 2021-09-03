@@ -7,14 +7,20 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('localizacao', '0001_initial'),
-        ('pessoas', '0010_advogado_emailadvogado_oab_rgadvogado'),
+        ("localizacao", "0001_initial"),
+        ("pessoas", "0010_advogado_emailadvogado_oab_rgadvogado"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='advogado',
-            name='naturalidade',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='naturalidade_advogado_pessoas_advogado_related', to='localizacao.cidade'),
-        ),
+            model_name="advogado",
+            name="naturalidade",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="naturalidade_advogado_pessoas_advogado_related",
+                to="localizacao.cidade",
+            ),
+        )
     ]

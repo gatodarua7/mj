@@ -38,8 +38,8 @@ class TestRecursoEndpoint(SiapenTestCase):
         self.data = {
             "observacao": "Teste",
             "data_recurso": "2020-01-01",
-            "documentos_list":  [{"id":"07f4e25a-95c2-4c62-9c44-017f1be0696a"}],
-            "usuario_cadastro": 1
+            "documentos_list": [{"id": "07f4e25a-95c2-4c62-9c44-017f1be0696a"}],
+            "usuario_cadastro": 1,
         }
         super(TestRecursoEndpoint, self).setUp()
 
@@ -47,8 +47,10 @@ class TestRecursoEndpoint(SiapenTestCase):
         """
         Criação de objeto válido.
         """
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -59,17 +61,21 @@ class TestRecursoEndpoint(SiapenTestCase):
 
         data = self.data
         data["documentos_list"] = []
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_c_create(self):
         """
         Criação de objeto invalido (sem campos obrigatorios).
         """
         data = self.data
-        data["data_recurso"] = None 
-        resp = self.client.post(self.url,data=json.dumps(data), content_type='application/json')
+        data["data_recurso"] = None
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -81,20 +87,23 @@ class TestRecursoEndpoint(SiapenTestCase):
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
 
-
     def test_a_update(self):
         """
         Atualizando objeto.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             data["id"] = resp_json["id"]
             data["data_recurso"] = "2020-11-01"
-            data["documentos_list"] = [{"id":"07f4e25a-95c2-4c62-9c44-017f1be0696a"}]
-            resp = self.client.patch(url, data=json.dumps(data), content_type='application/json')
+            data["documentos_list"] = [{"id": "07f4e25a-95c2-4c62-9c44-017f1be0696a"}]
+            resp = self.client.patch(
+                url, data=json.dumps(data), content_type="application/json"
+            )
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="update")
 
@@ -106,5 +115,3 @@ class TestRecursoEndpoint(SiapenTestCase):
         resp = self.client.delete(url)
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
         self.format_print(metodo="delete")
-
-    

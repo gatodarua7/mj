@@ -5,19 +5,17 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('visitante', '0011_auto_20210803_1757'),
-    ]
+    dependencies = [("visitante", "0011_auto_20210803_1757")]
 
     operations = [
         migrations.AddField(
-            model_name='visitante',
-            name='data_validade',
+            model_name="visitante",
+            name="data_validade",
             field=models.DateField(blank=True, default=None, null=True),
         ),
         migrations.AddField(
-            model_name='visitante',
-            name='situacao',
+            model_name="visitante",
+            name="situacao",
             field=models.BooleanField(default=False),
         ),
     ]

@@ -6,6 +6,6 @@ from localizacao.views import CidadeViewSet
 
 router = routers.DefaultRouter()
 
-router.register(r'paises', PaisViewSet)
-router.register(r'estados', EstadoViewSet)
-router.register(r'cidades', CidadeViewSet)
+router.register(r"paises", PaisViewSet)
+router.register(r"estados", EstadoViewSet)
+router.register(r"cidades", CidadeViewSet)

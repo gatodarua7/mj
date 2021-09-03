@@ -12,18 +12,18 @@ from validate_docbr import CPF
 from util import mensagens
 from mj_crypt.mj_crypt import AESCipher
 
+
 class OABSerializer(FlexFieldsModelSerializer):
     estado_nome = SerializerMethodField()
 
     class Meta:
         model = OAB
         ordering = ["id", "numero", "estado", "estado_nome"]
-        fields = ["id", "numero","estado", "estado_nome"]
+        fields = ["id", "numero", "estado", "estado_nome"]
 
-    
         mandatory_fields = {
             "numero": mensagens.MSG2.format(u"numero"),
-            "estado": mensagens.MSG2.format(u"estado")
+            "estado": mensagens.MSG2.format(u"estado"),
         }
 
     def get_advogado(self, obj):
@@ -58,7 +58,7 @@ class RgAdvogadoSerializer(FlexFieldsModelSerializer):
             "uf_rg",
             "uf_rg_nome",
             "orgao_expedidor_nome",
-            "advogado"
+            "advogado",
         ]
 
     def get_uf_rg(self, obj):
@@ -70,6 +70,7 @@ class RgAdvogadoSerializer(FlexFieldsModelSerializer):
     def get_orgao_expedidor_nome(self, obj):
         return obj.orgao_expedidor.nome
 
+
 class EmailSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = EmailAdvogado
@@ -79,6 +80,7 @@ class EmailSerializer(FlexFieldsModelSerializer):
     def get_advogado(self, obj):
         return obj.advogado
 
+
 class AdvogadoSerializer(FlexFieldsModelSerializer):
     telefones = SerializerMethodField()
     enderecos = SerializerMethodField()
@@ -87,7 +89,6 @@ class AdvogadoSerializer(FlexFieldsModelSerializer):
     oabs = SerializerMethodField()
     oabs_list = SerializerMethodField()
     emails = SerializerMethodField()
-
 
     class Meta:
         model = Advogado
@@ -102,7 +103,7 @@ class AdvogadoSerializer(FlexFieldsModelSerializer):
             "data_nascimento": mensagens.MSG2.format(u"data nascimento"),
             "nome": mensagens.MSG2.format(u"nome"),
             "nacionalidade": mensagens.MSG2.format(u"nacionalidade"),
-            "oabs": mensagens.MSG2.format(u"oabs")
+            "oabs": mensagens.MSG2.format(u"oabs"),
         }
 
         for key, value in mandatory_fields.items():
@@ -183,9 +184,7 @@ class AdvogadoSerializer(FlexFieldsModelSerializer):
             for oab in obj.oabs.values():
                 if not oab.get("excluido"):
                     oabdict = oab
-                    estado = Estado.objects.get(
-                        Q(id=oab.get("estado_id"))
-                    ).nome
+                    estado = Estado.objects.get(Q(id=oab.get("estado_id"))).nome
                     oabdict["numero"] = oab.get("numero")
                     oab = oab.get("numero") + " - " + estado
                     oabs.append(oab)
@@ -198,7 +197,6 @@ class AdvogadoSerializer(FlexFieldsModelSerializer):
         for email in EmailAdvogado.objects.filter(advogado_id=obj.id, excluido=False):
             lista_email.append(email.email)
         return lista_email
-
 
     def validate(self, data):
         """
@@ -226,17 +224,15 @@ class AdvogadoSerializer(FlexFieldsModelSerializer):
             )
 
         if brasil_exist and not data.get("estado"):
-            raise serializers.ValidationError(
-                {"estado": "Estado é obrigatório."}
-            )
-        
+            raise serializers.ValidationError({"estado": "Estado é obrigatório."})
+
         if brasil_exist and not data.get("naturalidade"):
             raise serializers.ValidationError(
                 {"naturalidade": "Naturalidade é obrigatório."}
             )
 
         return data
-    
+
     def get_thumbnail(self, obj):
         thumbnail = None
         crypt = AESCipher()
@@ -247,4 +243,3 @@ class AdvogadoSerializer(FlexFieldsModelSerializer):
             if foto and foto.ativo:
                 thumbnail = crypt.decrypt(foto.thumbnail)
         return thumbnail
-

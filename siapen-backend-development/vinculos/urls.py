@@ -4,4 +4,4 @@ from vinculos.views import TipoVinculoViewSet
 
 router = routers.DefaultRouter()
 
-router.register(r'tipo-vinculo', TipoVinculoViewSet)
+router.register(r"tipo-vinculo", TipoVinculoViewSet)

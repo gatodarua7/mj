@@ -9,7 +9,7 @@ from visitante.views import (
     VisitanteMovimentacaoViewSet,
     DocumentosVisitanteViewSet,
     VisitanteRecursoViewSet,
-     ManifestacaoDiretoriaViewSet,
+    ManifestacaoDiretoriaViewSet,
 )
 
 

@@ -5,7 +5,17 @@ from rest_framework import fields
 from rest_framework.fields import SerializerMethodField
 from rest_framework import serializers
 from rest_flex_fields import FlexFieldsModelSerializer
-from visitante.models import Visitante, EmailVisitante, RgVisitante, Anuencia, Manifestacao, DocumentosVisitante, VisitanteMovimentacao, VisitanteRecurso, ManifestacaoDiretoria
+from visitante.models import (
+    Visitante,
+    EmailVisitante,
+    RgVisitante,
+    Anuencia,
+    Manifestacao,
+    DocumentosVisitante,
+    VisitanteMovimentacao,
+    VisitanteRecurso,
+    ManifestacaoDiretoria,
+)
 from pessoas.interno.models import Interno, InternoVulgosThroughModel
 from pessoas.interno.serializers import InternoSerializer
 from vinculos.serializers import TipoVinculoSerializer
@@ -44,7 +54,7 @@ class RgVisitanteSerializer(FlexFieldsModelSerializer):
             "uf_rg",
             "uf_rg_nome",
             "orgao_expedidor_nome",
-            "visitante"
+            "visitante",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -52,7 +62,7 @@ class RgVisitanteSerializer(FlexFieldsModelSerializer):
 
         mandatory_fields = {
             "numero": mensagens.MSG2.format("RG"),
-            "orgao_expedidor": mensagens.MSG2.format("Órgão Expedidor")
+            "orgao_expedidor": mensagens.MSG2.format("Órgão Expedidor"),
         }
 
         for key, value in mandatory_fields.items():
@@ -81,32 +91,25 @@ class EmailVisitanteSerializer(FlexFieldsModelSerializer):
 
 
 class DocumentosVisitantePostSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = DocumentosVisitante
         ordering = ["id"]
-        fields = [
-            "id",
-            "arquivo_temp"
-        ]
+        fields = ["id", "arquivo_temp"]
 
     def __init__(self, *args, **kwargs):
         super(DocumentosVisitantePostSerializer, self).__init__(*args, **kwargs)
 
-        mandatory_fields = {
-            "arquivo_temp": mensagens.MSG2.format("Arquivo"),
-        }
+        mandatory_fields = {"arquivo_temp": mensagens.MSG2.format("Arquivo")}
 
         for key, value in mandatory_fields.items():
             self.fields[key].error_messages["required"] = value
             self.fields[key].error_messages["blank"] = value
             self.fields[key].error_messages["null"] = value
-            if key == 'arquivo_temp' and not self.fields[key]:
+            if key == "arquivo_temp" and not self.fields[key]:
                 self.fields[key].error_messages["invalid"] = value
 
 
 class DocumentosVisitanteSerializer(FlexFieldsModelSerializer):
-
     class Meta:
         model = DocumentosVisitante
         ordering = ["id"]
@@ -117,21 +120,18 @@ class DocumentosVisitanteSerializer(FlexFieldsModelSerializer):
 
 
 class VisitanteRecursoSerializer(FlexFieldsModelSerializer):
-
     class Meta:
         model = VisitanteRecurso
         fields = "__all__"
 
         expandable_fields = {
-            'documentos': (DocumentosVisitanteSerializer, {'many': True})
+            "documentos": (DocumentosVisitanteSerializer, {"many": True})
         }
 
     def __init__(self, *args, **kwargs):
         super(VisitanteRecursoSerializer, self).__init__(*args, **kwargs)
 
-        mandatory_fields = {
-            "data_recurso": mensagens.MSG2.format(u"data do recurso")
-        }
+        mandatory_fields = {"data_recurso": mensagens.MSG2.format(u"data do recurso")}
 
         for key, value in mandatory_fields.items():
             self.fields[key].error_messages["required"] = value
@@ -144,19 +144,18 @@ class ManifestacaoSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = Manifestacao
-        fields = ["id","parecer", "documentos", "visitante", "created_at", "usuario"]
+        fields = ["id", "parecer", "documentos", "visitante", "created_at", "usuario"]
 
         expandable_fields = {
-            'documentos': (DocumentosVisitanteSerializer, {'many': True})
+            "documentos": (DocumentosVisitanteSerializer, {"many": True})
         }
-         
 
     def __init__(self, *args, **kwargs):
         super(ManifestacaoSerializer, self).__init__(*args, **kwargs)
 
         mandatory_fields = {
             "parecer": mensagens.MSG2.format(u"parecer"),
-            "visitante": mensagens.MSG2.format(u"visitante")
+            "visitante": mensagens.MSG2.format(u"visitante"),
         }
 
         for key, value in mandatory_fields.items():
@@ -180,17 +179,14 @@ class VisitanteSerializer(FlexFieldsModelSerializer):
     situacao = SerializerMethodField()
     permite_recurso = SerializerMethodField()
     usuario_permissao = SerializerMethodField()
-    recurso_diretoria = SerializerMethodField() 
-
+    recurso_diretoria = SerializerMethodField()
 
     class Meta:
         model = Visitante
         ordering = ["id", "nome"]
         exclude = ["usuario_cadastro", "usuario_edicao", "usuario_exclusao"]
-        
-        expandable_fields = {
-            'recurso': VisitanteRecursoSerializer
-        }
+
+        expandable_fields = {"recurso": VisitanteRecursoSerializer}
 
     def __init__(self, *args, **kwargs):
         super(VisitanteSerializer, self).__init__(*args, **kwargs)
@@ -206,7 +202,7 @@ class VisitanteSerializer(FlexFieldsModelSerializer):
             self.fields[key].error_messages["required"] = value
             self.fields[key].error_messages["blank"] = value
             self.fields[key].error_messages["null"] = value
-        
+
     def to_representation(self, instance):
         """
         Representa o valor de um objeto.
@@ -284,13 +280,15 @@ class VisitanteSerializer(FlexFieldsModelSerializer):
 
     def get_analise_inteligencia(self, obj):
         return Manifestacao.objects.filter(visitante_id=obj.id, excluido=False).exists()
-    
+
     def get_analise_diretoria(self, obj):
-       
+
         try:
-            manifestacao = ManifestacaoDiretoria.objects.filter(visitante_id=obj.id).latest('created_at')
-            if (manifestacao):
-                if (obj.data_movimentacao < manifestacao.created_at):
+            manifestacao = ManifestacaoDiretoria.objects.filter(
+                visitante_id=obj.id
+            ).latest("created_at")
+            if manifestacao:
+                if obj.data_movimentacao < manifestacao.created_at:
                     return manifestacao.pk
                 else:
                     return None
@@ -299,10 +297,14 @@ class VisitanteSerializer(FlexFieldsModelSerializer):
 
     def get_usuario_permissao(self, obj):
         try:
-            manifestacao = ManifestacaoDiretoria.objects.filter(visitante_id=obj.id).latest('created_at')
-            if (manifestacao):
+            manifestacao = ManifestacaoDiretoria.objects.filter(
+                visitante_id=obj.id
+            ).latest("created_at")
+            if manifestacao:
                 request = self.context.get("request")
-                if ((manifestacao.usuario_cadastro == request.user) or (manifestacao.usuario_edicao == request.user)):
+                if (manifestacao.usuario_cadastro == request.user) or (
+                    manifestacao.usuario_edicao == request.user
+                ):
                     return True
                 else:
                     return False
@@ -316,8 +318,8 @@ class VisitanteSerializer(FlexFieldsModelSerializer):
         """
         Regras de validação de vinculo de localidade.
         """
-        requisicao = self.context['request'].data
-  
+        requisicao = self.context["request"].data
+
         if data.get("cpf") and not CPF().validate(data.get("cpf")):
             raise serializers.ValidationError({"cpf": "CPF inválido."})
 
@@ -343,21 +345,27 @@ class VisitanteSerializer(FlexFieldsModelSerializer):
             raise serializers.ValidationError(
                 {"estado": "O campo Estado é de preenchimento obrigatório."}
             )
-        
+
         if brasil_exist and not data.get("naturalidade"):
             raise serializers.ValidationError(
                 {"naturalidade": "O campo Naturalidade é de preenchimento obrigatório."}
             )
-            
+
         if (data.get("idade") and self.check_maioridade(data)) and brasil_exist:
             if not data.get("estado"):
-                raise serializers.ValidationError({'non_field_errors': mensagens.MSG2.format(u"rg")})
+                raise serializers.ValidationError(
+                    {"non_field_errors": mensagens.MSG2.format(u"rg")}
+                )
 
             if not data.get("cpf"):
-                raise serializers.ValidationError({'cpf': mensagens.MSG2.format(u"cpf")})
+                raise serializers.ValidationError(
+                    {"cpf": mensagens.MSG2.format(u"cpf")}
+                )
 
-            if not requisicao.get('rgs'):
-                raise serializers.ValidationError({'non_field_errors': mensagens.MSG2.format(u"rg")})
+            if not requisicao.get("rgs"):
+                raise serializers.ValidationError(
+                    {"non_field_errors": mensagens.MSG2.format(u"rg")}
+                )
 
         return data
 
@@ -366,7 +374,7 @@ class VisitanteSerializer(FlexFieldsModelSerializer):
         if idade < 18:
             return False
         return True
-    
+
     def get_thumbnail(self, obj):
         thumbnail = None
         crypt = AESCipher()
@@ -383,28 +391,31 @@ class VisitanteSerializer(FlexFieldsModelSerializer):
             Visitante.objects.filter(id=obj.pk).update(situacao=False)
             return False
         return obj.situacao
-    
+
     def get_permite_recurso(self, obj):
-        if obj.fase == 'INDEFERIDO' and obj.solicitante_informado:
-            movimentacao = VisitanteMovimentacao.objects.get(visitante_id=obj.pk, fase='SOLICITANTE_INFORMADO')
+        if obj.fase == "INDEFERIDO" and obj.solicitante_informado:
+            movimentacao = VisitanteMovimentacao.objects.get(
+                visitante_id=obj.pk, fase="SOLICITANTE_INFORMADO"
+            )
             if movimentacao:
                 dia = 5 if movimentacao.data_contato.isoweekday() in [6, 7] else 4
-                return datetime.today().date() <= get_proximo_dia_util(data=movimentacao.data_contato, dia=dia)
+                return datetime.today().date() <= get_proximo_dia_util(
+                    data=movimentacao.data_contato, dia=dia
+                )
         return False
 
 
 class AnuenciaSerializer(FlexFieldsModelSerializer):
-
     class Meta:
         model = Anuencia
         ordering = ["id"]
         exclude = ["usuario_cadastro", "usuario_edicao", "usuario_exclusao"]
 
         expandable_fields = {
-            'interno': InternoSerializer,
-            'tipo_vinculo': TipoVinculoSerializer,
-            'visitante': VisitanteSerializer,
-            'documento': DocumentosVisitanteSerializer
+            "interno": InternoSerializer,
+            "tipo_vinculo": TipoVinculoSerializer,
+            "visitante": VisitanteSerializer,
+            "documento": DocumentosVisitanteSerializer,
         }
 
     def __init__(self, *args, **kwargs):
@@ -429,10 +440,10 @@ class VisitanteMovimentacaoSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = VisitanteMovimentacao
         fields = "__all__"
-    
+
     def get_usuario(self, obj):
         return obj.usuario_cadastro.username
-    
+
     def validate(self, data):
         erro = dict()
         erro.update(self.check_data_comunicado(data))
@@ -442,8 +453,8 @@ class VisitanteMovimentacaoSerializer(FlexFieldsModelSerializer):
 
     def check_data_comunicado(self, data):
         erro = dict()
-        if data.get('fase') == 'SOLICITANTE_INFORMADO' and not data.get('data_contato'):
-            erro = {'data_contato': mensagens.MSG2.format(u"data do contato")}
+        if data.get("fase") == "SOLICITANTE_INFORMADO" and not data.get("data_contato"):
+            erro = {"data_contato": mensagens.MSG2.format(u"data do contato")}
         return erro
 
 
@@ -452,19 +463,18 @@ class ManifestacaoDiretoriaSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = ManifestacaoDiretoria
-        fields = ["id","parecer", "documentos", "visitante", "created_at", "usuario"]
+        fields = ["id", "parecer", "documentos", "visitante", "created_at", "usuario"]
 
         expandable_fields = {
-            'documentos': (DocumentosVisitanteSerializer, {'many': True})
+            "documentos": (DocumentosVisitanteSerializer, {"many": True})
         }
-         
 
     def __init__(self, *args, **kwargs):
         super(ManifestacaoDiretoriaSerializer, self).__init__(*args, **kwargs)
 
         mandatory_fields = {
             "parecer": mensagens.MSG2.format(u"parecer"),
-            "visitante": mensagens.MSG2.format(u"visitante")
+            "visitante": mensagens.MSG2.format(u"visitante"),
         }
 
         for key, value in mandatory_fields.items():

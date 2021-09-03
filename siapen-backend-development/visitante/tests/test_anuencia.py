@@ -37,12 +37,12 @@ class TestAnuenciaEndpoint(SiapenTestCase):
         self.entidade = "Anuencia"
         self.url = f"/api/visitante/anuencia/"
         self.data = {
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92", 
-            "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23", 
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
+            "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23",
             "data_declaracao": "21/02/2021",
             "observacao": "teste",
             "tipo_vinculo": "816579b4-0c3b-4c2f-a6d5-97e1dbc36444",
-            "documento":  "07f4e25a-95c2-4c62-9c44-017f1be0696a"
+            "documento": "07f4e25a-95c2-4c62-9c44-017f1be0696a",
         }
         super(TestAnuenciaEndpoint, self).setUp()
 
@@ -50,8 +50,10 @@ class TestAnuenciaEndpoint(SiapenTestCase):
         """
         Criação de objeto válido.
         """
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -59,28 +61,34 @@ class TestAnuenciaEndpoint(SiapenTestCase):
         """
         Criação de objeto sem campos obrigatorios.
         """
-        data = { 
+        data = {
             "data_declaracao": "21/02/2021",
             "observacao": "teste",
             "tipo_vinculo": "816579b4-0c3b-4c2f-a6d5-97e1dbc36444",
-            "documento":  "07f4e25a-95c2-4c62-9c44-017f1be0696a"
+            "documento": "07f4e25a-95c2-4c62-9c44-017f1be0696a",
         }
-        self.client.post(self.url, data=json.dumps(data), content_type='application/json')
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_c_create(self):
         """
         Criação de objeto invalido sem documentos.
         """
         data = {
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92", 
-            "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23", 
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
+            "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23",
             "observacao": "teste",
             "tipo_vinculo": "816579b4-0c3b-4c2f-a6d5-97e1dbc36444",
-        } 
-        resp = self.client.post(self.url,data=json.dumps(data), content_type='application/json')
+        }
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -89,20 +97,22 @@ class TestAnuenciaEndpoint(SiapenTestCase):
         Criação de objeto invalido sem data declaracao
         """
         data = {
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92", 
-            "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23", 
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
+            "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23",
             "observacao": "teste",
             "tipo_vinculo": "816579b4-0c3b-4c2f-a6d5-97e1dbc36444",
-            "documento":  "07f4e25a-95c2-4c62-9c44-017f1be0696a"
-        } 
-        resp = self.client.post(self.url,data=json.dumps(data), content_type='application/json')
+            "documento": "07f4e25a-95c2-4c62-9c44-017f1be0696a",
+        }
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
     def test_a_list(self):
         """
         List de objetos
-        """        
+        """
         resp = self.client.get(self.url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -112,23 +122,27 @@ class TestAnuenciaEndpoint(SiapenTestCase):
         List de com acento
         """
 
-        url = f'{self.url}?search=Condominio'
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        url = f"{self.url}?search=Condominio"
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.get(url)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=Condomínio'
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        url = f"{self.url}?search=Condomínio"
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -140,9 +154,11 @@ class TestAnuenciaEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        url = f"{self.url}?ativo=true"
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -154,9 +170,11 @@ class TestAnuenciaEndpoint(SiapenTestCase):
         """
         List de objetos por visitante
         """
-        url = f'{self.url}?id_visitante=2939da1f-552d-4997-b8de-3d956359ec92'
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        url = f"{self.url}?id_visitante=2939da1f-552d-4997-b8de-3d956359ec92"
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -164,26 +182,27 @@ class TestAnuenciaEndpoint(SiapenTestCase):
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="list")
 
-
     def test_a_update(self):
         """
         Atualizando objeto sem dados obrigatorios.
         """
         data = {
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92", 
-            "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23", 
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
+            "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23",
             "data_declaracao": "21/02/2021",
             "observacao": "teste",
             "tipo_vinculo": "816579b4-0c3b-4c2f-a6d5-97e1dbc36444",
-            "documento":  "07f4e25a-95c2-4c62-9c44-017f1be0696a"
-        } 
+            "documento": "07f4e25a-95c2-4c62-9c44-017f1be0696a",
+        }
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             resp_json["visitante"] = None
             resp_json["interno"] = None
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="update")
 
@@ -192,12 +211,12 @@ class TestAnuenciaEndpoint(SiapenTestCase):
         Atualizando dados do objeto sem interno
         """
         data = {
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92", 
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
             "data_declaracao": "21/02/2021",
             "observacao": "teste",
             "tipo_vinculo": "816579b4-0c3b-4c2f-a6d5-97e1dbc36444",
-            "documento":  "07f4e25a-95c2-4c62-9c44-017f1be0696a"
-        } 
+            "documento": "07f4e25a-95c2-4c62-9c44-017f1be0696a",
+        }
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -207,7 +226,6 @@ class TestAnuenciaEndpoint(SiapenTestCase):
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="update")
 
-
     def test_a_delete(self):
         """
         Apagando registro inexistente.
@@ -216,5 +234,3 @@ class TestAnuenciaEndpoint(SiapenTestCase):
         resp = self.client.delete(url)
         self.assertEqual(resp.status_code, status.HTTP_200_OK)
         self.format_print(metodo="delete")
-
-    

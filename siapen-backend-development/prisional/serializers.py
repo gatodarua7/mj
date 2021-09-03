@@ -172,10 +172,14 @@ class SistemaPenalSerializer(serializers.ModelSerializer):
         Regras de validação de prisional.
         """
 
-        if data.get("pais") and data.get("pais").nome != "Brasil" and data.get("estado"):
-                raise serializers.ValidationError(
-                    "Os estados só estão disponíveis para o Brasil."
-                )
+        if (
+            data.get("pais")
+            and data.get("pais").nome != "Brasil"
+            and data.get("estado")
+        ):
+            raise serializers.ValidationError(
+                "Os estados só estão disponíveis para o Brasil."
+            )
 
         return data
 

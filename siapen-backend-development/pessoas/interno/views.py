@@ -33,13 +33,19 @@ from pessoas.interno.models import (
     Contatos,
     Rg,
     SinaisParticulares,
-    InternoVulgosThroughModel
+    InternoVulgosThroughModel,
 )
 from comum.models import Endereco, Telefone
 from cadastros.models import OrgaoExpedidor
 from rest_framework import status, viewsets
 from util.paginacao import Paginacao
-from util.busca import trata_campo, trata_campo_ativo, trata_telefone, check_duplicidade, get_ids
+from util.busca import (
+    trata_campo,
+    trata_campo_ativo,
+    trata_telefone,
+    check_duplicidade,
+    get_ids,
+)
 from util import mensagens, validador, user
 from datetime import datetime, date
 from uuid import UUID
@@ -58,12 +64,7 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
     search_fields = ("nome", "cpf", "data_nascimento", "id", "vulgo__nome")
     filter_fields = ("nome", "cpf", "data_nascimento", "id", "vulgo__nome")
 
-    ordering_fields = (
-        "nome",
-        "cpf",
-        "data_nascimento",
-        "vulgo"
-    )
+    ordering_fields = ("nome", "cpf", "data_nascimento", "vulgo")
     ordering = ("nome", "cpf", "data_nascimento", "vulgo")
 
     def create(self, request, *args, **kwargs):
@@ -77,8 +78,7 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
             if self.check_interno_exists(requisicao):
                 return Response(
-                    {"cpf": mensagens.MSG4},
-                    status=status.HTTP_400_BAD_REQUEST,
+                    {"cpf": mensagens.MSG4}, status=status.HTTP_400_BAD_REQUEST
                 )
             if data_nascimento and not self.check_maioridade_penal(data_nascimento):
                 return Response(
@@ -110,8 +110,7 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
             if self.check_interno_exists(requisicao):
                 return Response(
-                    {"cpf": mensagens.MSG4},
-                    status=status.HTTP_400_BAD_REQUEST,
+                    {"cpf": mensagens.MSG4}, status=status.HTTP_400_BAD_REQUEST
                 )
             if not self.check_maioridade_penal(data_nascimento):
                 return Response(
@@ -150,56 +149,66 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             qs = Interno.objects.none()
             interno_list = list()
             interno_list2 = list()
-            
+
             interno_list.append(trata_campo(query.nome))
             interno_list.append(trata_campo(query.nome_social))
             interno_list2.append(trata_campo(query.cpf))
             interno_list.append(formata_data(trata_campo(query.data_nascimento)))
             interno_list.append(trata_campo(query.nome_pai))
             interno_list.append(trata_campo(query.nome_mae))
-            interno_list.append(trata_campo(
-                query.genero.descricao) if query.genero else "")
+            interno_list.append(
+                trata_campo(query.genero.descricao) if query.genero else ""
+            )
             interno_list.append(trata_campo(query.raca.nome) if query.raca else "")
             interno_list.append(
-                trata_campo(
-                    query.estado_civil.nome) if query.estado_civil else ""
+                trata_campo(query.estado_civil.nome) if query.estado_civil else ""
             )
             interno_list.append(trata_campo(query.estado.nome) if query.estado else "")
             interno_list.append(
-                trata_campo(
-                    query.naturalidade.nome) if query.naturalidade else ""
+                trata_campo(query.naturalidade.nome) if query.naturalidade else ""
             )
             interno_list.append(
-                trata_campo(
-                    query.grau_instrucao.nome) if query.grau_instrucao else ""
+                trata_campo(query.grau_instrucao.nome) if query.grau_instrucao else ""
             )
             interno_list.append(
                 trata_campo(query.orientacao_sexual.nome)
                 if query.orientacao_sexual
                 else ""
             )
-            interno_list.append(trata_campo(
-                query.religiao.nome) if query.religiao else "")
-            interno_list.extend([
-                trata_campo(necessidade.nome)
-                for necessidade in query.necessidade_especial.all()
-            ])
-            interno_list.extend([
-                trata_campo(vulgo)
-                for vulgo in InternoVulgosThroughModel.objects.filter(interno_id=query.id)
-            ])
-            interno_list.extend([
-                trata_campo(outros_nomes.nome)
-                for outros_nomes in OutroNome.objects.filter(interno_id=query.id, excluido=False)
-            ])
+            interno_list.append(
+                trata_campo(query.religiao.nome) if query.religiao else ""
+            )
+            interno_list.extend(
+                [
+                    trata_campo(necessidade.nome)
+                    for necessidade in query.necessidade_especial.all()
+                ]
+            )
+            interno_list.extend(
+                [
+                    trata_campo(vulgo)
+                    for vulgo in InternoVulgosThroughModel.objects.filter(
+                        interno_id=query.id
+                    )
+                ]
+            )
+            interno_list.extend(
+                [
+                    trata_campo(outros_nomes.nome)
+                    for outros_nomes in OutroNome.objects.filter(
+                        interno_id=query.id, excluido=False
+                    )
+                ]
+            )
             for rg in Rg.objects.filter(interno_id=query.id, excluido=False):
                 interno_list.append(trata_campo(rg.numero))
                 interno_list.append(trata_campo(rg.orgao_expedidor.nome))
                 interno_list.append(trata_campo(rg.orgao_expedidor.sigla))
                 interno_list.append(trata_campo(rg.orgao_expedidor.estado))
 
-            interno_list.append(trata_campo(
-                query.profissao.nome) if query.profissao else "")
+            interno_list.append(
+                trata_campo(query.profissao.nome) if query.profissao else ""
+            )
             interno_list.append(
                 trata_campo(query.caracteristicas_cutis)
                 if query.get_caracteristicas_cutis_display()
@@ -283,10 +292,12 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                     interno_list.append(trata_campo(telefone.observacao))
                     interno_list.append(trata_campo(telefone.privado))
 
-            for sinais in SinaisParticulares.objects.filter(interno_id=query.id, excluido=False):
+            for sinais in SinaisParticulares.objects.filter(
+                interno_id=query.id, excluido=False
+            ):
                 interno_list.append(trata_campo(sinais.tipo))
                 interno_list.append(trata_campo(sinais.descricao))
-            
+
             for documento in query.documentos.all():
                 interno_list.append(trata_campo(documento.tipo.nome))
                 interno_list.append(trata_campo(documento.num_cod))
@@ -296,10 +307,10 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                     interno_list.append(formata_data_hora(documento.updated_at))
                 interno_list.append(formata_data(trata_campo(documento.data_validade)))
 
-            interno_list.extend([
-                    trata_campo(pais.nome) for pais in query.nacionalidade.all()
-                ])
-           
+            interno_list.extend(
+                [trata_campo(pais.nome) for pais in query.nacionalidade.all()]
+            )
+
             for interno in interno_list:
                 if busca in interno:
                     qs = Interno.objects.filter(pk=query.pk)
@@ -330,7 +341,7 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
                 if list_queryset:
                     queryset = list_queryset
-                
+
         return queryset
 
     def check_interno_exists(self, requisicao):
@@ -374,8 +385,7 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         try:
             vulgo_nome = ast.literal_eval(requisicao.get("vulgo"))
         except Exception:
-            vulgo_nome = requisicao.get(
-                "vulgo") if requisicao.get("vulgo") else None
+            vulgo_nome = requisicao.get("vulgo") if requisicao.get("vulgo") else None
 
         try:
 
@@ -391,7 +401,9 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 if nome_vulgo.strip():
                     outro_nome = nome_vulgo.strip()
                     id_vulgo, created = Vulgo.objects.get_or_create(nome=nome_vulgo)
-                    InternoVulgosThroughModel.objects.get_or_create(interno_id=serializer.data["id"], vulgo_id=id_vulgo.id)
+                    InternoVulgosThroughModel.objects.get_or_create(
+                        interno_id=serializer.data["id"], vulgo_id=id_vulgo.id
+                    )
 
         if outros_nomes:
             for outro_nome in outros_nomes:
@@ -428,8 +440,7 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         try:
             vulgo_nome = ast.literal_eval(requisicao.get("vulgo"))
         except Exception:
-            vulgo_nome = requisicao.get(
-                "vulgo") if requisicao.get("vulgo") else None
+            vulgo_nome = requisicao.get("vulgo") if requisicao.get("vulgo") else None
 
         try:
             outros_nomes = ast.literal_eval(requisicao.get("outros_nomes"))
@@ -445,15 +456,27 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 if nome_vulgo.strip():
                     nome = nome_vulgo.strip()
                     id_vulgo, created = Vulgo.objects.get_or_create(nome=nome)
-                    InternoVulgosThroughModel.objects.get_or_create(interno_id=pk, vulgo_id=id_vulgo.id)
-            novos_vulgos = Vulgo.objects.filter(nome__in=vulgo_nome).values_list('id', flat=True)
-            for interno_vulgo in InternoVulgosThroughModel.objects.filter(~Q(vulgo_id__in=novos_vulgos) & Q(interno_id=pk)):
-                   InternoVulgosThroughModel.objects.filter(Q(pk=interno_vulgo.pk)).delete()
-        elif not vulgo_nome and InternoVulgosThroughModel.objects.filter(Q(interno_id=pk)):
+                    InternoVulgosThroughModel.objects.get_or_create(
+                        interno_id=pk, vulgo_id=id_vulgo.id
+                    )
+            novos_vulgos = Vulgo.objects.filter(nome__in=vulgo_nome).values_list(
+                "id", flat=True
+            )
+            for interno_vulgo in InternoVulgosThroughModel.objects.filter(
+                ~Q(vulgo_id__in=novos_vulgos) & Q(interno_id=pk)
+            ):
+                InternoVulgosThroughModel.objects.filter(
+                    Q(pk=interno_vulgo.pk)
+                ).delete()
+        elif not vulgo_nome and InternoVulgosThroughModel.objects.filter(
+            Q(interno_id=pk)
+        ):
             InternoVulgosThroughModel.objects.filter(Q(interno_id=pk)).delete()
 
         if outros_nomes:
-            for outro_nome in OutroNome.objects.filter(~Q(nome__in=outros_nomes) & Q(interno_id=pk)):
+            for outro_nome in OutroNome.objects.filter(
+                ~Q(nome__in=outros_nomes) & Q(interno_id=pk)
+            ):
                 OutroNome.objects.filter(Q(pk=outro_nome.pk)).delete()
             for outro_nome in outros_nomes:
                 if outro_nome.strip():
@@ -467,7 +490,7 @@ class InternoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         elif not outros_nomes and OutroNome.objects.filter(interno_id=pk):
             OutroNome.objects.filter(Q(interno_id=pk)).delete()
 
-    @ action(
+    @action(
         detail=False,
         methods=["get"],
         url_path="caracteristicas",
@@ -519,14 +542,10 @@ class RgViewSet(LoggingMixin, viewsets.ModelViewSet):
             )
 
     def perform_create(self, serializer):
-        serializer.save(
-            usuario_cadastro=user.get_user(self),
-        )
+        serializer.save(usuario_cadastro=user.get_user(self))
 
     def perform_update(self, serializer):
-        serializer.save(
-            usuario_edicao=user.get_user(self),
-        )
+        serializer.save(usuario_edicao=user.get_user(self))
 
 
 class OutroNomeViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -536,11 +555,7 @@ class OutroNomeViewSet(LoggingMixin, viewsets.ModelViewSet):
     pagination_class = Paginacao
     queryset = OutroNome.objects.filter(excluido=False)
     filter_backends = (SearchFilter,)
-    search_fields = (
-        "outro",
-        "pessoa__nome",
-        "data_cadastro",
-    )
+    search_fields = ("outro", "pessoa__nome", "data_cadastro")
 
     def create(self, request, *args, **kwargs):
         try:
@@ -574,14 +589,10 @@ class OutroNomeViewSet(LoggingMixin, viewsets.ModelViewSet):
             )
 
     def perform_create(self, serializer):
-        serializer.save(
-            usuario_cadastro=user.get_user(self),
-        )
+        serializer.save(usuario_cadastro=user.get_user(self))
 
     def perform_update(self, serializer):
-        serializer.save(
-            usuario_edicao=user.get_user(self),
-        )
+        serializer.save(usuario_edicao=user.get_user(self))
 
 
 class VulgoViewSet(LoggingMixin, viewsets.ModelViewSet):
@@ -591,9 +602,9 @@ class VulgoViewSet(LoggingMixin, viewsets.ModelViewSet):
     pagination_class = Paginacao
     queryset = Vulgo.objects.all()
     filter_backends = (SearchFilter,)
-    search_fields = ("nome")
-    ordering_fields = ("nome")
-    ordering = ("nome")
+    search_fields = "nome"
+    ordering_fields = "nome"
+    ordering = "nome"
 
     def create(self, request, *args, **kwargs):
         try:
@@ -687,14 +698,16 @@ class ContatosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
         contato_queryset = None
         if parametros_busca.get("interno"):
-            for query in Contatos.objects.filter(Q(excluido=False, interno=parametros_busca.get("interno"))):
+            for query in Contatos.objects.filter(
+                Q(excluido=False, interno=parametros_busca.get("interno"))
+            ):
                 qs = None
                 contato_list = list()
                 contato_list2 = list()
 
                 contato_list.append(trata_campo(query.nome))
                 contato_list.append(trata_campo(query.tipo_vinculo.nome))
-            
+
                 for endereco in query.enderecos.all():
                     contato_list.append(trata_campo(endereco.logradouro))
                     contato_list.append(trata_campo(endereco.bairro))
@@ -704,7 +717,9 @@ class ContatosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                     contato_list.append(trata_campo(endereco.estado.sigla))
                     contato_list.append(trata_campo(endereco.observacao))
                     contato_list.append(trata_campo(endereco.complemento))
-                    contato_list2.append(trata_campo(endereco.cep.replace("-", "").replace(".", "")))
+                    contato_list2.append(
+                        trata_campo(endereco.cep.replace("-", "").replace(".", ""))
+                    )
                     contato_list.append(trata_campo(endereco.andar))
                     contato_list.append(trata_campo(endereco.sala))
 
@@ -734,9 +749,6 @@ class ContatosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
         if ativo is not None:
             queryset = queryset.filter(ativo=ativo)
-            
-        
-           
 
         queryset = OrderingFilter().filter_queryset(self.request, queryset, self)
 
@@ -765,8 +777,7 @@ class ContatosViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         for telefone in request.get("telefones"):
             privado = True
             Telefone.objects.filter(
-                Q(id=telefone["id"]) & (
-                    Q(tipo="CELULAR") | Q(tipo="RESIDENCIAL"))
+                Q(id=telefone["id"]) & (Q(tipo="CELULAR") | Q(tipo="RESIDENCIAL"))
             ).update(privado=privado)
             list_telefones.append(telefone["id"])
         return list_telefones
@@ -786,7 +797,9 @@ class SinaisParticularesViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
     def create(self, request, *args, **kwargs):
         try:
-            return super(SinaisParticularesViewSet, self).create(request, *args, **kwargs)
+            return super(SinaisParticularesViewSet, self).create(
+                request, *args, **kwargs
+            )
         except KeyError:
             return Response(
                 {"non_field_errors": mensagens.MSG_ERRO},
@@ -838,8 +851,7 @@ class SinaisParticularesViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             )
 
     def filter_queryset(self, queryset):
-        queryset = super(SinaisParticularesViewSet,
-                         self).filter_queryset(queryset)
+        queryset = super(SinaisParticularesViewSet, self).filter_queryset(queryset)
         parametros_busca = self.request.query_params
 
         area = trata_campo(parametros_busca.get("area"))
@@ -860,11 +872,11 @@ class SinaisParticularesViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
     def perform_update(self, serializer, **kwargs):
         requisicao = self.request.data
-        if requisicao.get('motivo_exclusao'):
+        if requisicao.get("motivo_exclusao"):
             kwargs["delete_at"] = datetime.now()
             kwargs["excluido"] = True
             kwargs["usuario_exclusao"] = user.get_user(self)
-            kwargs["motivo_exclusao"] = requisicao.get('motivo_exclusao')
+            kwargs["motivo_exclusao"] = requisicao.get("motivo_exclusao")
         else:
             kwargs["updated_at"] = datetime.now()
             kwargs["usuario_edicao"] = user.get_user(self)

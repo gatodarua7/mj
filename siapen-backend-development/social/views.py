@@ -65,7 +65,7 @@ class EstadoCivilViewSet(LoggingMixin, Base, viewsets.ModelViewSet):
         return super(EstadoCivilViewSet, self).create(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
-        
+
         try:
             requisicao = request.data
             if not Base().check_registro_exists(EstadoCivil, requisicao.get("id")):
@@ -117,7 +117,7 @@ class EstadoCivilViewSet(LoggingMixin, Base, viewsets.ModelViewSet):
         return queryset
 
     def destroy(self, request, pk, *args, **kwargs):
-        try:      
+        try:
             if not Base().check_registro_exists(EstadoCivil, pk):
                 return Response(
                     {"detail": mensagens.NAO_ENCONTRADO},
@@ -321,12 +321,16 @@ class NecessidadeEspecialViewSet(LoggingMixin, Base, viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         try:
             requisicao = request.data
-            if not Base().check_registro_exists(NecessidadeEspecial, requisicao.get("id")):
+            if not Base().check_registro_exists(
+                NecessidadeEspecial, requisicao.get("id")
+            ):
                 return Response(
                     {"detail": mensagens.NAO_ENCONTRADO},
                     status=status.HTTP_404_NOT_FOUND,
                 )
-            if Base().check_registro_excluido(NecessidadeEspecial, requisicao.get("id")):
+            if Base().check_registro_excluido(
+                NecessidadeEspecial, requisicao.get("id")
+            ):
                 return Response(
                     {"non_field_errors": mensagens.NAO_PERMITIDO},
                     status=status.HTTP_400_BAD_REQUEST,

@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cadastros', '0003_auto_20210428_1656'),
-        ('pessoas', '0018_auto_20210720_1637'),
+        ("cadastros", "0003_auto_20210428_1656"),
+        ("pessoas", "0018_auto_20210720_1637"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='visitante',
-            name='documentos',
-            field=models.ManyToManyField(blank=True, to='cadastros.Documentos'),
-        ),
+            model_name="visitante",
+            name="documentos",
+            field=models.ManyToManyField(blank=True, to="cadastros.Documentos"),
+        )
     ]

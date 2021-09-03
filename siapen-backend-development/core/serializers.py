@@ -18,6 +18,6 @@ class LogSerializer(FlexFieldsModelSerializer):
 
     def get_status_code_nome(self, obj):
         return obj.get_status_code_display()
-    
+
     def get_method_nome(self, obj):
         return obj.get_method_display()

@@ -9,38 +9,50 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('pessoas', '0002_remove_servidor_profissao'),
+        ("pessoas", "0002_remove_servidor_profissao"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='servidor',
-            old_name='motivo',
-            new_name='motivo_ativacao',
+            model_name="servidor", old_name="motivo", new_name="motivo_ativacao"
         ),
         migrations.AddField(
-            model_name='servidor',
-            name='data_ativacao',
+            model_name="servidor",
+            name="data_ativacao",
             field=models.DateTimeField(blank=True, default=None, null=True),
         ),
         migrations.AddField(
-            model_name='servidor',
-            name='data_inativacao',
+            model_name="servidor",
+            name="data_inativacao",
             field=models.DateTimeField(blank=True, default=None, null=True),
         ),
         migrations.AddField(
-            model_name='servidor',
-            name='motivo_inativacao',
+            model_name="servidor",
+            name="motivo_inativacao",
             field=models.TextField(blank=True, default=None, max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='servidor',
-            name='usuario_ativacao',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='Ativacao_servidor_related', to=settings.AUTH_USER_MODEL),
+            model_name="servidor",
+            name="usuario_ativacao",
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="Ativacao_servidor_related",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='servidor',
-            name='usuario_inativacao',
-            field=models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='Inativação_servidor_related', to=settings.AUTH_USER_MODEL),
+            model_name="servidor",
+            name="usuario_inativacao",
+            field=models.ForeignKey(
+                blank=True,
+                default=None,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="Inativação_servidor_related",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

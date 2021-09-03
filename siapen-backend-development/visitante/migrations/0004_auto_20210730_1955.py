@@ -5,31 +5,24 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('visitante', '0003_auto_20210728_0959'),
-    ]
+    dependencies = [("visitante", "0003_auto_20210728_0959")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='anuencia',
-            options={'verbose_name': 'Anuencia', 'verbose_name_plural': 'Anuencia'},
+            name="anuencia",
+            options={"verbose_name": "Anuencia", "verbose_name_plural": "Anuencia"},
         ),
-        migrations.RemoveField(
-            model_name='anuencia',
-            name='declaracao',
-        ),
+        migrations.RemoveField(model_name="anuencia", name="declaracao"),
         migrations.AddField(
-            model_name='anuencia',
-            name='arquivo',
+            model_name="anuencia",
+            name="arquivo",
             field=models.BinaryField(blank=True, default=None, null=True),
         ),
         migrations.AddField(
-            model_name='anuencia',
-            name='arquivo_temp',
-            field=models.FileField(default='', upload_to='documento_anuencia'),
+            model_name="anuencia",
+            name="arquivo_temp",
+            field=models.FileField(default="", upload_to="documento_anuencia"),
             preserve_default=False,
         ),
-        migrations.DeleteModel(
-            name='DocumentoAnuencia',
-        ),
+        migrations.DeleteModel(name="DocumentoAnuencia"),
     ]

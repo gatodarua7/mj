@@ -1,6 +1,13 @@
 from django.contrib import admin
 from .servidor.models import Servidor
-from .interno.models import Interno, Vulgo, OutroNome, Rg, InternoVulgosThroughModel, Contatos
+from .interno.models import (
+    Interno,
+    Vulgo,
+    OutroNome,
+    Rg,
+    InternoVulgosThroughModel,
+    Contatos,
+)
 
 
 admin.site.register(Servidor)

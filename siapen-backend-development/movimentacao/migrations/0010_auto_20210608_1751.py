@@ -5,23 +5,46 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('movimentacao', '0009_auto_20210603_1657'),
-    ]
+    dependencies = [("movimentacao", "0009_auto_20210603_1657")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='fasespedido',
-            name='cgin',
-        ),
+        migrations.RemoveField(model_name="fasespedido", name="cgin"),
         migrations.AddField(
-            model_name='fasespedido',
-            name='fase',
-            field=models.CharField(blank=True, choices=[('ULTIMA_FASE', 'Última fase'), ('CGIN', 'Análise CGIN'), ('ARQUIVAR', 'Arquivar'), ('DESARQUIVAR', 'Desarquivar'), ('REMETIDO', 'Remetido os autos ao Juízo corregedor'), ('RECEBIDO', 'Recebido os autos do Juízo corregedor')], default=None, max_length=20, null=True),
+            model_name="fasespedido",
+            name="fase",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("ULTIMA_FASE", "Última fase"),
+                    ("CGIN", "Análise CGIN"),
+                    ("ARQUIVAR", "Arquivar"),
+                    ("DESARQUIVAR", "Desarquivar"),
+                    ("REMETIDO", "Remetido os autos ao Juízo corregedor"),
+                    ("RECEBIDO", "Recebido os autos do Juízo corregedor"),
+                ],
+                default=None,
+                max_length=20,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='fasespedido',
-            name='ultima_fase',
-            field=models.CharField(blank=True, choices=[('DEFERIDO', 'Finalizado pelo Juízo corregedor com parecer favorável para inclusão.'), ('INDEFERIDO', 'Finalizado pelo Juízo corregedor com parecer desfavorável para inclusão.')], default=None, max_length=20, null=True),
+            model_name="fasespedido",
+            name="ultima_fase",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    (
+                        "DEFERIDO",
+                        "Finalizado pelo Juízo corregedor com parecer favorável para inclusão.",
+                    ),
+                    (
+                        "INDEFERIDO",
+                        "Finalizado pelo Juízo corregedor com parecer desfavorável para inclusão.",
+                    ),
+                ],
+                default=None,
+                max_length=20,
+                null=True,
+            ),
         ),
     ]

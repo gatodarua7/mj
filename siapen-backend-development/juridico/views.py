@@ -17,12 +17,9 @@ from rest_framework import viewsets
 from util.paginacao import Paginacao
 from util import mensagens, user
 from datetime import datetime
-from util.busca import (
-    trata_campo,
-    trata_campo_ativo,
-    check_duplicidade
-)
+from util.busca import trata_campo, trata_campo_ativo, check_duplicidade
 from core.views import Base
+
 
 class TituloLeiViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
     authentication_classes = (JWTAuthentication, SessionAuthentication)
@@ -103,8 +100,7 @@ class TituloLeiViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             )
 
     def filter_queryset(self, queryset):
-        queryset = super(TituloLeiViewSet,
-                         self).filter_queryset(queryset)
+        queryset = super(TituloLeiViewSet, self).filter_queryset(queryset)
         parametros_busca = self.request.query_params
 
         busca = trata_campo(parametros_busca.get("search"))
@@ -120,15 +116,19 @@ class TituloLeiViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                     break
 
         if parametros_busca.get("norma_juridica"):
-            queryset = queryset.filter(norma_juridica=parametros_busca.get("norma_juridica"))
+            queryset = queryset.filter(
+                norma_juridica=parametros_busca.get("norma_juridica")
+            )
 
         if ativo is not None:
-            queryset = queryset.filter(Q(id=parametros_busca.get("titulo_id")) | Q(ativo=ativo))
+            queryset = queryset.filter(
+                Q(id=parametros_busca.get("titulo_id")) | Q(ativo=ativo)
+            )
 
         queryset = OrderingFilter().filter_queryset(self.request, queryset, self)
 
         return queryset
-    
+
     def perform_create(self, serializer):
         serializer.save(usuario_cadastro=user.get_user(self))
 
@@ -136,10 +136,10 @@ class TituloLeiViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         requisicao = self.request.data
         kwargs["usuario_edicao"] = user.get_user(self)
         kwargs["updated_at"] = datetime.now()
-        if requisicao.get('motivo_inativacao'):
+        if requisicao.get("motivo_inativacao"):
             kwargs["data_inativacao"] = datetime.now()
             kwargs["usuario_inativacao"] = user.get_user(self)
-        elif requisicao.get('motivo_ativacao'):
+        elif requisicao.get("motivo_ativacao"):
             kwargs["data_ativacao"] = datetime.now()
             kwargs["usuario_ativacao"] = user.get_user(self)
         serializer.save(**kwargs)
@@ -148,9 +148,9 @@ class TituloLeiViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         """Verifica se existe registro com o mesmo nome (título)"""
         nome = check_duplicidade(requisicao.get("nome"))
         norma_juridica = check_duplicidade(requisicao.get("norma_juridica"))
-        return TituloLei.objects.filter(Q(nome__iexact=nome, 
-                                            norma_juridica__iexact=norma_juridica, 
-                                            excluido=False) & ~Q(id=requisicao.get("id"))
+        return TituloLei.objects.filter(
+            Q(nome__iexact=nome, norma_juridica__iexact=norma_juridica, excluido=False)
+            & ~Q(id=requisicao.get("id"))
         ).exists()
 
     def check_dependencia_registro(self, id):
@@ -243,15 +243,14 @@ class NormasJuridicasViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             )
 
     def filter_queryset(self, queryset):
-        queryset = super(NormasJuridicasViewSet,
-                         self).filter_queryset(queryset)
+        queryset = super(NormasJuridicasViewSet, self).filter_queryset(queryset)
         parametros_busca = self.request.query_params
 
         busca = trata_campo(parametros_busca.get("search"))
         ativo = trata_campo_ativo(parametros_busca.get("ativo"))
         nomas_id = list()
         if parametros_busca.get("norma_id"):
-            nomas_id = parametros_busca['norma_id'].split(',')
+            nomas_id = parametros_busca["norma_id"].split(",")
 
         for query in NormasJuridicas.objects.filter(Q(excluido=False)):
             normas = list()
@@ -262,13 +261,15 @@ class NormasJuridicasViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 if busca in norma:
                     queryset |= NormasJuridicas.objects.filter(pk=query.pk)
                     break
-      
+
         if parametros_busca.get("norma_juridica") and parametros_busca.get("titulo"):
-            queryset = queryset.filter(norma_juridica=parametros_busca.get("norma_juridica"),
-                                         titulo_id=parametros_busca.get("titulo"))
+            queryset = queryset.filter(
+                norma_juridica=parametros_busca.get("norma_juridica"),
+                titulo_id=parametros_busca.get("titulo"),
+            )
 
         if ativo is not None:
-                queryset = queryset.filter(Q(id__in=nomas_id) | Q(ativo=ativo))
+            queryset = queryset.filter(Q(id__in=nomas_id) | Q(ativo=ativo))
 
         queryset = OrderingFilter().filter_queryset(self.request, queryset, self)
 
@@ -277,17 +278,18 @@ class NormasJuridicasViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
     def check_normas_juridicas_exists(self, requisicao):
         try:
             descricao = check_duplicidade(requisicao.get("descricao"))
-            norma_juridica = check_duplicidade(
-                requisicao.get("norma_juridica"))
+            norma_juridica = check_duplicidade(requisicao.get("norma_juridica"))
             return NormasJuridicas.objects.filter(
-                Q(titulo_id=requisicao.get("titulo"), 
+                Q(
+                    titulo_id=requisicao.get("titulo"),
                     norma_juridica__iexact=norma_juridica,
-                    descricao__iexact=descricao)
+                    descricao__iexact=descricao,
+                )
                 & (~Q(id=requisicao.get("id")) & Q(excluido=False))
             ).exists()
         except Exception:
             raise serializers.ValidationError({"non_field_errors": mensagens.MSG_ERRO})
-    
+
     def check_vinculos(self, id):
         return PedidoInclusaoMotivos.objects.filter(descricao=id).exists()
 
@@ -298,10 +300,10 @@ class NormasJuridicasViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         requisicao = self.request.data
         kwargs["usuario_edicao"] = user.get_user(self)
         kwargs["updated_at"] = datetime.now()
-        if requisicao.get('motivo_inativacao'):
+        if requisicao.get("motivo_inativacao"):
             kwargs["data_inativacao"] = datetime.now()
             kwargs["usuario_inativacao"] = user.get_user(self)
-        elif requisicao.get('motivo_ativacao'):
+        elif requisicao.get("motivo_ativacao"):
             kwargs["data_ativacao"] = datetime.now()
             kwargs["usuario_ativacao"] = user.get_user(self)
         serializer.save(**kwargs)

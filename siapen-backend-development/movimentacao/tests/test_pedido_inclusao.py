@@ -52,12 +52,8 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
             "fase_pedido": "210fc034-845d-42ce-9a5e-621d3716e1fe",
             "motivo_exclusao": None,
             "estado_solicitante": 13,
-            "nacionalidade": [
-                1
-            ],
-            "necessidade_especial": [
-                "b83cb47a-dbdb-49e4-9ef7-34fcec39443f"
-            ]
+            "nacionalidade": [1],
+            "necessidade_especial": ["b83cb47a-dbdb-49e4-9ef7-34fcec39443f"],
         }
         super(TestPedidoInclusaoEndpoint, self).setUp()
 
@@ -66,7 +62,9 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -75,8 +73,8 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         Criação de objeto Interno Ativo
         """
         data = self.data
-        data['cpf'] = '61094644064'
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        data["cpf"] = "61094644064"
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -88,7 +86,9 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         data["data_nascimento"] = None
         data["vulgo"] = None
         data["preso_extraditando"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -98,7 +98,9 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["interesse"] = ""
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -108,7 +110,9 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["tipo_inclusao"] = ""
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -118,7 +122,9 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         """
         pedido = self.data
         pedido["data_nascimento"] = "10/10/2020"
-        resp = self.client.post(self.url, data=json.dumps(pedido), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(pedido), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -128,7 +134,9 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["numero_sei"] = ""
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -139,58 +147,58 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         resp = self.client.get(self.url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_b_list(self):
         """List de objetos em escolta"""
-    
+
         url = self.url + "?page=1&ordering=&page_size=10&fase=escolta&search="
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """List de objetos em cgin"""
-    
+
         url = self.url + "?page=1&ordering=&page_size=10&fase=cgin&search="
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_d_list(self):
         """Dashboard de ToTal por fase"""
-    
+
         url = self.url + "total-fases/"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_e_list(self):
         """Dashboard de ToTal parecer CGIN"""
-    
+
         url = self.url + "total-parecer-cgin/"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_f_list(self):
         """Dashboard de ToTal unidade CGIN"""
-    
+
         url = self.url + "total-unidades-cgin/"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_g_list(self):
         """Dashboard de ToTal fase por mes"""
-    
+
         url = self.url + "total-fases-mes/"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_h_list(self):
         """Dashboard de ToTal por estado Solicitante"""
-    
+
         url = self.url + "total-estado-solicitante/"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
@@ -201,16 +209,16 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         List de com acento
         """
 
-        url = f'{self.url}?search=ARAGÂO'
+        url = f"{self.url}?search=ARAGÂO"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_j_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=ARAGAO'
+        url = f"{self.url}?search=ARAGAO"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -219,7 +227,7 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -228,19 +236,22 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
 
     def test_m_list(self):
         """List de objetos em escolta"""
-    
-        url = self.url + "pessoas/?page=1&ordering=nome&page_size=10&cpf=06789566413&nome=jose&nome_mae=maria"
+
+        url = (
+            self.url
+            + "pessoas/?page=1&ordering=nome&page_size=10&cpf=06789566413&nome=jose&nome_mae=maria"
+        )
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_j_update(self):
         """
         Atualizando objeto excluído.
@@ -248,7 +259,9 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
 
         data = self.data
         data["cpf"] = "84012256041"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -264,7 +277,7 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
 
         data = self.data
         data["nome"] = "Atualização de nome"
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "Dona Finha."
@@ -281,7 +294,7 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
 
         data = self.data
         data["data_nascimento"] = "05/07/2000"
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["data_nascimento"] = "09/09/2020"
@@ -298,7 +311,7 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
 
         data = self.data
         data["numero_sei"] = "78765.827364/2020.02"
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["numero_sei"] = "78765827364AGRV02"
@@ -306,18 +319,20 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
             resp = self.client.patch(url, data=resp)
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="Update")
-    
+
     def test_oo_delete(self):
         """
         Validando o processo de remoção de registro válido.
         """
 
         data = self.data
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            resp_json = resp_json['motivo_exclusao'] = 'teste'
-            resp = self.update(id="c38ea467-4aca-4c25-bdec-ace5aab8015f", data=resp_json)
+            resp_json = resp_json["motivo_exclusao"] = "teste"
+            resp = self.update(
+                id="c38ea467-4aca-4c25-bdec-ace5aab8015f", data=resp_json
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="delete")
 
@@ -327,15 +342,14 @@ class TestPedidoInclusaoEndpoint(SiapenTestCase):
         """
 
         data = self.data
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            resp_json['motivo_exclusao'] = 'teste'
+            resp_json["motivo_exclusao"] = "teste"
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="delete")
-
 
     def test_p_delete(self):
         """

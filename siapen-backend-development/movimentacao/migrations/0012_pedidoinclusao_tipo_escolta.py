@@ -5,14 +5,18 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('movimentacao', '0011_pedidoinclusao_unidade'),
-    ]
+    dependencies = [("movimentacao", "0011_pedidoinclusao_unidade")]
 
     operations = [
         migrations.AddField(
-            model_name='pedidoinclusao',
-            name='tipo_escolta',
-            field=models.CharField(blank=True, choices=[('INCLUSAO', 'Inclusão')], default=None, max_length=20, null=True),
-        ),
+            model_name="pedidoinclusao",
+            name="tipo_escolta",
+            field=models.CharField(
+                blank=True,
+                choices=[("INCLUSAO", "Inclusão")],
+                default=None,
+                max_length=20,
+                null=True,
+            ),
+        )
     ]

@@ -6,14 +6,11 @@ from util import mensagens
 
 
 class TestCidadeEndpoint(SiapenTestCase):
-    fixtures = [
-        "fixtures/localizacao/paises.json",
-        "fixtures/localizacao/estados.json",
-    ]
+    fixtures = ["fixtures/localizacao/paises.json", "fixtures/localizacao/estados.json"]
 
     def setUp(self) -> None:
         self.entidade = "Municipios"
-        self.data = {"estado":11, "nome": "TESTE_CIDADE"}
+        self.data = {"estado": 11, "nome": "TESTE_CIDADE"}
         self.url = f"/api/localizacao/cidades/"
         super(TestCidadeEndpoint, self).setUp()
 
@@ -22,7 +19,7 @@ class TestCidadeEndpoint(SiapenTestCase):
         Criação de objeto invalido.
         """
         data = self.data
-        data['nome'] = ""
+        data["nome"] = ""
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
@@ -41,7 +38,9 @@ class TestCidadeEndpoint(SiapenTestCase):
         Criação de objeto extrapolando campos.
         """
         data = self.data
-        data['nome'] = """TESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_
+        data[
+            "nome"
+        ] = """TESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_
                         CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE
                         _CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_
                         CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_
@@ -129,7 +128,9 @@ class TestCidadeEndpoint(SiapenTestCase):
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            resp_json["nome"] = """TESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_
+            resp_json[
+                "nome"
+            ] = """TESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_
                         CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE
                         _CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_
                         CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_CIDADETESTE_
@@ -148,8 +149,7 @@ class TestCidadeEndpoint(SiapenTestCase):
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "GG"
-            url = f'{self.url}999999999/'
+            url = f"{self.url}999999999/"
             response = self.client.patch(url, data=resp_json)
             self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
             self.format_print(metodo="update")
-    

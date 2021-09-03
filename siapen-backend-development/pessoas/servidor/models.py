@@ -1,13 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
-from cadastros.models import (
-    Cargos,
-    Setor,
-    Documentos,
-    Funcao,
-    OrgaoExpedidor,
-)
+from cadastros.models import Cargos, Setor, Documentos, Funcao, OrgaoExpedidor
 from core.models import BaseModel
 from pessoas.models import DadosPessoais
 from comum.models import Endereco, Telefone
@@ -37,9 +31,8 @@ class Servidor(BaseModel, DadosPessoais):
         max_length=8,
         validators=[
             RegexValidator(
-                regex=r"^[-+]?[0-9]+$",
-                message="Apenas números são aceitos.",
-            ),
+                regex=r"^[-+]?[0-9]+$", message="Apenas números são aceitos."
+            )
         ],
     )
     data_admissao = models.DateField()
@@ -58,19 +51,32 @@ class Servidor(BaseModel, DadosPessoais):
     cargos = models.ForeignKey(Cargos, on_delete=models.PROTECT)
     funcao = models.ManyToManyField(Funcao, blank=True)
     motivo_desligamento = models.TextField(max_length=200, null=True, blank=True)
-    motivo_ativacao = models.TextField(max_length=200, default=None, null=True, blank=True)
-    motivo_inativacao = models.TextField(max_length=200, default=None, null=True, blank=True)
+    motivo_ativacao = models.TextField(
+        max_length=200, default=None, null=True, blank=True
+    )
+    motivo_inativacao = models.TextField(
+        max_length=200, default=None, null=True, blank=True
+    )
     data_ativacao = models.DateTimeField(default=None, blank=True, null=True)
     data_inativacao = models.DateTimeField(default=None, blank=True, null=True)
-    usuario_ativacao = models.ForeignKey(User, on_delete=models.PROTECT, 
-                                        related_name="Ativacao_servidor_related", 
-                                        default=None, blank=True, null=True)
-    usuario_inativacao = models.ForeignKey(User, on_delete=models.PROTECT, 
-                                        related_name="Inativação_servidor_related", 
-                                        default=None, blank=True, null=True)
+    usuario_ativacao = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name="Ativacao_servidor_related",
+        default=None,
+        blank=True,
+        null=True,
+    )
+    usuario_inativacao = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name="Inativação_servidor_related",
+        default=None,
+        blank=True,
+        null=True,
+    )
     documentos = models.ManyToManyField(Documentos, blank=True)
     situacao = models.BooleanField(default=False)
-
 
     def __str__(self):
         return self.nome

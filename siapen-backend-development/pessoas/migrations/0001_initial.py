@@ -13,68 +13,287 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('comum', '0001_initial'),
-        ('localizacao', '0001_initial'),
-        ('social', '0001_initial'),
-        ('cadastros', '0001_initial'),
+        ("comum", "0001_initial"),
+        ("localizacao", "0001_initial"),
+        ("social", "0001_initial"),
+        ("cadastros", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Servidor',
+            name="Servidor",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('ativo', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('delete_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('excluido', models.BooleanField(default=False)),
-                ('nome', models.CharField(max_length=150)),
-                ('nome_social', models.CharField(blank=True, max_length=150, null=True)),
-                ('data_nascimento', models.DateField(blank=True, default=None, null=True)),
-                ('cpf', models.CharField(max_length=14, validators=[django.core.validators.RegexValidator(message='CPF inválido', regex='[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}')])),
-                ('rg', models.CharField(blank=True, max_length=15, null=True)),
-                ('nome_mae', models.CharField(blank=True, max_length=150, null=True)),
-                ('nome_pai', models.CharField(blank=True, max_length=150, null=True)),
-                ('mae_falecido', models.BooleanField(default=False)),
-                ('mae_nao_declarado', models.BooleanField(default=False)),
-                ('pai_falecido', models.BooleanField(default=False)),
-                ('pai_nao_declarado', models.BooleanField(default=False)),
-                ('email_pessoal', models.EmailField(blank=True, max_length=150, null=True)),
-                ('email_profissional', models.EmailField(max_length=150)),
-                ('matricula', models.CharField(max_length=8, validators=[django.core.validators.RegexValidator(message='Apenas números são aceitos.', regex='^[-+]?[0-9]+$')])),
-                ('data_admissao', models.DateField()),
-                ('data_desligamento', models.DateField(blank=True, default=None, null=True)),
-                ('motivo_desligamento', models.TextField(blank=True, max_length=200, null=True)),
-                ('motivo', models.TextField(blank=True, default=None, max_length=200, null=True)),
-                ('situacao', models.BooleanField(default=False)),
-                ('cargos', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='cadastros.cargos')),
-                ('documentos', models.ManyToManyField(blank=True, to='cadastros.Documentos')),
-                ('enderecos', models.ManyToManyField(blank=True, to='comum.Endereco')),
-                ('estado', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='localizacao.estado')),
-                ('estado_civil', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='social.estadocivil')),
-                ('foto', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='foto_servidor', to='cadastros.foto')),
-                ('funcao', models.ManyToManyField(to='cadastros.Funcao')),
-                ('genero', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='cadastros.genero')),
-                ('grau_instrucao', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='social.graudeinstrucao')),
-                ('lotacao', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='lotacao_servidor', to='cadastros.setor')),
-                ('lotacao_temporaria', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='lotacao_temporaria_servidor', to='cadastros.setor')),
-                ('nacionalidade', models.ManyToManyField(blank=True, default=None, to='localizacao.Pais')),
-                ('naturalidade', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='localizacao.cidade')),
-                ('necessidade_especial', models.ManyToManyField(blank=True, to='social.NecessidadeEspecial')),
-                ('orgao_expedidor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='orgao_expedidor_servidor', to='cadastros.orgaoexpedidor')),
-                ('orientacao_sexual', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='social.orientacaosexual')),
-                ('profissao', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='social.profissao')),
-                ('raca', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='social.raca')),
-                ('religiao', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='social.religiao')),
-                ('telefones', models.ManyToManyField(blank=True, related_name='telefones_pessoais', to='comum.Telefone')),
-                ('telefones_funcionais', models.ManyToManyField(blank=True, related_name='telefones_funcionais', to='comum.Telefone')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('usuario_edicao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='updatedpessoas_servidor_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_exclusao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='deletepessoas_servidor_related', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("ativo", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "updated_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "delete_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("excluido", models.BooleanField(default=False)),
+                ("nome", models.CharField(max_length=150)),
+                (
+                    "nome_social",
+                    models.CharField(blank=True, max_length=150, null=True),
+                ),
+                (
+                    "data_nascimento",
+                    models.DateField(blank=True, default=None, null=True),
+                ),
+                (
+                    "cpf",
+                    models.CharField(
+                        max_length=14,
+                        validators=[
+                            django.core.validators.RegexValidator(
+                                message="CPF inválido",
+                                regex="[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}",
+                            )
+                        ],
+                    ),
+                ),
+                ("rg", models.CharField(blank=True, max_length=15, null=True)),
+                ("nome_mae", models.CharField(blank=True, max_length=150, null=True)),
+                ("nome_pai", models.CharField(blank=True, max_length=150, null=True)),
+                ("mae_falecido", models.BooleanField(default=False)),
+                ("mae_nao_declarado", models.BooleanField(default=False)),
+                ("pai_falecido", models.BooleanField(default=False)),
+                ("pai_nao_declarado", models.BooleanField(default=False)),
+                (
+                    "email_pessoal",
+                    models.EmailField(blank=True, max_length=150, null=True),
+                ),
+                ("email_profissional", models.EmailField(max_length=150)),
+                (
+                    "matricula",
+                    models.CharField(
+                        max_length=8,
+                        validators=[
+                            django.core.validators.RegexValidator(
+                                message="Apenas números são aceitos.",
+                                regex="^[-+]?[0-9]+$",
+                            )
+                        ],
+                    ),
+                ),
+                ("data_admissao", models.DateField()),
+                (
+                    "data_desligamento",
+                    models.DateField(blank=True, default=None, null=True),
+                ),
+                (
+                    "motivo_desligamento",
+                    models.TextField(blank=True, max_length=200, null=True),
+                ),
+                (
+                    "motivo",
+                    models.TextField(
+                        blank=True, default=None, max_length=200, null=True
+                    ),
+                ),
+                ("situacao", models.BooleanField(default=False)),
+                (
+                    "cargos",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="cadastros.cargos",
+                    ),
+                ),
+                (
+                    "documentos",
+                    models.ManyToManyField(blank=True, to="cadastros.Documentos"),
+                ),
+                ("enderecos", models.ManyToManyField(blank=True, to="comum.Endereco")),
+                (
+                    "estado",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="localizacao.estado",
+                    ),
+                ),
+                (
+                    "estado_civil",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="social.estadocivil",
+                    ),
+                ),
+                (
+                    "foto",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="foto_servidor",
+                        to="cadastros.foto",
+                    ),
+                ),
+                ("funcao", models.ManyToManyField(to="cadastros.Funcao")),
+                (
+                    "genero",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="cadastros.genero",
+                    ),
+                ),
+                (
+                    "grau_instrucao",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="social.graudeinstrucao",
+                    ),
+                ),
+                (
+                    "lotacao",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="lotacao_servidor",
+                        to="cadastros.setor",
+                    ),
+                ),
+                (
+                    "lotacao_temporaria",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="lotacao_temporaria_servidor",
+                        to="cadastros.setor",
+                    ),
+                ),
+                (
+                    "nacionalidade",
+                    models.ManyToManyField(
+                        blank=True, default=None, to="localizacao.Pais"
+                    ),
+                ),
+                (
+                    "naturalidade",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="localizacao.cidade",
+                    ),
+                ),
+                (
+                    "necessidade_especial",
+                    models.ManyToManyField(blank=True, to="social.NecessidadeEspecial"),
+                ),
+                (
+                    "orgao_expedidor",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="orgao_expedidor_servidor",
+                        to="cadastros.orgaoexpedidor",
+                    ),
+                ),
+                (
+                    "orientacao_sexual",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="social.orientacaosexual",
+                    ),
+                ),
+                (
+                    "profissao",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="social.profissao",
+                    ),
+                ),
+                (
+                    "raca",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="social.raca",
+                    ),
+                ),
+                (
+                    "religiao",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="social.religiao",
+                    ),
+                ),
+                (
+                    "telefones",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="telefones_pessoais",
+                        to="comum.Telefone",
+                    ),
+                ),
+                (
+                    "telefones_funcionais",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="telefones_funcionais",
+                        to="comum.Telefone",
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_edicao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="updatedpessoas_servidor_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_exclusao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="deletepessoas_servidor_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
-        ),
+            options={"abstract": False},
+        )
     ]

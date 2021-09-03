@@ -219,7 +219,7 @@ class OrgaoExpedidorSerializer(serializers.ModelSerializer):
             "estado_sigla",
             "ativo",
         ]
-    
+
     def __init__(self, *args, **kwargs):
         super(OrgaoExpedidorSerializer, self).__init__(*args, **kwargs)
         mandatory_fields = {
@@ -334,7 +334,7 @@ class SetorSerializer(serializers.ModelSerializer):
 
     def __init__(self, *args, **kwargs):
         super(SetorSerializer, self).__init__(*args, **kwargs)
-    
+
         mandatory_fields = {
             "nome": mensagens.MSG2.format("Nome"),
             "sigla": mensagens.MSG2.format("Sigla"),
@@ -410,4 +410,3 @@ class ComportamentoInternoSerializer(serializers.ModelSerializer):
         super(ComportamentoInternoSerializer, self).__init__(*args, **kwargs)
 
         self.fields["nome"].error_messages["blank"] = mensagens.MSG2.format("nome")
-

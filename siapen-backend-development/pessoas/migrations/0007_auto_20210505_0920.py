@@ -6,18 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cadastros', '0003_auto_20210428_1656'),
-        ('pessoas', '0006_auto_20210430_1854'),
+        ("cadastros", "0003_auto_20210428_1656"),
+        ("pessoas", "0006_auto_20210430_1854"),
     ]
 
     operations = [
-        migrations.AlterModelOptions(
-            name='vulgo',
-            options={'ordering': ['nome']},
-        ),
+        migrations.AlterModelOptions(name="vulgo", options={"ordering": ["nome"]}),
         migrations.AlterField(
-            model_name='interno',
-            name='documentos',
-            field=models.ManyToManyField(blank=True, to='cadastros.Documentos'),
+            model_name="interno",
+            name="documentos",
+            field=models.ManyToManyField(blank=True, to="cadastros.Documentos"),
         ),
     ]

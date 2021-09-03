@@ -16,20 +16,31 @@ class Normas(models.TextChoices):
 
 class TituloLei(BaseModel):
     nome = models.CharField(max_length=255)
-    norma_juridica = models.CharField(
-        max_length=50, choices=Normas.choices)
+    norma_juridica = models.CharField(max_length=50, choices=Normas.choices)
     motivo_ativacao = models.TextField(
-        max_length=200, default=None, null=True, blank=True)
+        max_length=200, default=None, null=True, blank=True
+    )
     motivo_inativacao = models.TextField(
-        max_length=200, default=None, null=True, blank=True)
+        max_length=200, default=None, null=True, blank=True
+    )
     data_ativacao = models.DateTimeField(default=None, blank=True, null=True)
     data_inativacao = models.DateTimeField(default=None, blank=True, null=True)
-    usuario_ativacao = models.ForeignKey(User, on_delete=models.PROTECT,
-                                         related_name="Ativacao_titulo_lei_related",
-                                         default=None, blank=True, null=True)
-    usuario_inativacao = models.ForeignKey(User, on_delete=models.PROTECT,
-                                           related_name="Inativação_titulo_lei_related",
-                                           default=None, blank=True, null=True)
+    usuario_ativacao = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name="Ativacao_titulo_lei_related",
+        default=None,
+        blank=True,
+        null=True,
+    )
+    usuario_inativacao = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name="Inativação_titulo_lei_related",
+        default=None,
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return self.nome
@@ -42,20 +53,31 @@ class TituloLei(BaseModel):
 class NormasJuridicas(BaseModel):
     descricao = models.TextField()
     titulo = models.ForeignKey(TituloLei, on_delete=models.PROTECT)
-    norma_juridica = models.CharField(
-        max_length=100, choices=Normas.choices)
+    norma_juridica = models.CharField(max_length=100, choices=Normas.choices)
     motivo_ativacao = models.TextField(
-        max_length=200, default=None, null=True, blank=True)
+        max_length=200, default=None, null=True, blank=True
+    )
     motivo_inativacao = models.TextField(
-        max_length=200, default=None, null=True, blank=True)
+        max_length=200, default=None, null=True, blank=True
+    )
     data_ativacao = models.DateTimeField(default=None, blank=True, null=True)
     data_inativacao = models.DateTimeField(default=None, blank=True, null=True)
-    usuario_ativacao = models.ForeignKey(User, on_delete=models.PROTECT,
-                                         related_name="Ativacao_normas_juridicas_related",
-                                         default=None, blank=True, null=True)
-    usuario_inativacao = models.ForeignKey(User, on_delete=models.PROTECT,
-                                           related_name="Inativação_normas_juridicas_related",
-                                           default=None, blank=True, null=True)
+    usuario_ativacao = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name="Ativacao_normas_juridicas_related",
+        default=None,
+        blank=True,
+        null=True,
+    )
+    usuario_inativacao = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name="Inativação_normas_juridicas_related",
+        default=None,
+        blank=True,
+        null=True,
+    )
 
     def __str__(self):
         return self.norma_juridica

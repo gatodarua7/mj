@@ -20,8 +20,7 @@ class TestEmailAdvogadoEndpoint(SiapenTestCase):
         "fixtures/social/estado_civil.json",
         "fixtures/social/grau_instrucao.json",
         "fixtures/social/orientacao_sexual.json",
-        "fixtures/social/religiao.json"
-
+        "fixtures/social/religiao.json",
     ]
 
     def setUp(self) -> None:
@@ -29,7 +28,7 @@ class TestEmailAdvogadoEndpoint(SiapenTestCase):
         self.url = f"/api/pessoas/email/"
         self.data = {
             "email": "teste@gmail.com",
-            "advogado": "29a09f2d-e1dd-43fa-9b3f-6f722c20b8c9",      
+            "advogado": "29a09f2d-e1dd-43fa-9b3f-6f722c20b8c9",
         }
         super(TestEmailAdvogadoEndpoint, self).setUp()
 

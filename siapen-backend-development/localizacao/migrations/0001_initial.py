@@ -8,39 +8,70 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Pais',
+            name="Pais",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nome', models.CharField(max_length=50)),
-                ('sigla', models.CharField(max_length=3)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("nome", models.CharField(max_length=50)),
+                ("sigla", models.CharField(max_length=3)),
             ],
         ),
         migrations.CreateModel(
-            name='Estado',
+            name="Estado",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nome', models.CharField(max_length=50)),
-                ('sigla', models.CharField(max_length=3)),
-                ('pais', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='localizacao.pais')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("nome", models.CharField(max_length=50)),
+                ("sigla", models.CharField(max_length=3)),
+                (
+                    "pais",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="localizacao.pais",
+                    ),
+                ),
             ],
-            options={
-                'unique_together': {('pais', 'nome')},
-            },
+            options={"unique_together": {("pais", "nome")}},
         ),
         migrations.CreateModel(
-            name='Cidade',
+            name="Cidade",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nome', models.CharField(max_length=100)),
-                ('estado', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='localizacao.estado')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("nome", models.CharField(max_length=100)),
+                (
+                    "estado",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="localizacao.estado",
+                    ),
+                ),
             ],
-            options={
-                'unique_together': {('estado', 'nome')},
-            },
+            options={"unique_together": {("estado", "nome")}},
         ),
     ]

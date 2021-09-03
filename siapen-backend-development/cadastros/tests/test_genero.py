@@ -7,10 +7,7 @@ from util import mensagens
 
 
 class TestGeneroEndpoint(SiapenTestCase):
-    fixtures = [
-        "fixtures/usuarios/usuario.json",
-        "fixtures/cadastro/genero.json",
-    ]
+    fixtures = ["fixtures/usuarios/usuario.json", "fixtures/cadastro/genero.json"]
 
     def setUp(self) -> None:
         self.entidade = "Gênero"
@@ -25,7 +22,7 @@ class TestGeneroEndpoint(SiapenTestCase):
         data = self.data
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_b_create(self):
         """
@@ -35,7 +32,7 @@ class TestGeneroEndpoint(SiapenTestCase):
         self.client.post(self.url, data=self.data)
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_409_CONFLICT)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_d_create(self):
         """
@@ -45,7 +42,7 @@ class TestGeneroEndpoint(SiapenTestCase):
         data["descricao"] = ""
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_e_create(self):
         """
@@ -56,12 +53,12 @@ class TestGeneroEndpoint(SiapenTestCase):
         data["ativo"] = False
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_a_list(self):
         """
         List de objetos
-        """        
+        """
         resp = self.client.get(self.url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -71,19 +68,19 @@ class TestGeneroEndpoint(SiapenTestCase):
         List de com acento
         """
 
-        url = f'{self.url}?search=GÊNERO'
+        url = f"{self.url}?search=GÊNERO"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp = self.client.get(url)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=GENERO'
+        url = f"{self.url}?search=GENERO"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -95,7 +92,7 @@ class TestGeneroEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -107,7 +104,7 @@ class TestGeneroEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -179,7 +176,7 @@ class TestGeneroEndpoint(SiapenTestCase):
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
-            resp_json["descricao"] = "TESTANDO" 
+            resp_json["descricao"] = "TESTANDO"
             resp = self.client.patch(url, data=resp_json)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="update")
@@ -191,15 +188,18 @@ class TestGeneroEndpoint(SiapenTestCase):
         data = self.data
         data["ativo"] = False
         resp = requests.post(
-            self.base_url+self.url,
+            self.base_url + self.url,
             data=json.dumps(data),
             proxies=self.proxies,
-            headers=self.headers)
+            headers=self.headers,
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["descricao"] = "TESTE INATIVO"
             url = f'{self.base_url+self.url}{resp_json["id"]}/'
-            resp = requests.put(url, data=json.dumps(data), proxies=self.proxies, headers=self.headers)
+            resp = requests.put(
+                url, data=json.dumps(data), proxies=self.proxies, headers=self.headers
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="update")
 
@@ -211,7 +211,7 @@ class TestGeneroEndpoint(SiapenTestCase):
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            url = f'{self.url}7124d8d8-21b4-4d6e-aa3a-687ad2ccccc4/'
+            url = f"{self.url}7124d8d8-21b4-4d6e-aa3a-687ad2ccccc4/"
             response = self.client.patch(url, data=resp_json)
             self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
             self.format_print(metodo="update")

@@ -10,22 +10,14 @@ import os
 
 
 class TestDocumentoVisitanteEndpoint(SiapenTestCase):
-    fixtures = [
-        "fixtures/usuarios/usuario.json"
-    ]
+    fixtures = ["fixtures/usuarios/usuario.json"]
 
     def setUp(self) -> None:
         self.entidade = "Documentos_Visitante"
         self.image = self.get_image()
         self.documento = self.get_documento()
-        self.image_data = {
-            "arquivo_temp": self.image,
-            "usuario_cadastro": 1,
-        }
-        self.documento_data = {
-            "arquivo_temp": self.documento,
-            "ativo": True,
-        }
+        self.image_data = {"arquivo_temp": self.image, "usuario_cadastro": 1}
+        self.documento_data = {"arquivo_temp": self.documento, "ativo": True}
         self.url = f"/api/visitante/documentos/"
         super(TestDocumentoVisitanteEndpoint, self).setUp()
 
@@ -47,8 +39,7 @@ class TestDocumentoVisitanteEndpoint(SiapenTestCase):
         with open(file, "rb") as infile:
             _file = SimpleUploadedFile(file, infile.read())
             attachment = DocumentosVisitante.objects.create(
-                arquivo_temp=_file,
-                usuario_cadastro_id=1,
+                arquivo_temp=_file, usuario_cadastro_id=1
             )
         return attachment
 

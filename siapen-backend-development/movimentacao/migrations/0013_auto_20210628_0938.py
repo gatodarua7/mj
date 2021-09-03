@@ -6,14 +6,22 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('movimentacao', '0012_pedidoinclusao_tipo_escolta'),
-    ]
+    dependencies = [("movimentacao", "0012_pedidoinclusao_tipo_escolta")]
 
     operations = [
         migrations.AlterField(
-            model_name='pedidoinclusao',
-            name='cpf',
-            field=models.CharField(blank=True, max_length=14, null=True, validators=[django.core.validators.RegexValidator(message='CPF inválido', regex='[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}')]),
-        ),
+            model_name="pedidoinclusao",
+            name="cpf",
+            field=models.CharField(
+                blank=True,
+                max_length=14,
+                null=True,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message="CPF inválido",
+                        regex="[0-9]{3}\\.?[0-9]{3}\\.?[0-9]{3}\\-?[0-9]{2}",
+                    )
+                ],
+            ),
+        )
     ]

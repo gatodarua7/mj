@@ -21,35 +21,38 @@ class TestPessoaEndpoint(SiapenTestCase):
         "fixtures/social/estado_civil.json",
         "fixtures/social/grau_instrucao.json",
         "fixtures/social/orientacao_sexual.json",
-        "fixtures/social/religiao.json"
+        "fixtures/social/religiao.json",
     ]
 
     def setUp(self) -> None:
-        self.entidade = 'Pessoa'
+        self.entidade = "Pessoa"
         self.url = f"/api/cadastros/pessoas/"
-        self.data = {   "nome": "Carlos Alexandre",
-                        "data_nascimento": "01/01/2000",
-                        "genero": "96637461-43cb-4d55-893b-c09fe514ecf7",
-                        "nacionalidade": 33,
-                        "naturalidade": 283,
-                        "estado": 29,
-                        "enderecos": [],
-                        "telefones": [],
-                        "foto": "",
-                        "cpf": "94875968019",
-                        "necessidade_especial": ["b83cb47a-dbdb-49e4-9ef7-34fcec39443f"]
-                }
+        self.data = {
+            "nome": "Carlos Alexandre",
+            "data_nascimento": "01/01/2000",
+            "genero": "96637461-43cb-4d55-893b-c09fe514ecf7",
+            "nacionalidade": 33,
+            "naturalidade": 283,
+            "estado": 29,
+            "enderecos": [],
+            "telefones": [],
+            "foto": "",
+            "cpf": "94875968019",
+            "necessidade_especial": ["b83cb47a-dbdb-49e4-9ef7-34fcec39443f"],
+        }
         super(TestPessoaEndpoint, self).setUp()
 
     def test_a_create(self):
         """
         Criação de objeto válido.
         """
-        
+
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_b_create(self):
         """
@@ -57,10 +60,12 @@ class TestPessoaEndpoint(SiapenTestCase):
         """
         data = self.data
         data["nome"] = "Marcos Ramos"
-        data["data_nascimento"]= '01/13/2001'
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        data["data_nascimento"] = "01/13/2001"
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_c_create(self):
         """
@@ -69,7 +74,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = None
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -93,9 +98,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = False
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_d_create(self):
         """
@@ -104,9 +111,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Leopoldo"
         data["mae_falecido"] = True
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_e_create(self):
         """
@@ -115,9 +124,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Maria"
         data["ativo"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_f_create(self):
         """
@@ -126,7 +137,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Mariah"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -150,9 +161,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = False
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_g_create(self):
         """
@@ -161,9 +174,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Pedro"
         data["pai_falecido"] = True
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_h_create(self):
         """
@@ -172,7 +187,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Joao"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -196,9 +211,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = False
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = True
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_i_create(self):
         """
@@ -207,7 +224,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Jose"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -231,9 +248,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = False
         data["pai_falecido"] = True
         data["pai_nao_declarado"] = True
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_j_create(self):
         """
@@ -242,7 +261,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Carol"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -266,9 +285,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_k_create(self):
         """
@@ -277,9 +298,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Carolyne"
         data["cpf"] = "66726786620"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_ka_create(self):
         """
@@ -288,9 +311,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Caroline"
         data["cpf"] = "66726786622"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_l_create(self):
         """
@@ -299,7 +324,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Clara"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = "048103729476"
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -323,9 +348,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_m_create(self):
         """
@@ -334,7 +361,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Ulisses"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -358,9 +385,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_n_create(self):
         """
@@ -369,7 +398,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Maria"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -393,9 +422,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_o_create(self):
         """
@@ -404,7 +435,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Jailton"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -428,9 +459,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_p_create(self):
         """
@@ -439,7 +472,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Silvana"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -463,9 +496,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_q_create(self):
         """
@@ -474,7 +509,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Pedrinho"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -498,9 +533,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_r_create(self):
         """
@@ -509,7 +546,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Iris"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -533,9 +570,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_s_create(self):
         """
@@ -544,7 +583,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Isis"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -568,9 +607,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_t_create(self):
         """
@@ -579,7 +620,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Stefany"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -603,9 +644,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_u_create(self):
         """
@@ -614,7 +657,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Joao Pedro"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -638,9 +681,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_v_create(self):
         """
@@ -649,7 +694,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Lucas"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -673,9 +718,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_x_create(self):
         """
@@ -684,7 +731,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Luis"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -708,9 +755,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_y_create(self):
         """
@@ -719,7 +768,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Manuela"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -743,9 +792,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_w_create(self):
         """
@@ -754,7 +805,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Manuel"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -778,9 +829,11 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_z_create(self):
         """
@@ -789,7 +842,7 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Erondina"
         data["nome_social"] = None
-        data["data_nascimento"]= None
+        data["data_nascimento"] = None
         data["cpf"] = None
         data["rg"] = None
         data["orgao_expedidor"] = None
@@ -813,10 +866,12 @@ class TestPessoaEndpoint(SiapenTestCase):
         data["mae_nao_declarado"] = True
         data["pai_falecido"] = False
         data["pai_nao_declarado"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
-        
+        self.format_print(metodo="create")
+
     def test_f_list(self):
         """
         List de objetos
@@ -830,8 +885,10 @@ class TestPessoaEndpoint(SiapenTestCase):
         Validando o processo de remoção de registro válido.
         """
         data = self.data
-        data['nome'] = "Nelma"
-        resp = self.client.post(self.url, data=json.dumps(self.data), content_type='application/json')
+        data["nome"] = "Nelma"
+        resp = self.client.post(
+            self.url, data=json.dumps(self.data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -848,7 +905,6 @@ class TestPessoaEndpoint(SiapenTestCase):
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
         self.format_print(metodo="delete")
 
-
     def test_c_delete(self):
         """
         Apagando registro ja excluído.
@@ -858,16 +914,17 @@ class TestPessoaEndpoint(SiapenTestCase):
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
         self.format_print(metodo="delete")
 
-
     def test_a_update(self):
         """
         Atualizando objeto excluído.
         """
-        
+
         data = self.data
         data["nome"] = "Yasmin"
         data["data_nascimento"] = None
-        resp = self.client.post(self.url, data=json.dumps(self.data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(self.data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -881,15 +938,19 @@ class TestPessoaEndpoint(SiapenTestCase):
         """
         data = self.data
         data["nome"] = "Glaucia"
-        resp = self.client.post(self.url, data=json.dumps(self.data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(self.data), content_type="application/json"
+        )
 
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             resp_json["nome"] = "Teresinha"
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_c_update(self):
         """
@@ -898,15 +959,19 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Geyce"
         data["ativo"] = False
-        resp = self.client.post(self.url, data=json.dumps(self.data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(self.data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             resp_json["nome"] = "Caroline"
             resp_json["ativo"] = False
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_d_update(self):
         """
@@ -915,14 +980,18 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Greyce"
         data["cpf"] = "25134280305"
-        resp = self.client.post(self.url, data=json.dumps(self.data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(self.data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             resp_json["cpf"] = "11111111111"
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_e_update(self):
         """
@@ -931,11 +1000,15 @@ class TestPessoaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Gleicene"
         data["data_nascimento"] = "2999-05-01"
-        resp = self.client.post(self.url, data=json.dumps(self.data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(self.data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             resp_json["data_nascimento"] = "2999-15-14"
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")

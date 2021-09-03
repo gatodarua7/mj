@@ -33,17 +33,18 @@ class TestAnalisePedidoEndpoint(SiapenTestCase):
             "parecer": "Meu parecer",
             "penitenciaria": "fb5bc99e-b885-40ce-ad86-0fe2021a488b",
             "posicionamento": "DESFAVORAVEL",
-            "pedido_inclusao": "96418c25-d397-45e3-9cc2-8a4dadbb2d6c"
+            "pedido_inclusao": "96418c25-d397-45e3-9cc2-8a4dadbb2d6c",
         }
         super(TestAnalisePedidoEndpoint, self).setUp()
-
 
     def test_a_create(self):
         """
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
@@ -54,7 +55,9 @@ class TestAnalisePedidoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["parecer"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -67,7 +70,9 @@ class TestAnalisePedidoEndpoint(SiapenTestCase):
         data["penitenciaria"] = None
         data["posicionamento"] = None
         data["pedido_inclusao"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -85,7 +90,9 @@ class TestAnalisePedidoEndpoint(SiapenTestCase):
         """
 
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -101,7 +108,9 @@ class TestAnalisePedidoEndpoint(SiapenTestCase):
 
         data = self.data
         data["parecer"] = "Um parecer de atualização"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["penitenciaria"] = "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9"
@@ -112,17 +121,19 @@ class TestAnalisePedidoEndpoint(SiapenTestCase):
 
     def test_g_update(self):
         """
-        Atualizando dados do objeto 
+        Atualizando dados do objeto
         """
 
         data = {
             "parecer": "Meu parecer",
             "penitenciaria": "fb5bc99e-b885-40ce-ad86-0fe2021a488b",
             "posicionamento": "DESFAVORAVEL",
-            "pedido_inclusao": "f4ff1afb-b510-44f0-b409-5a657c98004a"
+            "pedido_inclusao": "f4ff1afb-b510-44f0-b409-5a657c98004a",
         }
         data["parecer"] = "Um novo parecer de atualização"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["penitenciaria"] = "c612a4bf-0837-47b4-ade8-8ac3ad9f8bc9"

@@ -31,14 +31,14 @@ class TestVulgoInternoEndpoint(SiapenTestCase):
 
         self.data = {
             "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23",
-            "nome": self.obj_id
+            "nome": self.obj_id,
         }
         self.interno = Interno.objects.get(nome="JOSE MARIA")
         super(TestVulgoInternoEndpoint, self).setUp()
 
     def test_a_create(self):
         vulgo = Vulgo.objects.get(id=self.obj_id)
-        self.assertTrue(isinstance(vulgo, Vulgo)) 
+        self.assertTrue(isinstance(vulgo, Vulgo))
 
     def test_c_list(self):
         """
@@ -74,7 +74,9 @@ class TestVulgoInternoEndpoint(SiapenTestCase):
         """
         Deleta objeto
         """
-        vulgo = InternoVulgosThroughModel.objects.filter(interno=self.interno.id).delete()
+        vulgo = InternoVulgosThroughModel.objects.filter(
+            interno=self.interno.id
+        ).delete()
         self.assertEqual(len(vulgo) == 0, False)
         self.format_print(metodo="delete")
 
@@ -82,9 +84,8 @@ class TestVulgoInternoEndpoint(SiapenTestCase):
         """
         Deleta objeto
         """
-        vulgo = InternoVulgosThroughModel.objects.filter(interno=self.interno.id).delete()
+        vulgo = InternoVulgosThroughModel.objects.filter(
+            interno=self.interno.id
+        ).delete()
         self.assertTrue(vulgo)
         self.format_print(metodo="delete")
-
-
-    

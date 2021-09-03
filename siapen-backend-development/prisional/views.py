@@ -191,17 +191,19 @@ class BlocoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         ativo = trata_campo_ativo(parametros_busca.get("ativo"))
 
         for query in Bloco.objects.filter(Q(excluido=False)):
-            bloco_list = list() 
+            bloco_list = list()
             bloco_list.append(trata_campo(query.nome))
             bloco_list.append(trata_campo(query.sistema.nome))
             bloco_list.append(trata_campo(query.unidade.nome))
-            bloco_list.append(trata_campo(query.bloco_pai.nome) if query.bloco_pai else "")
+            bloco_list.append(
+                trata_campo(query.bloco_pai.nome) if query.bloco_pai else ""
+            )
 
             for item in bloco_list:
                 if busca in item:
                     queryset |= Bloco.objects.filter(pk=query.pk)
                     break
-           
+
         if ativo is not None:
             queryset = queryset.filter(ativo=ativo)
 
@@ -410,7 +412,7 @@ class CelaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         ativo = trata_campo_ativo(parametros_busca.get("ativo"))
 
         for query in Cela.objects.filter(Q(excluido=False)):
-            cela_list = list() 
+            cela_list = list()
             cela_list.append(trata_campo(query.nome))
             cela_list.append(trata_campo(query.sistema.nome))
             cela_list.append(trata_campo(query.unidade.nome))
@@ -527,7 +529,7 @@ class DefeitoCelaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         for query in DefeitoCela.objects.filter(Q(excluido=False)):
             nome = trata_campo(query.nome)
             defeito = trata_campo(query.defeito.descricao)
-            
+
             if busca in nome or busca in defeito:
                 queryset |= Cela.objects.filter(pk=query.pk)
 
@@ -564,7 +566,6 @@ class DefeitoCelaViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
     def check_cela(self, id):
         return Cela.objects.filter(Q(id=id) & (Q(excluido=True) | Q(ativo=False)))
-
 
     def perform_create(self, serializer):
         serializer.save(usuario_cadastro=user.get_user(self))
@@ -723,11 +724,7 @@ class SistemaPenalViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
     queryset = SistemaPenal.objects.filter(excluido=False)
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
     search_fields = ("nome", "sigla", "ativo", "pais__nome", "estado__nome")
-    filter_fields = (
-        "nome",
-        "sigla",
-        "ativo",
-    )
+    filter_fields = ("nome", "sigla", "ativo")
     ordering_fields = ("nome", "sigla", "ativo", "pais__nome", "estado__nome", "ativo")
     ordering = ("nome", "sigla", "ativo", "pais__nome", "estado__nome", "ativo")
 
@@ -805,7 +802,7 @@ class SistemaPenalViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         ativo = trata_campo_ativo(parametros_busca.get("ativo"))
 
         for query in SistemaPenal.objects.filter(Q(excluido=False)):
-            sistema_list = list() 
+            sistema_list = list()
             sistema_list.append(trata_campo(query.nome))
             sistema_list.append(trata_campo(query.sigla))
             sistema_list.append(trata_campo(query.pais.nome) if query.pais else "")
@@ -977,7 +974,7 @@ class UnidadeViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         ativo = trata_campo_ativo(parametros_busca.get("ativo"))
 
         for query in Unidade.objects.filter(Q(excluido=False)):
-            unidade_list = list() 
+            unidade_list = list()
             unidade_list.append(trata_campo(query.nome))
             unidade_list.append(trata_campo(query.sigla))
             unidade_list.append(trata_campo(query.sistema.nome))

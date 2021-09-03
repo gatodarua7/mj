@@ -17,7 +17,7 @@ class TestPaisEndpoint(SiapenTestCase):
         Criação de objeto invalido.
         """
         data = self.data
-        data['sigla'] = ""
+        data["sigla"] = ""
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
@@ -27,7 +27,7 @@ class TestPaisEndpoint(SiapenTestCase):
         criar objeto valido.
         """
         data = self.data
-        data['sigla'] = "TT"
+        data["sigla"] = "TT"
         resp = self.client.post(self.url, data=self.data)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="create")
@@ -37,7 +37,7 @@ class TestPaisEndpoint(SiapenTestCase):
         Criação de objeto extrapolando campos.
         """
         data = self.data
-        data['sigla'] = "TTTTTTTTTTT"
+        data["sigla"] = "TTTTTTTTTTT"
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
@@ -137,8 +137,7 @@ class TestPaisEndpoint(SiapenTestCase):
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["sigla"] = "GG"
-            url = f'{self.url}999999999/'
+            url = f"{self.url}999999999/"
             response = self.client.patch(url, data=resp_json)
             self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
             self.format_print(metodo="update")
-    

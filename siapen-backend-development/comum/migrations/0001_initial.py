@@ -14,62 +14,179 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('localizacao', '0001_initial'),
+        ("localizacao", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Telefone',
+            name="Telefone",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('ativo', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('delete_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('excluido', models.BooleanField(default=False)),
-                ('numero', models.CharField(max_length=11, validators=[django.core.validators.RegexValidator('^\\d{1,11}$')])),
-                ('tipo', models.CharField(choices=[('CELULAR', 'Celular'), ('FUNCIONAL', 'Celular Funcional'), ('RAMAL', 'Ramal'), ('RESIDENCIAL', 'Residencial')], max_length=15)),
-                ('observacao', models.TextField(blank=True, max_length=200, null=True)),
-                ('andar', models.CharField(blank=True, max_length=20, null=True)),
-                ('sala', models.CharField(blank=True, max_length=20, null=True)),
-                ('privado', models.BooleanField(blank=True, default=False, null=True)),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('usuario_edicao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='updatedcomum_telefone_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_exclusao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='deletecomum_telefone_related', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("ativo", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "updated_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "delete_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("excluido", models.BooleanField(default=False)),
+                (
+                    "numero",
+                    models.CharField(
+                        max_length=11,
+                        validators=[
+                            django.core.validators.RegexValidator("^\\d{1,11}$")
+                        ],
+                    ),
+                ),
+                (
+                    "tipo",
+                    models.CharField(
+                        choices=[
+                            ("CELULAR", "Celular"),
+                            ("FUNCIONAL", "Celular Funcional"),
+                            ("RAMAL", "Ramal"),
+                            ("RESIDENCIAL", "Residencial"),
+                        ],
+                        max_length=15,
+                    ),
+                ),
+                ("observacao", models.TextField(blank=True, max_length=200, null=True)),
+                ("andar", models.CharField(blank=True, max_length=20, null=True)),
+                ("sala", models.CharField(blank=True, max_length=20, null=True)),
+                ("privado", models.BooleanField(blank=True, default=False, null=True)),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_edicao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="updatedcomum_telefone_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_exclusao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="deletecomum_telefone_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'verbose_name': 'Telefone',
-                'verbose_name_plural': 'Telefones',
-            },
+            options={"verbose_name": "Telefone", "verbose_name_plural": "Telefones"},
         ),
         migrations.CreateModel(
-            name='Endereco',
+            name="Endereco",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('ativo', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('delete_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('excluido', models.BooleanField(default=False)),
-                ('logradouro', comum.models.CICharField(max_length=250)),
-                ('bairro', comum.models.CICharField(max_length=150)),
-                ('numero', models.CharField(blank=True, max_length=10, null=True)),
-                ('complemento', comum.models.CITextField(blank=True, null=True)),
-                ('cep', models.CharField(blank=True, max_length=10, null=True)),
-                ('andar', models.CharField(blank=True, max_length=20, null=True)),
-                ('sala', models.CharField(blank=True, max_length=20, null=True)),
-                ('latitude', models.DecimalField(blank=True, decimal_places=3, max_digits=8, null=True)),
-                ('longitude', models.DecimalField(blank=True, decimal_places=3, max_digits=8, null=True)),
-                ('observacao', models.TextField(blank=True, null=True)),
-                ('cidade', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='localizacao.cidade')),
-                ('estado', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='localizacao.estado')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('usuario_edicao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='updatedcomum_endereco_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_exclusao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='deletecomum_endereco_related', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("ativo", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "updated_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "delete_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("excluido", models.BooleanField(default=False)),
+                ("logradouro", comum.models.CICharField(max_length=250)),
+                ("bairro", comum.models.CICharField(max_length=150)),
+                ("numero", models.CharField(blank=True, max_length=10, null=True)),
+                ("complemento", comum.models.CITextField(blank=True, null=True)),
+                ("cep", models.CharField(blank=True, max_length=10, null=True)),
+                ("andar", models.CharField(blank=True, max_length=20, null=True)),
+                ("sala", models.CharField(blank=True, max_length=20, null=True)),
+                (
+                    "latitude",
+                    models.DecimalField(
+                        blank=True, decimal_places=3, max_digits=8, null=True
+                    ),
+                ),
+                (
+                    "longitude",
+                    models.DecimalField(
+                        blank=True, decimal_places=3, max_digits=8, null=True
+                    ),
+                ),
+                ("observacao", models.TextField(blank=True, null=True)),
+                (
+                    "cidade",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="localizacao.cidade",
+                    ),
+                ),
+                (
+                    "estado",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="localizacao.estado",
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_edicao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="updatedcomum_endereco_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_exclusao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="deletecomum_endereco_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'verbose_name': 'Endereço',
-                'verbose_name_plural': 'Endereços',
-            },
+            options={"verbose_name": "Endereço", "verbose_name_plural": "Endereços"},
         ),
     ]

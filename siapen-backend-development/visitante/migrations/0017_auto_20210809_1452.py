@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('visitante', '0016_auto_20210806_1654'),
-    ]
+    dependencies = [("visitante", "0016_auto_20210806_1654")]
 
     operations = [
         migrations.AlterField(
-            model_name='documentosvisitante',
-            name='arquivo_temp',
-            field=models.FileField(upload_to='documentos_visitante'),
-        ),
+            model_name="documentosvisitante",
+            name="arquivo_temp",
+            field=models.FileField(upload_to="documentos_visitante"),
+        )
     ]

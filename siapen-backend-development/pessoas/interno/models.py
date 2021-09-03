@@ -20,224 +20,85 @@ class AbaCaracteristicas(models.Model):
         PRETA = "PRETA", _("Preta")
 
     class CorCabelo(models.TextChoices):
-        PRETO = (
-            "PRETO",
-            _("Preto"),
-        )
-        CASTANHO = (
-            "CASTANHO",
-            _("Castanho"),
-        )
-        RUIVO = (
-            "RUIVO",
-            _("Ruivo"),
-        )
-        LOIRO = (
-            "LOIRO",
-            _("Loiro"),
-        )
-        GRISALHO = (
-            "GRISALHO",
-            _("Grisalho"),
-        )
+        PRETO = ("PRETO", _("Preto"))
+        CASTANHO = ("CASTANHO", _("Castanho"))
+        RUIVO = ("RUIVO", _("Ruivo"))
+        LOIRO = ("LOIRO", _("Loiro"))
+        GRISALHO = ("GRISALHO", _("Grisalho"))
         BRANCO = "BRANCO", _("Branco")
 
     class TipoCabelo(models.TextChoices):
-        LISO = (
-            "LISO",
-            _("Liso"),
-        )
-        CRESPO = (
-            "CRESPO",
-            _("Crespo"),
-        )
-        ONDULADO = (
-            "ONDULADO",
-            _("Ondulado"),
-        )
+        LISO = ("LISO", _("Liso"))
+        CRESPO = ("CRESPO", _("Crespo"))
+        ONDULADO = ("ONDULADO", _("Ondulado"))
         CARAPINHA = "CARAPINHA", _("Carapinha")
 
     class TipoRosto(models.TextChoices):
-        ACHATADO = (
-            "ACHATADO",
-            _("Achatado"),
-        )
-        COMPRIDO = (
-            "COMPRIDO",
-            _("Comprido"),
-        )
-        OVALADO = (
-            "OVALADO",
-            _("Ovalado"),
-        )
-        QUADRADO = (
-            "QUADRADO",
-            _("Quadrado"),
-        )
+        ACHATADO = ("ACHATADO", _("Achatado"))
+        COMPRIDO = ("COMPRIDO", _("Comprido"))
+        OVALADO = ("OVALADO", _("Ovalado"))
+        QUADRADO = ("QUADRADO", _("Quadrado"))
         REDONDO = "REDONDO", _("Redondo")
 
     class TipoTesta(models.TextChoices):
-        ALTA = (
-            "ALTA",
-            _("Alta"),
-        )
-        COM_ENTRADAS = (
-            "COM_ENTRADAS",
-            _("Com entradas"),
-        )
+        ALTA = ("ALTA", _("Alta"))
+        COM_ENTRADAS = ("COM_ENTRADAS", _("Com entradas"))
         CURTA = "CURTA", _("Curta")
 
     class Sobrancelhas(models.TextChoices):
-        APARADAS = (
-            "APARADAS",
-            _("Aparadas"),
-        )
-        FINAS = (
-            "FINAS",
-            _("Finas"),
-        )
-        GROSSAS = (
-            "GROSSAS",
-            _("Grossas"),
-        )
-        PINTADAS = (
-            "PINTADAS",
-            _("Pintadas"),
-        )
-        SEPARADAS = (
-            "SEPARADAS",
-            _("Separadas"),
-        )
+        APARADAS = ("APARADAS", _("Aparadas"))
+        FINAS = ("FINAS", _("Finas"))
+        GROSSAS = ("GROSSAS", _("Grossas"))
+        PINTADAS = ("PINTADAS", _("Pintadas"))
+        SEPARADAS = ("SEPARADAS", _("Separadas"))
         UNIDAS = "UNIDAS", _("Unidas")
 
     class TipoOlhos(models.TextChoices):
-        FUNDOS = (
-            "FUNDOS",
-            _("Fundos"),
-        )
-        GRANDES = (
-            "GRANDES",
-            _("Grandes"),
-        )
-        ORIENTAIS = (
-            "ORIENTAIS",
-            _("Orientais"),
-        )
-        PEQUENOS = (
-            "PEQUENOS",
-            _("Pequenos"),
-        )
+        FUNDOS = ("FUNDOS", _("Fundos"))
+        GRANDES = ("GRANDES", _("Grandes"))
+        ORIENTAIS = ("ORIENTAIS", _("Orientais"))
+        PEQUENOS = ("PEQUENOS", _("Pequenos"))
         SALTADOS = "SALTADOS", _("Saltados")
 
     class CorOlhos(models.TextChoices):
-        PRETOS = (
-            "PRETOS",
-            _("Pretos"),
-        )
-        CASTANHO = (
-            "CASTANHO",
-            _("Castanho"),
-        )
-        AZUIS = (
-            "AZUIS",
-            _("Azuis"),
-        )
-        VERDES = (
-            "VERDES",
-            _("Verdes"),
-        )
-        DUAS_CORES = (
-            "DUAS_CORES",
-            _("Duas cores"),
-        )
-        INDEFINIDOS_CLAROS = (
-            "INDEFINIDOS_CLAROS",
-            _("Indefinidos claros"),
-        )
+        PRETOS = ("PRETOS", _("Pretos"))
+        CASTANHO = ("CASTANHO", _("Castanho"))
+        AZUIS = ("AZUIS", _("Azuis"))
+        VERDES = ("VERDES", _("Verdes"))
+        DUAS_CORES = ("DUAS_CORES", _("Duas cores"))
+        INDEFINIDOS_CLAROS = ("INDEFINIDOS_CLAROS", _("Indefinidos claros"))
         INDEFINIDOS_ESCUROS = "INDEFINIDOS_ESCUROS", _("Indefinidos escuros")
 
     class Nariz(models.TextChoices):
-        ACHATADO = (
-            "ACHATADO",
-            _("Achatado"),
-        )
-        ADUNCO = (
-            "ADUNCO",
-            _("Adunco"),
-        )
-        AFILADO = (
-            "AFILADO",
-            _("Afilado"),
-        )
-        ARREBITADO = (
-            "ARREBITADO",
-            _("Arrebitado"),
-        )
-        GRANDE = (
-            "GRANDE",
-            _("Grande"),
-        )
-        MEDIO = (
-            "MEDIO",
-            _("Médio"),
-        )
+        ACHATADO = ("ACHATADO", _("Achatado"))
+        ADUNCO = ("ADUNCO", _("Adunco"))
+        AFILADO = ("AFILADO", _("Afilado"))
+        ARREBITADO = ("ARREBITADO", _("Arrebitado"))
+        GRANDE = ("GRANDE", _("Grande"))
+        MEDIO = ("MEDIO", _("Médio"))
         PEQUENO = "PEQUENO", _("Pequeno")
 
     class Orelhas(models.TextChoices):
-        GRANDES = (
-            "GRANDES",
-            _("Grandes"),
-        )
-        MEDIAS = (
-            "MEDIAS",
-            _("Médias"),
-        )
-        PEQUENAS = (
-            "PEQUENAS",
-            _("Pequenas"),
-        )
-        LOBULOS_FECHADOS = (
-            "LOBULOS_FECHADOS",
-            _("Lóbulos fechados"),
-        )
+        GRANDES = ("GRANDES", _("Grandes"))
+        MEDIAS = ("MEDIAS", _("Médias"))
+        PEQUENAS = ("PEQUENAS", _("Pequenas"))
+        LOBULOS_FECHADOS = ("LOBULOS_FECHADOS", _("Lóbulos fechados"))
         LOBULOS_ABERTOS = "LOBULOS_ABERTOS", _("Lóbulos abertos")
 
     class Labios(models.TextChoices):
-        FINOS = (
-            "FINOS",
-            _("Finos"),
-        )
-        MEDIOS = (
-            "MEDIOS",
-            _("Médios"),
-        )
-        GROSSOS = (
-            "GROSSOS",
-            _("Grossos"),
-        )
+        FINOS = ("FINOS", _("Finos"))
+        MEDIOS = ("MEDIOS", _("Médios"))
+        GROSSOS = ("GROSSOS", _("Grossos"))
         LEPORINOS = "LEPORINOS", _("Leporinos")
 
     class Compleicao(models.TextChoices):
-        GORDA = (
-            "GORDA",
-            _("Gorda"),
-        )
-        MEDIA = (
-            "MEDIA",
-            _("Média"),
-        )
-        MAGRA = (
-            "MAGRA",
-            _("Magra"),
-        )
-        MUSCULOSA = (
-            "MUSCULOSA",
-            _("Musculosa"),
-        )
+        GORDA = ("GORDA", _("Gorda"))
+        MEDIA = ("MEDIA", _("Média"))
+        MAGRA = ("MAGRA", _("Magra"))
+        MUSCULOSA = ("MUSCULOSA", _("Musculosa"))
         RAQUITICA = "RAQUITICA", _("Raquítica")
 
-    caracteristicas_cutis = models.CharField(
-        max_length=20, choices=Cutis.choices)
+    caracteristicas_cutis = models.CharField(max_length=20, choices=Cutis.choices)
     caracteristicas_cor_cabelo = models.CharField(
         max_length=20, choices=CorCabelo.choices
     )
@@ -256,18 +117,15 @@ class AbaCaracteristicas(models.Model):
     caracteristicas_cor_olhos = models.CharField(
         max_length=20, choices=CorOlhos.choices
     )
-    caracteristicas_nariz = models.CharField(
-        max_length=20, choices=Nariz.choices)
-    caracteristicas_labios = models.CharField(
-        max_length=20, choices=Labios.choices)
+    caracteristicas_nariz = models.CharField(max_length=20, choices=Nariz.choices)
+    caracteristicas_labios = models.CharField(max_length=20, choices=Labios.choices)
     caracteristicas_compleicao = models.CharField(
         max_length=20, choices=Compleicao.choices
     )
     caracteristicas_sobrancelhas = models.CharField(
         max_length=20, choices=Sobrancelhas.choices
     )
-    caracteristicas_orelhas = models.CharField(
-        max_length=20, choices=Orelhas.choices)
+    caracteristicas_orelhas = models.CharField(max_length=20, choices=Orelhas.choices)
 
     class Meta:
         abstract = True
@@ -280,7 +138,7 @@ class Vulgo(models.Model):
     nome = models.CharField(max_length=150)
 
     class Meta:
-        ordering = ['nome']
+        ordering = ["nome"]
 
     def __str__(self):
         return self.nome
@@ -289,15 +147,17 @@ class Vulgo(models.Model):
 class Interno(BaseModel, AbaCaracteristicas, DadosPessoais):
     data_nascimento = models.DateField()
     profissao = models.ForeignKey(
-        Profissao, on_delete=models.PROTECT, null=True, blank=True,
-        related_name="profissao_interno_related"
+        Profissao,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="profissao_interno_related",
     )
     documentos = models.ManyToManyField(Documentos, blank=True)
-    vulgo = models.ManyToManyField(
-        Vulgo, through='InternoVulgosThroughModel')
+    vulgo = models.ManyToManyField(Vulgo, through="InternoVulgosThroughModel")
 
     class Meta:
-        order_with_respect_to = 'id'
+        order_with_respect_to = "id"
 
     def __str__(self):
         return self.nome
@@ -306,7 +166,7 @@ class Interno(BaseModel, AbaCaracteristicas, DadosPessoais):
 class InternoVulgosThroughModel(OrderedModel):
     interno = models.ForeignKey(Interno, on_delete=models.PROTECT)
     vulgo = models.ForeignKey(Vulgo, on_delete=models.PROTECT)
-    order_with_respect_to = 'vulgo'
+    order_with_respect_to = "vulgo"
 
     def __str__(self):
         return "{0} - {1}".format(self.interno, self.vulgo)
@@ -315,9 +175,7 @@ class InternoVulgosThroughModel(OrderedModel):
 class Rg(BaseModel):
     numero = models.CharField(max_length=15)
     orgao_expedidor = models.ForeignKey(
-        OrgaoExpedidor,
-        on_delete=models.PROTECT,
-        related_name="orgao_expedidor_interno",
+        OrgaoExpedidor, on_delete=models.PROTECT, related_name="orgao_expedidor_interno"
     )
     interno = models.ForeignKey(
         Interno,
@@ -354,16 +212,24 @@ class OutroNome(BaseModel):
 
 class Contatos(BaseModel):
     interno = models.ForeignKey(
-        Interno, on_delete=models.PROTECT, null=True, blank=True,
-        related_name="interno_contato_related"
+        Interno,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="interno_contato_related",
     )
     nome = models.CharField(max_length=100)
-    tipo_vinculo = models.ForeignKey(TipoVinculo, on_delete=models.PROTECT,
-                                     related_name="tipo_vinculo_contato_related")
-    enderecos = models.ManyToManyField(Endereco, blank=True,
-                                       related_name="endereco_contato_related")
-    telefones = models.ManyToManyField(Telefone, blank=True,
-                                       related_name="telefone_contato_related")
+    tipo_vinculo = models.ForeignKey(
+        TipoVinculo,
+        on_delete=models.PROTECT,
+        related_name="tipo_vinculo_contato_related",
+    )
+    enderecos = models.ManyToManyField(
+        Endereco, blank=True, related_name="endereco_contato_related"
+    )
+    telefones = models.ManyToManyField(
+        Telefone, blank=True, related_name="telefone_contato_related"
+    )
 
     def __str__(self):
         return self.nome
@@ -375,15 +241,20 @@ class SinaisParticulares(BaseModel):
         TATUAGEM = "TATUAGEM", _("Tatuagem")
 
     interno = models.ForeignKey(
-        Interno, on_delete=models.PROTECT, null=True, blank=True,
-        related_name="interno_sinais_related"
+        Interno,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="interno_sinais_related",
     )
-    foto = models.ForeignKey(Foto, on_delete=models.PROTECT,
-                             related_name="foto_sinais_related")
+    foto = models.ForeignKey(
+        Foto, on_delete=models.PROTECT, related_name="foto_sinais_related"
+    )
     area = models.CharField(max_length=50)
     position_x = models.FloatField()
     position_y = models.FloatField()
     tipo = models.CharField(max_length=20, choices=TipoSinal.choices)
     descricao = models.TextField(max_length=200)
     motivo_ativacao = models.TextField(
-        max_length=200, default=None, null=True, blank=True)
+        max_length=200, default=None, null=True, blank=True
+    )

@@ -33,7 +33,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
         Cria objeto conforme esperado pela aplicação.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -48,7 +50,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": None,
             "ativo": False,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -63,7 +67,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": 0,
             "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -78,7 +84,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": "",
             "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -93,7 +101,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": 28,
             "ativo": False,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -108,7 +118,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": 28,
             "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -124,16 +136,16 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
         """
         List de com acento
         """
-        url = f'{self.url}?search=INICÌAL'
+        url = f"{self.url}?search=INICÌAL"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=INICIAL'
+        url = f"{self.url}?search=INICIAL"
         resp = self.client.post(self.url, data=self.data)
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
@@ -143,7 +155,7 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -152,7 +164,7 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -168,7 +180,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": 28,
             "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -187,7 +201,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": 18,
             "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -206,7 +222,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": 27,
             "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "SISTEMA PENAL JABAQUARA ATUALIZADO"
@@ -230,15 +248,16 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": 27,
             "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["sigla"] = "SPJ"
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp_json)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
-
+            self.format_print(metodo="Update")
 
     def test_c_update(self):
         """
@@ -251,7 +270,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": 27,
             "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "SISTEMA PENAL JBQ"
@@ -262,7 +283,7 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp_json)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_d_update(self):
         """
@@ -275,7 +296,9 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             "estado": 27,
             "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "SISTEMA JABAQA ATUALIZADO"
@@ -286,4 +309,4 @@ class TestSistemaPenalEndpoint(SiapenTestCase):
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp_json)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")

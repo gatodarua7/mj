@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('cadastros', '0001_initial'),
-    ]
+    dependencies = [("cadastros", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='documentos',
-            name='observacao',
-            field=models.CharField(blank=True, default='', max_length=100, null=True),
-        ),
+            model_name="documentos",
+            name="observacao",
+            field=models.CharField(blank=True, default="", max_length=100, null=True),
+        )
     ]

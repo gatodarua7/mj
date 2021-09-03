@@ -16,14 +16,31 @@ from localizacao.models import Pais, Estado, Cidade
 class DadosPessoais(models.Model):
     nome = models.CharField(max_length=150)
     nome_social = models.CharField(max_length=150, null=True, blank=True)
-    genero = models.ForeignKey(Genero, on_delete=models.PROTECT, null=True, blank=True, 
-        related_name="genero_%(app_label)s_%(class)s_related")
-    nacionalidade = models.ManyToManyField(Pais, blank=True, default=None,
-        related_name="nacionalidade_%(app_label)s_%(class)s_related")
-    estado = models.ForeignKey(Estado, blank=True, null=True, on_delete=models.PROTECT, 
-        related_name="estado_%(app_label)s_%(class)s_related")
+    genero = models.ForeignKey(
+        Genero,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="genero_%(app_label)s_%(class)s_related",
+    )
+    nacionalidade = models.ManyToManyField(
+        Pais,
+        blank=True,
+        default=None,
+        related_name="nacionalidade_%(app_label)s_%(class)s_related",
+    )
+    estado = models.ForeignKey(
+        Estado,
+        blank=True,
+        null=True,
+        on_delete=models.PROTECT,
+        related_name="estado_%(app_label)s_%(class)s_related",
+    )
     naturalidade = models.ForeignKey(
-        Cidade, on_delete=models.PROTECT, null=True, blank=True,
+        Cidade,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
         related_name="naturalidade_%(app_label)s_%(class)s_related",
     )
     cpf = models.CharField(
@@ -32,7 +49,7 @@ class DadosPessoais(models.Model):
             RegexValidator(
                 regex=r"[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}",
                 message="CPF inválido",
-            ),
+            )
         ],
     )
     foto = models.ForeignKey(
@@ -76,8 +93,11 @@ class DadosPessoais(models.Model):
         blank=True,
         related_name="religiao_%(app_label)s_%(class)s_related",
     )
-    necessidade_especial = models.ManyToManyField(NecessidadeEspecial, blank=True, 
-        related_name="necessidades_%(app_label)s_%(class)s_related")
+    necessidade_especial = models.ManyToManyField(
+        NecessidadeEspecial,
+        blank=True,
+        related_name="necessidades_%(app_label)s_%(class)s_related",
+    )
     estado_civil = models.ForeignKey(
         EstadoCivil,
         on_delete=models.PROTECT,

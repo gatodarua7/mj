@@ -36,9 +36,10 @@ def idade(born):
         [int]: [Idade da pessoa]
     """
     from datetime import date
+
     try:
         if born:
-            born = born.replace("-","/")
+            born = born.replace("-", "/")
             born = born.split("/")
             year = int(born[2])
             month = int(born[1])

@@ -7,14 +7,19 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('prisional', '0001_initial'),
-        ('movimentacao', '0010_auto_20210608_1751'),
+        ("prisional", "0001_initial"),
+        ("movimentacao", "0010_auto_20210608_1751"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='pedidoinclusao',
-            name='unidade',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='prisional.unidade'),
-        ),
+            model_name="pedidoinclusao",
+            name="unidade",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                to="prisional.unidade",
+            ),
+        )
     ]

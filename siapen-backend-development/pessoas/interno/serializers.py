@@ -43,7 +43,7 @@ class RgSerializer(FlexFieldsModelSerializer):
             "uf_rg",
             "uf_rg_nome",
             "orgao_expedidor_nome",
-            "interno"
+            "interno",
         ]
 
     def get_uf_rg(self, obj):
@@ -77,8 +77,7 @@ class OutroNomeSerializer(FlexFieldsModelSerializer):
 
 
 class InternoSerializer(FlexFieldsModelSerializer):
-    outros_nomes = OutroNomeSerializer(
-        source="nome_set", many=True, read_only=True)
+    outros_nomes = OutroNomeSerializer(source="nome_set", many=True, read_only=True)
     vulgo = VulgoSerializer(source="vulgo_set", many=True, read_only=True)
     rgs = SerializerMethodField()
     thumbnail = SerializerMethodField()
@@ -135,7 +134,7 @@ class InternoSerializer(FlexFieldsModelSerializer):
             "mae_nao_declarado": mensagens.MSG2.format("Mãe não declarado"),
             "mae_falecido": mensagens.MSG2.format("Mãe falecido"),
             "pai_falecido": mensagens.MSG2.format("Pai falecido"),
-            "pai_nao_declarado": mensagens.MSG2.format("Pai não declarado")
+            "pai_nao_declarado": mensagens.MSG2.format("Pai não declarado"),
         }
 
         for key, value in mandatory_fields.items():
@@ -147,15 +146,13 @@ class InternoSerializer(FlexFieldsModelSerializer):
         """
         Representa o valor de um objeto.
         """
-        representacao = super(
-            InternoSerializer, self).to_representation(instance)
+        representacao = super(InternoSerializer, self).to_representation(instance)
         representacao["nacionalidade_nome"] = [
             PaisSerializer(pais).data["nome"] for pais in instance.nacionalidade.all()
         ]
 
         representacao["vulgo"] = [
-            VulgoSerializer(v).data["nome"]
-            for v in instance.vulgo.all()
+            VulgoSerializer(v).data["nome"] for v in instance.vulgo.all()
         ]
 
         representacao["outros_nomes"] = [
@@ -164,8 +161,10 @@ class InternoSerializer(FlexFieldsModelSerializer):
         ]
 
         if representacao["vulgo"]:
-            parametros = self.context['request'].query_params
-            if (parametros and parametros.get('ordering')) and parametros.get('ordering') == '-vulgo':
+            parametros = self.context["request"].query_params
+            if (parametros and parametros.get("ordering")) and parametros.get(
+                "ordering"
+            ) == "-vulgo":
                 representacao["vulgo"].sort(reverse=True)
 
         return representacao
@@ -190,14 +189,16 @@ class InternoSerializer(FlexFieldsModelSerializer):
                     "mae_falecido": "A mãe nao pode ser declarado falecido e nao declarado."
                 }
             )
-    
+
         brasil_exist = None
         if data.get("nacionalidade"):
             brasil_exist = [
                 pais.nome for pais in data["nacionalidade"] if "Brasil" in pais.nome
             ]
         else:
-            raise serializers.ValidationError({"nacionalidade":  mensagens.MSG2.format("nacionalidade")})
+            raise serializers.ValidationError(
+                {"nacionalidade": mensagens.MSG2.format("nacionalidade")}
+            )
 
         if not brasil_exist and data.get("estado"):
             raise serializers.ValidationError(
@@ -227,8 +228,7 @@ class InternoSerializer(FlexFieldsModelSerializer):
         try:
             contatos = list()
             for contato in Contatos.objects.filter(interno_id=obj.id, excluido=False):
-                contato_dict = model_to_dict(
-                    Contatos.objects.get(pk=contato.id))
+                contato_dict = model_to_dict(Contatos.objects.get(pk=contato.id))
                 contato_dict["total_telefones"] = contato.telefones.count()
                 contato_dict["total_enderecos"] = contato.enderecos.count()
                 contato_dict["tipo_vinculo_nome"] = contato.tipo_vinculo.nome
@@ -238,10 +238,11 @@ class InternoSerializer(FlexFieldsModelSerializer):
                     for endereco in contato_dict["enderecos"]:
                         endereco_dict = dict()
                         endereco_dict = model_to_dict(
-                            Endereco.objects.get(pk=endereco.id))
+                            Endereco.objects.get(pk=endereco.id)
+                        )
                         endereco_dict["id"] = endereco.id
-                        endereco_dict['cidade_nome'] = endereco.cidade.nome
-                        endereco_dict['estado_nome'] = endereco.estado.nome
+                        endereco_dict["cidade_nome"] = endereco.cidade.nome
+                        endereco_dict["estado_nome"] = endereco.estado.nome
                         endereco_list.append(endereco_dict)
                     contato_dict["enderecos"] = endereco_list
                 if contato_dict["telefones"]:
@@ -249,7 +250,8 @@ class InternoSerializer(FlexFieldsModelSerializer):
                     for telefone in contato_dict["telefones"]:
                         telefone_dict = dict()
                         telefone_dict = model_to_dict(
-                            Telefone.objects.get(pk=telefone.id))
+                            Telefone.objects.get(pk=telefone.id)
+                        )
                         telefone_dict["id"] = telefone.id
                         telefone_list.append(telefone_dict)
                     contato_dict["telefones"] = telefone_list
@@ -264,8 +266,7 @@ class InternoSerializer(FlexFieldsModelSerializer):
             for sinal in SinaisParticulares.objects.filter(
                 interno_id=obj.id, excluido=False
             ):
-                sinal_dict = model_to_dict(
-                    SinaisParticulares.objects.get(pk=sinal.id))
+                sinal_dict = model_to_dict(SinaisParticulares.objects.get(pk=sinal.id))
                 sinal_dict["id"] = sinal.id
                 sinais.append(sinal_dict)
             return sinais
@@ -301,7 +302,7 @@ class ContatosSerializer(serializers.ModelSerializer):
 
         mandatory_fields = {
             "nome": mensagens.MSG2.format(u"nome"),
-            "tipo_vinculo": mensagens.MSG2.format(u"vínculo")
+            "tipo_vinculo": mensagens.MSG2.format(u"vínculo"),
         }
 
         for key, value in mandatory_fields.items():
@@ -363,8 +364,7 @@ class SinaisParticularesSerializer(serializers.ModelSerializer):
         mandatory_fields = {
             "foto": mensagens.MSG2.format(u"foto"),
             "descricao": mensagens.MSG2.format(u"descrição"),
-            "tipo": mensagens.MSG2.format(u"tipo")
-
+            "tipo": mensagens.MSG2.format(u"tipo"),
         }
 
         for key, value in mandatory_fields.items():

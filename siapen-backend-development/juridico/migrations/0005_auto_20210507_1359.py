@@ -5,19 +5,39 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('juridico', '0004_auto_20210507_1317'),
-    ]
+    dependencies = [("juridico", "0004_auto_20210507_1317")]
 
     operations = [
         migrations.AlterField(
-            model_name='normasjuridicas',
-            name='norma_juridica',
-            field=models.CharField(choices=[('EMENDA_CONSTITUICAO', 'Emenda à Constituição'), ('LEI_COMPLEMENTAR', 'Lei Complementar'), ('LEI_ORDINARIA', 'Lei Ordinária'), ('LEI_DELEGADA', 'Lei Delegada'), ('MEDIDA_PROVISORIA', 'Medida Provisória'), ('DECRETO_LEGISLATIVO', 'Decreto Legislativo'), ('RESOLUCAO', 'Resolução')], max_length=100),
+            model_name="normasjuridicas",
+            name="norma_juridica",
+            field=models.CharField(
+                choices=[
+                    ("EMENDA_CONSTITUICAO", "Emenda à Constituição"),
+                    ("LEI_COMPLEMENTAR", "Lei Complementar"),
+                    ("LEI_ORDINARIA", "Lei Ordinária"),
+                    ("LEI_DELEGADA", "Lei Delegada"),
+                    ("MEDIDA_PROVISORIA", "Medida Provisória"),
+                    ("DECRETO_LEGISLATIVO", "Decreto Legislativo"),
+                    ("RESOLUCAO", "Resolução"),
+                ],
+                max_length=100,
+            ),
         ),
         migrations.AlterField(
-            model_name='titulolei',
-            name='norma_juridica',
-            field=models.CharField(choices=[('EMENDA_CONSTITUICAO', 'Emenda à Constituição'), ('LEI_COMPLEMENTAR', 'Lei Complementar'), ('LEI_ORDINARIA', 'Lei Ordinária'), ('LEI_DELEGADA', 'Lei Delegada'), ('MEDIDA_PROVISORIA', 'Medida Provisória'), ('DECRETO_LEGISLATIVO', 'Decreto Legislativo'), ('RESOLUCAO', 'Resolução')], max_length=50),
+            model_name="titulolei",
+            name="norma_juridica",
+            field=models.CharField(
+                choices=[
+                    ("EMENDA_CONSTITUICAO", "Emenda à Constituição"),
+                    ("LEI_COMPLEMENTAR", "Lei Complementar"),
+                    ("LEI_ORDINARIA", "Lei Ordinária"),
+                    ("LEI_DELEGADA", "Lei Delegada"),
+                    ("MEDIDA_PROVISORIA", "Medida Provisória"),
+                    ("DECRETO_LEGISLATIVO", "Decreto Legislativo"),
+                    ("RESOLUCAO", "Resolução"),
+                ],
+                max_length=50,
+            ),
         ),
     ]

@@ -29,23 +29,24 @@ class TestEnderecoEndpoint(SiapenTestCase):
     ]
 
     def setUp(self) -> None:
-        self.entidade = 'Endereço'
-        self.data = {"logradouro": "Rua 1",
-                    "bairro": "Barrio teste",
-                    "numero": 50,
-                    "complemento": "Condomínio Teste",
-                    "estado": 28,
-                    "cidade": 3956,
-                    "andar": 12,
-                    "sala": "B",
-                    "cep":"12345-678",
-                    "latitude": "-16.7573",
-                    "longitude": "-49.4412",
-                    "observacao": "Nada para observar",
-                    "ativo": True}
+        self.entidade = "Endereço"
+        self.data = {
+            "logradouro": "Rua 1",
+            "bairro": "Barrio teste",
+            "numero": 50,
+            "complemento": "Condomínio Teste",
+            "estado": 28,
+            "cidade": 3956,
+            "andar": 12,
+            "sala": "B",
+            "cep": "12345-678",
+            "latitude": "-16.7573",
+            "longitude": "-49.4412",
+            "observacao": "Nada para observar",
+            "ativo": True,
+        }
         self.url = f"/api/comum/endereco/"
         super(TestEnderecoEndpoint, self).setUp()
-
 
     def test_a_create(self):
         """
@@ -54,7 +55,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
         data = self.data
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_b_create(self):
         """
@@ -64,7 +65,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
         self.client.post(self.url, data=data)
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_c_create(self):
         """
@@ -72,9 +73,11 @@ class TestEnderecoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["logradouro"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type="application/json")
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_d_create(self):
         """
@@ -84,7 +87,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
         data["logradouro"] = ""
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_e_create(self):
         """
@@ -92,9 +95,11 @@ class TestEnderecoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["bairro"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type="application/json")
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_f_create(self):
         """
@@ -104,7 +109,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
         data["bairro"] = ""
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_g_create(self):
         """
@@ -112,9 +117,11 @@ class TestEnderecoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["estado"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type="application/json")
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_h_create(self):
         """
@@ -122,14 +129,16 @@ class TestEnderecoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["cidade"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type="application/json")
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_a_list(self):
         """
         List de objetos
-        """        
+        """
         resp = self.client.get(self.url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -139,7 +148,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
         List de com acento
         """
 
-        url = f'{self.url}?search=Condominio'
+        url = f"{self.url}?search=Condominio"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -147,12 +156,12 @@ class TestEnderecoEndpoint(SiapenTestCase):
             resp = self.client.get(url)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=Condomínio'
+        url = f"{self.url}?search=Condomínio"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -165,7 +174,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -178,7 +187,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -186,7 +195,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
             resp = self.client.get(url)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="list")
-  
+
     def test_a_delete(self):
         """
         Deletar um registro.
@@ -224,7 +233,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
-            resp_json["complemento"] = "Teste" 
+            resp_json["complemento"] = "Teste"
             resp = self.client.patch(url, data=resp_json)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="update")
@@ -237,7 +246,7 @@ class TestEnderecoEndpoint(SiapenTestCase):
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            url = f'{self.url}18428964-828c-4e93-91fe-3807786a0dc9/'
+            url = f"{self.url}18428964-828c-4e93-91fe-3807786a0dc9/"
             response = self.client.patch(url, data=resp_json)
             self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
             self.format_print(metodo="update")

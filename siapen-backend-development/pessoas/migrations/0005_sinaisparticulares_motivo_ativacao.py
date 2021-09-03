@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('pessoas', '0004_auto_20210429_1841'),
-    ]
+    dependencies = [("pessoas", "0004_auto_20210429_1841")]
 
     operations = [
         migrations.AddField(
-            model_name='sinaisparticulares',
-            name='motivo_ativacao',
+            model_name="sinaisparticulares",
+            name="motivo_ativacao",
             field=models.TextField(blank=True, default=None, max_length=200, null=True),
-        ),
+        )
     ]

@@ -6,19 +6,23 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('movimentacao', '0008_auto_20210526_1636'),
-    ]
+    dependencies = [("movimentacao", "0008_auto_20210526_1636")]
 
     operations = [
         migrations.AlterField(
-            model_name='analisepedido',
-            name='parecer',
-            field=models.TextField(),
+            model_name="analisepedido", name="parecer", field=models.TextField()
         ),
         migrations.AlterField(
-            model_name='pedidoinclusao',
-            name='numero_sei',
-            field=models.CharField(max_length=20, validators=[django.core.validators.RegexValidator(message='Nº SEI inválido', regex='\\d{5}\\.\\d{6}\\/\\d{4}\\-\\d{2}')]),
+            model_name="pedidoinclusao",
+            name="numero_sei",
+            field=models.CharField(
+                max_length=20,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message="Nº SEI inválido",
+                        regex="\\d{5}\\.\\d{6}\\/\\d{4}\\-\\d{2}",
+                    )
+                ],
+            ),
         ),
     ]

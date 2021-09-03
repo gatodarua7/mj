@@ -5,13 +5,15 @@ from django.db import transaction
 from django.contrib.auth.models import User
 from rest_framework.fields import SerializerMethodField
 from rest_flex_fields import FlexFieldsModelSerializer
-from movimentacao.models import (AnalisePedido, 
-                                    PedidoInclusaoMotivos, 
-                                    FasesPedido, 
-                                    PedidoInclusao, 
-                                    PedidoInclusaoOutroNome, 
-                                    NormasJuridicasMotivosThroughModel, 
-                                    PedidoInclusaoMovimentacao)
+from movimentacao.models import (
+    AnalisePedido,
+    PedidoInclusaoMotivos,
+    FasesPedido,
+    PedidoInclusao,
+    PedidoInclusaoOutroNome,
+    NormasJuridicasMotivosThroughModel,
+    PedidoInclusaoMovimentacao,
+)
 from cadastros.models import Foto
 from juridico.models import TituloLei
 from localizacao.serializers import PaisSerializer
@@ -24,33 +26,36 @@ from uuid import UUID
 
 
 class FasesPedidoListSerializer(serializers.ListSerializer):
-
     def create(self, validated_data):
         with transaction.atomic():
             itens = []
-            for item in self.context['request'].data:
-                if item.get('usuario_cadastro'):
-                    item['usuario_cadastro'] = User.objects.get(
-                        pk=item.get('usuario_cadastro'))
-                if item.get('usuario_edicao'):
-                    item['usuario_edicao'] = User.objects.get(
-                        pk=item.get('usuario_edicao'))
-                if item.get('usuario_ativacao'):
-                    item['usuario_ativacao'] = User.objects.get(
-                        pk=item.get('usuario_ativacao'))
-                if item.get('usuario_inativacao'):
-                    item['usuario_inativacao'] = User.objects.get(
-                        pk=item.get('usuario_inativacao'))
-                
+            for item in self.context["request"].data:
+                if item.get("usuario_cadastro"):
+                    item["usuario_cadastro"] = User.objects.get(
+                        pk=item.get("usuario_cadastro")
+                    )
+                if item.get("usuario_edicao"):
+                    item["usuario_edicao"] = User.objects.get(
+                        pk=item.get("usuario_edicao")
+                    )
+                if item.get("usuario_ativacao"):
+                    item["usuario_ativacao"] = User.objects.get(
+                        pk=item.get("usuario_ativacao")
+                    )
+                if item.get("usuario_inativacao"):
+                    item["usuario_inativacao"] = User.objects.get(
+                        pk=item.get("usuario_inativacao")
+                    )
+
                 obj, created = FasesPedido.objects.update_or_create(
-                    pk=item.get('id'), defaults=item)
+                    pk=item.get("id"), defaults=item
+                )
 
                 itens.append(obj)
             return itens
 
 
 class FasesPedidoSerializer(FlexFieldsModelSerializer):
-
     class Meta:
         model = FasesPedido
         fields = "__all__"
@@ -64,7 +69,7 @@ class FasesPedidoSerializer(FlexFieldsModelSerializer):
             "grupo": mensagens.MSG2.format(u"grupo"),
             "ordem": mensagens.MSG2.format(u"ordem"),
             "descricao": mensagens.MSG2.format(u"descrição"),
-            "cor": mensagens.MSG2.format(u"cor")
+            "cor": mensagens.MSG2.format(u"cor"),
         }
 
         for key, value in mandatory_fields.items():
@@ -84,23 +89,20 @@ class PedidoInclusaoOutroNomeSerializer(FlexFieldsModelSerializer):
 
 
 class PedidoInclusaoMotivosSerializer(FlexFieldsModelSerializer):
-
     class Meta:
         model = PedidoInclusaoMotivos
-        ordering = ["id", "norma_juridica",
-                    "pedido_inclusao", "titulo", "descricao"]
-        fields = ["id", "norma_juridica",
-                  "pedido_inclusao", "titulo", "descricao"]
+        ordering = ["id", "norma_juridica", "pedido_inclusao", "titulo", "descricao"]
+        fields = ["id", "norma_juridica", "pedido_inclusao", "titulo", "descricao"]
 
     def get_pedido_inclusao(self, obj):
         return obj.pedido_inclusao
 
     def to_representation(self, instance):
-        data = super(PedidoInclusaoMotivosSerializer,
-                     self).to_representation(instance)
+        data = super(PedidoInclusaoMotivosSerializer, self).to_representation(instance)
         titulo = TituloLei.objects.get(id=data["titulo"])
         normas_juridicas = NormasJuridicasMotivosThroughModel.objects.filter(
-            motivo=data["id"])
+            motivo=data["id"]
+        )
         ids_normas = list()
         nomes_normas = list()
         normas = ""
@@ -109,21 +111,23 @@ class PedidoInclusaoMotivosSerializer(FlexFieldsModelSerializer):
             nomes_normas.append(norma.norma.descricao)
             normas = norma.norma.get_norma_juridica_display()
         return {
-            'norma_juridica': data["norma_juridica"],
+            "norma_juridica": data["norma_juridica"],
             "norma_juridica_nome": normas,
             "titulo": data["titulo"],
             "titulo_nome": titulo.nome,
             "descricao": ids_normas,
-            "descricao_nome": nomes_normas
+            "descricao_nome": nomes_normas,
         }
 
 
 class PedidoInclusaoSerializer(FlexFieldsModelSerializer):
     vulgo = VulgoSerializer(source="vulgo_set", many=True, read_only=True)
     outros_nomes = PedidoInclusaoOutroNomeSerializer(
-        source="nome_set", many=True, read_only=True)
+        source="nome_set", many=True, read_only=True
+    )
     motivos_inclusao = PedidoInclusaoMotivosSerializer(
-        source="motivos_set", many=True, read_only=True)
+        source="motivos_set", many=True, read_only=True
+    )
     fase_pedido = SerializerMethodField()
     thumbnail = SerializerMethodField()
     imagem = SerializerMethodField()
@@ -182,20 +186,20 @@ class PedidoInclusaoSerializer(FlexFieldsModelSerializer):
             return imagem
         except Exception:
             pass
-    
+
     def get_fase_pedido(self, obj):
         fase = dict()
         if obj.fase_pedido:
             fase = model_to_dict(FasesPedido.objects.get(pk=obj.fase_pedido_id))
             fase["id"] = obj.fase_pedido_id
         return fase
-    
+
     def get_ultima_fase(self, obj):
         if obj.fase_pedido:
             return obj.fase_pedido.ultima_fase
-    
+
     def get_fase_cgin(self, obj):
-        if obj.fase_pedido and obj.fase_pedido.fase == 'CGIN':
+        if obj.fase_pedido and obj.fase_pedido.fase == "CGIN":
             return True
 
     def get_estado_solicitante_nome(self, obj):
@@ -204,16 +208,18 @@ class PedidoInclusaoSerializer(FlexFieldsModelSerializer):
     def get_analise_cgin(self, obj):
         pedido = PedidoInclusao.objects.get(id=obj.id)
         try:
-            analise_pedido = AnalisePedido.objects.filter(pedido_inclusao=obj.id).latest('created_at')
+            analise_pedido = AnalisePedido.objects.filter(
+                pedido_inclusao=obj.id
+            ).latest("created_at")
 
-            if (analise_pedido):
-                if (pedido.data_movimentacao < analise_pedido.created_at):
+            if analise_pedido:
+                if pedido.data_movimentacao < analise_pedido.created_at:
                     return analise_pedido.pk
                 else:
                     return None
         except Exception:
             None
-    
+
     def get_unidade_nome(self, obj):
         if obj.unidade:
             return obj.unidade.nome
@@ -226,30 +232,36 @@ class PedidoInclusaoSerializer(FlexFieldsModelSerializer):
         Representa o valor de um objeto.
         """
 
-        representacao = super(
-            PedidoInclusaoSerializer, self).to_representation(instance)
+        representacao = super(PedidoInclusaoSerializer, self).to_representation(
+            instance
+        )
         representacao["nacionalidade_nome"] = [
             PaisSerializer(pais).data["nome"] for pais in instance.nacionalidade.all()
         ]
 
         representacao["vulgo"] = [
-            VulgoSerializer(v).data["nome"]
-            for v in instance.vulgo.all()
+            VulgoSerializer(v).data["nome"] for v in instance.vulgo.all()
         ]
 
         representacao["outros_nomes"] = [
             PedidoInclusaoOutroNomeSerializer(on).data["nome"]
-            for on in PedidoInclusaoOutroNome.objects.filter(pedido_inclusao_id=instance.id, ativo=True)
+            for on in PedidoInclusaoOutroNome.objects.filter(
+                pedido_inclusao_id=instance.id, ativo=True
+            )
         ]
 
         representacao["motivos_inclusao"] = [
             PedidoInclusaoMotivosSerializer(on).data
-            for on in PedidoInclusaoMotivos.objects.filter(pedido_inclusao_id=instance.id)
+            for on in PedidoInclusaoMotivos.objects.filter(
+                pedido_inclusao_id=instance.id
+            )
         ]
 
         if representacao["vulgo"]:
-            parametros = self.context['request'].query_params
-            if (parametros and parametros.get('ordering')) and parametros.get('ordering') == '-vulgo':
+            parametros = self.context["request"].query_params
+            if (parametros and parametros.get("ordering")) and parametros.get(
+                "ordering"
+            ) == "-vulgo":
                 representacao["vulgo"].sort(reverse=True)
 
         return representacao
@@ -268,13 +280,13 @@ class PedidoInclusaoMovimentacaoSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = PedidoInclusaoMovimentacao
         fields = "__all__"
-    
+
     def get_fase_nome(self, obj):
         return obj.fase_pedido.nome
 
     def get_fase_cor(self, obj):
         return obj.fase_pedido.cor
-    
+
     def get_usuario(self, obj):
         return obj.usuario_cadastro.username
 
@@ -285,9 +297,16 @@ class AnalisePedidoSerializer(FlexFieldsModelSerializer):
 
     class Meta:
         model = AnalisePedido
-        fields = ["id","parecer", "penitenciaria", "posicionamento",
-         "pedido_inclusao", "penitenciaria_nome", "created_at", "usuario"]
-         
+        fields = [
+            "id",
+            "parecer",
+            "penitenciaria",
+            "posicionamento",
+            "pedido_inclusao",
+            "penitenciaria_nome",
+            "created_at",
+            "usuario",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(AnalisePedidoSerializer, self).__init__(*args, **kwargs)
@@ -296,7 +315,7 @@ class AnalisePedidoSerializer(FlexFieldsModelSerializer):
             "parecer": mensagens.MSG2.format(u"parecer"),
             "penitenciaria": mensagens.MSG2.format(u"penitenciária"),
             "posicionamento": mensagens.MSG2.format(u"posicionamento"),
-            "pedido_inclusao": mensagens.MSG2.format(u"pedido inclusao")
+            "pedido_inclusao": mensagens.MSG2.format(u"pedido inclusao"),
         }
 
         for key, value in mandatory_fields.items():
@@ -309,4 +328,3 @@ class AnalisePedidoSerializer(FlexFieldsModelSerializer):
 
     def get_usuario(self, obj):
         return obj.usuario_cadastro.username
-

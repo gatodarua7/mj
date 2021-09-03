@@ -29,14 +29,16 @@ class TestTelefoneEndpoint(SiapenTestCase):
     ]
 
     def setUp(self) -> None:
-        self.entidade = 'Telefone'
-        self.data = {"numero": "9999", 
-                    "tipo": "RAMAL", 
-                    "observacao": "OBSERVAÇÃO",
-                    "andar": "Terreo",
-                    "sala": "Sala 5", 
-                    "privado": False,
-                    "ativo": True}
+        self.entidade = "Telefone"
+        self.data = {
+            "numero": "9999",
+            "tipo": "RAMAL",
+            "observacao": "OBSERVAÇÃO",
+            "andar": "Terreo",
+            "sala": "Sala 5",
+            "privado": False,
+            "ativo": True,
+        }
         self.url = f"/api/comum/telefones/"
         super(TestTelefoneEndpoint, self).setUp()
 
@@ -47,7 +49,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         data = self.data
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_b_create(self):
         """
@@ -57,7 +59,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         self.client.post(self.url, data=data)
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_409_CONFLICT)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_c_create(self):
         """
@@ -67,7 +69,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         data["numero"] = ""
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_d_create(self):
         """
@@ -75,10 +77,12 @@ class TestTelefoneEndpoint(SiapenTestCase):
         """
         data = self.data
         data["tipo"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type="application/json")
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
-    
+        self.format_print(metodo="create")
+
     def test_e_create(self):
         """
         Criação de objeto tipo vazio.
@@ -87,7 +91,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         data["tipo"] = ""
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_f_create(self):
         """
@@ -97,12 +101,12 @@ class TestTelefoneEndpoint(SiapenTestCase):
         data["tipo"] = "CELULAR"
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_a_list(self):
         """
         List de objetos
-        """        
+        """
         resp = self.client.get(self.url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -112,7 +116,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         List de com acento
         """
 
-        url = f'{self.url}?search=OBSERVAÇÃO'
+        url = f"{self.url}?search=OBSERVAÇÃO"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -120,12 +124,12 @@ class TestTelefoneEndpoint(SiapenTestCase):
             resp = self.client.get(url)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=OBSERVAÇAO'
+        url = f"{self.url}?search=OBSERVAÇAO"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -138,7 +142,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -151,7 +155,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -224,7 +228,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
-            resp_json["numero"] = "8888" 
+            resp_json["numero"] = "8888"
             resp = self.client.patch(url, data=resp_json)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="update")
@@ -237,7 +241,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            url = f'{self.url}18428964-828c-4e93-91fe-3807786a0dc9/'
+            url = f"{self.url}18428964-828c-4e93-91fe-3807786a0dc9/"
             response = self.client.patch(url, data=resp_json)
             self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
             self.format_print(metodo="update")
@@ -248,7 +252,7 @@ class TestTelefoneEndpoint(SiapenTestCase):
         """
         data = self.data
         self.client.post(self.url, data=data)
-        data["numero"] = "8888" 
+        data["numero"] = "8888"
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()

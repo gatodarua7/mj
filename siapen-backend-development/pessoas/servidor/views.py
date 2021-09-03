@@ -28,7 +28,7 @@ from util.busca import (
     formata_data,
     formata_data_hora,
     get_ids,
-    has_key
+    has_key,
 )
 from util import mensagens, validador, user
 from datetime import datetime
@@ -52,8 +52,7 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             requisicao = request.data
             if self.check_servidor_exists(requisicao):
                 return Response(
-                    {"detail": mensagens.MSG4},
-                    status=status.HTTP_409_CONFLICT,
+                    {"detail": mensagens.MSG4}, status=status.HTTP_409_CONFLICT
                 )
             if (
                 requisicao.get("naturalidade") and requisicao.get("estado")
@@ -74,8 +73,7 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             requisicao = request.data
             if self.check_servidor_exists(requisicao):
                 return Response(
-                    {"detail": mensagens.MSG4},
-                    status=status.HTTP_409_CONFLICT,
+                    {"detail": mensagens.MSG4}, status=status.HTTP_409_CONFLICT
                 )
             if (
                 requisicao.get("naturalidade") and requisicao.get("estado")
@@ -125,7 +123,11 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         parametros_busca = self.request.query_params
 
         busca = trata_campo(parametros_busca.get("search"))
-        exclude_id = parametros_busca.get("exclude_ids").split(',') if parametros_busca.get("exclude_ids") else None
+        exclude_id = (
+            parametros_busca.get("exclude_ids").split(",")
+            if parametros_busca.get("exclude_ids")
+            else None
+        )
         ativo = trata_campo_ativo(parametros_busca.get("ativo"))
 
         queryset_servidor = Servidor.objects.none()
@@ -143,7 +145,9 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             servidor_list.append(trata_campo(query.nome_mae))
             servidor_list.append(trata_campo(query.motivo_desligamento))
             servidor_list.append(formata_data(trata_campo(query.data_admissao)))
-            servidor_list.append(trata_campo(query.email_pessoal) if query.email_pessoal else "")
+            servidor_list.append(
+                trata_campo(query.email_pessoal) if query.email_pessoal else ""
+            )
 
             servidor_list.append(
                 trata_campo(query.orgao_expedidor.nome) if query.orgao_expedidor else ""
@@ -153,7 +157,9 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 if query.orgao_expedidor
                 else ""
             )
-            servidor_list.append(trata_campo(query.genero.descricao) if query.genero else "")
+            servidor_list.append(
+                trata_campo(query.genero.descricao) if query.genero else ""
+            )
             servidor_list.append(trata_campo(query.raca.nome) if query.raca else "")
             servidor_list.append(
                 trata_campo(query.estado_civil.nome) if query.estado_civil else ""
@@ -170,19 +176,25 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 if query.orientacao_sexual
                 else ""
             )
-            servidor_list.append(trata_campo(query.religiao.nome) if query.religiao else "")
-            servidor_list.extend([
-                trata_campo(necessidade.nome)
-                for necessidade in query.necessidade_especial.all()
-            ])
-            
+            servidor_list.append(
+                trata_campo(query.religiao.nome) if query.religiao else ""
+            )
+            servidor_list.extend(
+                [
+                    trata_campo(necessidade.nome)
+                    for necessidade in query.necessidade_especial.all()
+                ]
+            )
+
             servidor_list.append(
                 trata_campo(query.email_profissional)
                 if query.email_profissional
                 else ""
             )
             servidor_list.append(
-                formata_data(trata_campo(query.data_desligamento)) if query.data_desligamento else ""
+                formata_data(trata_campo(query.data_desligamento))
+                if query.data_desligamento
+                else ""
             )
             servidor_list.append(trata_campo(query.lotacao.nome))
             servidor_list.append(
@@ -191,13 +203,13 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 else ""
             )
             servidor_list.append(trata_campo(query.cargos.cargo))
-            servidor_list.extend([
-                trata_campo(funcao.descricao) for funcao in query.funcao.all()
-            ])
+            servidor_list.extend(
+                [trata_campo(funcao.descricao) for funcao in query.funcao.all()]
+            )
 
-            servidor_list.extend([
-                    trata_campo(pais.nome) for pais in query.nacionalidade.all()
-                ])
+            servidor_list.extend(
+                [trata_campo(pais.nome) for pais in query.nacionalidade.all()]
+            )
 
             for endereco in query.enderecos.all():
                 servidor_list.append(trata_campo(endereco.logradouro))
@@ -208,7 +220,9 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 servidor_list.append(trata_campo(endereco.estado.sigla))
                 servidor_list.append(trata_campo(endereco.observacao))
                 servidor_list.append(trata_campo(endereco.complemento))
-                servidor_list2.append(trata_campo(endereco.cep.replace("-", "").replace(".", "")))
+                servidor_list2.append(
+                    trata_campo(endereco.cep.replace("-", "").replace(".", ""))
+                )
                 servidor_list.append(trata_campo(endereco.andar))
                 servidor_list.append(trata_campo(endereco.sala))
 
@@ -216,7 +230,7 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 servidor_list.append(trata_campo(telefone.tipo))
                 servidor_list2.append(trata_campo(telefone.numero))
                 servidor_list.append(trata_campo(telefone.observacao))
-            
+
             for telefone in query.telefones_funcionais.all():
                 servidor_list.append(trata_campo(telefone.tipo))
                 servidor_list2.append(trata_campo(telefone.numero))
@@ -243,7 +257,7 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                     if trata_telefone(busca) in item:
                         qs = Servidor.objects.filter(pk=query.pk)
                         break
-                    
+
             if queryset_servidor:
                 queryset_servidor = qs
                 queryset = queryset_servidor
@@ -292,7 +306,9 @@ class ServidorViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         if has_key("documentos", requisicao):
             kwargs["documentos"] = get_ids(requisicao.get("documentos"))
         if has_key("telefones_funcionais", requisicao):
-            kwargs["telefones_funcionais"] = get_ids(requisicao.get("telefones_funcionais"))
+            kwargs["telefones_funcionais"] = get_ids(
+                requisicao.get("telefones_funcionais")
+            )
         kwargs["situacao"] = self.check_cadastro(self.update_dict(requisicao))
         kwargs["usuario_edicao"] = user.get_user(self)
         kwargs.update(self.check_motivo_desligamento(requisicao))

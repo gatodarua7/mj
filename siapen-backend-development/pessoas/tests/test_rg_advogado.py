@@ -20,27 +20,30 @@ class TestRgAdvogadoEndpoint(SiapenTestCase):
         "fixtures/social/estado_civil.json",
         "fixtures/social/grau_instrucao.json",
         "fixtures/social/orientacao_sexual.json",
-        "fixtures/social/religiao.json"
-
+        "fixtures/social/religiao.json",
     ]
+
     def setUp(self) -> None:
         self.entidade = "RgAdvogado"
         self.url = f"/api/pessoas/rg-advogado/"
         self.data = {
             "numero": "3610441",
             "orgao_expedidor": "96637461-43cb-4d55-893b-c09fe514ebf7",
-            "advogado": "29a09f2d-e1dd-43fa-9b3f-6f722c20b8c9"
-
+            "advogado": "29a09f2d-e1dd-43fa-9b3f-6f722c20b8c9",
         }
         super(TestRgAdvogadoEndpoint, self).setUp()
 
-   
     def test_a_create(self):
         """
         Criação de objeto válido.
         """
         data = self.data
-        resp = requests.post(self.base_url+self.url, data=json.dumps(data), proxies=self.proxies, headers=self.headers)
+        resp = requests.post(
+            self.base_url + self.url,
+            data=json.dumps(data),
+            proxies=self.proxies,
+            headers=self.headers,
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -104,7 +107,9 @@ class TestRgAdvogadoEndpoint(SiapenTestCase):
         """
 
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'

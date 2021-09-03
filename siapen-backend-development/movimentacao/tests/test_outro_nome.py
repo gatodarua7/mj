@@ -21,7 +21,7 @@ class TestOutroNomeEndpoint(SiapenTestCase):
         "fixtures/social/estado_civil.json",
         "fixtures/social/grau_instrucao.json",
         "fixtures/social/orientacao_sexual.json",
-        "fixtures/social/religiao.json"
+        "fixtures/social/religiao.json",
     ]
 
     def setUp(self) -> None:
@@ -29,17 +29,18 @@ class TestOutroNomeEndpoint(SiapenTestCase):
         self.url = f"/api/movimentacao/outro-nome/"
         self.data = {
             "pedido_inclusao": "0afdff24-e1d5-401b-a4f3-639fb3236c0e",
-            "nome": "Outro nome 1"
+            "nome": "Outro nome 1",
         }
         super(TestOutroNomeEndpoint, self).setUp()
 
-   
     def test_a_create(self):
         """
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -48,8 +49,10 @@ class TestOutroNomeEndpoint(SiapenTestCase):
         Criação de objeto inválido.
         """
         data = self.data
-        data['pedido_inclusao'] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        data["pedido_inclusao"] = None
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -58,11 +61,12 @@ class TestOutroNomeEndpoint(SiapenTestCase):
         Criação de objeto inválido.
         """
         data = self.data
-        data['nome'] = ''
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        data["nome"] = ""
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
-
 
     def test_c_list(self):
         """
@@ -80,7 +84,9 @@ class TestOutroNomeEndpoint(SiapenTestCase):
         data = self.data
         data["pedido_inclusao"] = "0afdff24-e1d5-401b-a4f3-639fb3236c0e"
         data["nome"] = "Outro nome 2"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -97,7 +103,9 @@ class TestOutroNomeEndpoint(SiapenTestCase):
         data = self.data
         data["pedido_inclusao"] = "0afdff24-e1d5-401b-a4f3-639fb3236c0e"
         data["nome"] = "Atualização de Outro nome"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "Outro nome 3"

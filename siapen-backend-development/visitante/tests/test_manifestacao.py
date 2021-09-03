@@ -36,9 +36,9 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         self.entidade = "Manifestacao"
         self.url = f"/api/visitante/manifestacao/"
         self.data = {
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92", 
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
             "parecer": "Teste",
-            "documentos_list":  [{"id":"07f4e25a-95c2-4c62-9c44-017f1be0696a"}]
+            "documentos_list": [{"id": "07f4e25a-95c2-4c62-9c44-017f1be0696a"}],
         }
         super(TestManifestacaoEndpoint, self).setUp()
 
@@ -46,8 +46,10 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         """
         Criação de objeto válido.
         """
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -56,24 +58,28 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         Criação de objeto sem documento.
         """
         data = {
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92", 
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
             "parecer": "Teste",
-            "documentos_list":  []
+            "documentos_list": [],
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertTrue(status.is_success(resp.status_code))
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_c_create(self):
         """
         Criação de objeto invalido (sem campos obrigatorios).
         """
         data = {
-            "visitante": None, 
+            "visitante": None,
             "parecer": "",
-            "documentos_list":  [{"id":"07f4e25a-95c2-4c62-9c44-017f1be0696a"}]
-        }  
-        resp = self.client.post(self.url,data=json.dumps(data), content_type='application/json')
+            "documentos_list": [{"id": "07f4e25a-95c2-4c62-9c44-017f1be0696a"}],
+        }
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -90,23 +96,27 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         List de com acento
         """
 
-        url = f'{self.url}?search=téste'
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        url = f"{self.url}?search=téste"
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.get(url)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=teste'
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        url = f"{self.url}?search=teste"
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -118,9 +128,11 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        url = f"{self.url}?ativo=true"
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -132,9 +144,11 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        url = f"{self.url}?ativo=false"
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -146,9 +160,11 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=101_RECEITAS'
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        url = f"{self.url}?ativo=101_RECEITAS"
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -161,11 +177,13 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         Atualizando objeto excluído.
         """
         data = {
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92", 
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
             "parecer": "Teste Edição",
-            "documentos_list":  [{"id":"07f4e25a-95c2-4c62-9c44-017f1be0696a"}]
-        }  
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+            "documentos_list": [{"id": "07f4e25a-95c2-4c62-9c44-017f1be0696a"}],
+        }
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -179,21 +197,22 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         Atualizando dados do objeto com outro usuario
         """
         data = {
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92", 
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
             "parecer": "Teste Edição",
-            "documentos_list":  [{"id":"07f4e25a-95c2-4c62-9c44-017f1be0696a"}],
-            "usuario_cadastro": 1
-        } 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+            "documentos_list": [{"id": "07f4e25a-95c2-4c62-9c44-017f1be0696a"}],
+            "usuario_cadastro": 1,
+        }
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
-            resp_json["parecer"] = "Teste edição outro usuario" 
-            resp_json["usuario_cadastro"] = 2 
+            resp_json["parecer"] = "Teste edição outro usuario"
+            resp_json["usuario_cadastro"] = 2
             resp = self.client.patch(url, data=resp_json)
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="update")
-
 
     def test_a_delete(self):
         """
@@ -203,5 +222,3 @@ class TestManifestacaoEndpoint(SiapenTestCase):
         resp = self.client.delete(url)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="delete")
-
-    

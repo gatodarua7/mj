@@ -25,23 +25,30 @@ from imagehelpers.image import (
 )
 
 
-PLAIN_FASES = {'ANALISE_DIRETORIA': ['ASSISTENCIA_SOCIAL', 'ANALISE_INTELIGENCIA',
-                                            'DEFERIDO', 'INDEFERIDO'],
-                'ANALISE_INTELIGENCIA':['ANALISE_DIRETORIA', 'ASSISTENCIA_SOCIAL'],
-                'ASSISTENCIA_SOCIAL': ['ANALISE_DIRETORIA', 'ANALISE_INTELIGENCIA'],
-                'DEFERIDO': [],
-                'INDEFERIDO': ['RECURSO'],
-                'INICIADO': ['ANALISE_DIRETORIA', 'ANALISE_INTELIGENCIA'],
-                'RECURSO': ['RECURSO_EM_ANALISE'],
-                'RECURSO_EM_ANALISE': ['RECURSO_DEFERIDO', 'RECURSO_INDEFERIDO'],
-                'RECURSO_DEFERIDO': [],
-                'RECURSO_INDEFERIDO': []
-                }
+PLAIN_FASES = {
+    "ANALISE_DIRETORIA": [
+        "ASSISTENCIA_SOCIAL",
+        "ANALISE_INTELIGENCIA",
+        "DEFERIDO",
+        "INDEFERIDO",
+    ],
+    "ANALISE_INTELIGENCIA": ["ANALISE_DIRETORIA", "ASSISTENCIA_SOCIAL"],
+    "ASSISTENCIA_SOCIAL": ["ANALISE_DIRETORIA", "ANALISE_INTELIGENCIA"],
+    "DEFERIDO": [],
+    "INDEFERIDO": ["RECURSO"],
+    "INICIADO": ["ANALISE_DIRETORIA", "ANALISE_INTELIGENCIA"],
+    "RECURSO": ["RECURSO_EM_ANALISE"],
+    "RECURSO_EM_ANALISE": ["RECURSO_DEFERIDO", "RECURSO_INDEFERIDO"],
+    "RECURSO_DEFERIDO": [],
+    "RECURSO_INDEFERIDO": [],
+}
 
-FASES_INFOR_SOLICITANTE = ['RECURSO_DEFERIDO', 
-                            'RECURSO_INDEFERIDO',
-                            'DEFERIDO', 
-                            'INDEFERIDO']
+FASES_INFOR_SOLICITANTE = [
+    "RECURSO_DEFERIDO",
+    "RECURSO_INDEFERIDO",
+    "DEFERIDO",
+    "INDEFERIDO",
+]
 
 
 class Situacao(models.TextChoices):
@@ -73,7 +80,6 @@ class DocumentosVisitante(BaseModel):
         temp = str(self.arquivo_temp)
         DOCUMENTO = os.path.join(MEDIA_ROOT, temp)
         name = temp.replace("documentos/", "").replace("documentos_visitante/", "")
-        
 
         if os.path.isfile(DOCUMENTO):
             if DOCUMENTO.split(".")[-1].lower() != "pdf":
@@ -82,8 +88,9 @@ class DocumentosVisitante(BaseModel):
                 self.encode_pdf(DOCUMENTO)
             os.remove(DOCUMENTO)
 
-        DocumentosVisitante.objects.filter(id=self.id).update(arquivo=self.arquivo, filename=name)
-
+        DocumentosVisitante.objects.filter(id=self.id).update(
+            arquivo=self.arquivo, filename=name
+        )
 
     def encode_pdf(self, documento_local):
         import base64
@@ -101,13 +108,13 @@ class DocumentosVisitante(BaseModel):
         barquivo = image_to_bytes(arquivo, format_file)
         arquivo = image_to_b64(barquivo, mime)
         self.arquivo = self.crypt.encrypt(arquivo)
-        
+
 
 class VisitanteRecurso(BaseModel):
     data_recurso = models.DateField()
     observacao = models.TextField(blank=True, null=True)
     documentos = models.ManyToManyField(DocumentosVisitante, blank=True)
-    
+
 
 class Visitante(BaseModel, DadosPessoais):
     class Atendimento(models.TextChoices):
@@ -117,20 +124,22 @@ class Visitante(BaseModel, DadosPessoais):
     data_nascimento = models.DateField()
     mae_falecido = models.BooleanField(default=False, null=True, blank=True)
     mae_nao_declarado = models.BooleanField(default=False, null=True, blank=True)
-    pai_falecido = models.BooleanField(default=False,null=True, blank=True)
-    pai_nao_declarado = models.BooleanField(default=False,null=True, blank=True)
+    pai_falecido = models.BooleanField(default=False, null=True, blank=True)
+    pai_nao_declarado = models.BooleanField(default=False, null=True, blank=True)
     idade = models.IntegerField(null=True, blank=True)
     profissao = models.ForeignKey(
-        Profissao, on_delete=models.PROTECT, null=True, blank=True,
-        related_name="profissao_visitante_related"
+        Profissao,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="profissao_visitante_related",
     )
     numero_sei = models.CharField(
         max_length=20,
         validators=[
             RegexValidator(
-                regex=r"\d{5}\.\d{6}\/\d{4}\-\d{2}",
-                message="Nº SEI inválido",
-            ),
+                regex=r"\d{5}\.\d{6}\/\d{4}\-\d{2}", message="Nº SEI inválido"
+            )
         ],
     )
     foto = models.ForeignKey(
@@ -138,30 +147,40 @@ class Visitante(BaseModel, DadosPessoais):
         on_delete=models.PROTECT,
         related_name="foto%(app_label)s_%(class)s_related",
     )
-    atendimento = models.CharField(max_length=20, choices=Atendimento.choices, null=True, blank=True)
+    atendimento = models.CharField(
+        max_length=20, choices=Atendimento.choices, null=True, blank=True
+    )
     data_movimentacao = models.DateTimeField(auto_now_add=True)
     solicitante_informado = models.BooleanField(default=False)
-    enderecos = models.ManyToManyField(Endereco, blank=True,
-                                       related_name="endereco_visitante_related")
-    telefones = models.ManyToManyField(Telefone, blank=True,
-                                       related_name="telefone_visitante_related")
+    enderecos = models.ManyToManyField(
+        Endereco, blank=True, related_name="endereco_visitante_related"
+    )
+    telefones = models.ManyToManyField(
+        Telefone, blank=True, related_name="telefone_visitante_related"
+    )
     cpf = models.CharField(
         max_length=14,
         validators=[
             RegexValidator(
                 regex=r"[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}",
                 message="CPF inválido",
-            ),
+            )
         ],
-        null=True, blank=True
+        null=True,
+        blank=True,
     )
     documentos = models.ManyToManyField(Documentos, blank=True)
-    fase = models.CharField(max_length=25, choices=Situacao.choices, null=True, blank=True)
+    fase = models.CharField(
+        max_length=25, choices=Situacao.choices, null=True, blank=True
+    )
     data_validade = models.DateField(default=None, null=True, blank=True)
     situacao = models.BooleanField(default=False)
     recurso = models.ForeignKey(
-        VisitanteRecurso, on_delete=models.PROTECT, null=True, blank=True,
-        related_name="recurso_visitante_related"
+        VisitanteRecurso,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="recurso_visitante_related",
     )
 
     def __str__(self):
@@ -210,12 +229,28 @@ class RgVisitante(BaseModel):
 
 
 class Anuencia(BaseModel):
-    visitante = models.ForeignKey(Visitante, on_delete=models.PROTECT, related_name="visitante_related", blank=True, null=True)
-    interno =  models.ForeignKey(Interno, on_delete=models.PROTECT, related_name="interno_visitante_related")
+    visitante = models.ForeignKey(
+        Visitante,
+        on_delete=models.PROTECT,
+        related_name="visitante_related",
+        blank=True,
+        null=True,
+    )
+    interno = models.ForeignKey(
+        Interno, on_delete=models.PROTECT, related_name="interno_visitante_related"
+    )
     data_declaracao = models.DateField()
     observacao = models.CharField(max_length=500, blank=True, null=True)
-    tipo_vinculo = models.ForeignKey(TipoVinculo, on_delete=models.PROTECT, related_name="tipo_vinculo_anuencia_related")
-    documento = models.ForeignKey(DocumentosVisitante, on_delete=models.PROTECT, related_name="documento_visitante_related")
+    tipo_vinculo = models.ForeignKey(
+        TipoVinculo,
+        on_delete=models.PROTECT,
+        related_name="tipo_vinculo_anuencia_related",
+    )
+    documento = models.ForeignKey(
+        DocumentosVisitante,
+        on_delete=models.PROTECT,
+        related_name="documento_visitante_related",
+    )
 
     class Meta:
         verbose_name = u"Anuencia"
@@ -237,10 +272,13 @@ class VisitanteMovimentacao(models.Model):
     motivo = models.TextField(null=True, blank=True)
     data_contato = models.DateField(default=None, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    usuario_cadastro = models.ForeignKey(User, on_delete=models.PROTECT, 
-                                         related_name="usuario_movimentacao_visitante_related")
+    usuario_cadastro = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name="usuario_movimentacao_visitante_related",
+    )
 
-                                     
+
 class ManifestacaoDiretoria(BaseModel):
     visitante = models.ForeignKey(Visitante, on_delete=models.PROTECT)
     parecer = models.TextField()

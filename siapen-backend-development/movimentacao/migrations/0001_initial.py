@@ -11,67 +11,195 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('cadastros', '0001_initial'),
-        ('prisional', '0001_initial'),
-        ('localizacao', '0001_initial'),
+        ("cadastros", "0001_initial"),
+        ("prisional", "0001_initial"),
+        ("localizacao", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='StatusMovimentacao',
+            name="StatusMovimentacao",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('descricao', models.CharField(max_length=20)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("descricao", models.CharField(max_length=20)),
             ],
         ),
         migrations.CreateModel(
-            name='TipoMovimentacao',
+            name="TipoMovimentacao",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tipo', models.CharField(choices=[('ENTRADA', 'Entrada'), ('SAIDA', 'Saída'), ('INTERNA', 'Interna'), ('TRANSITO', 'Trânsito'), ('TRANSFERENCIA', 'Transferência')], max_length=13)),
-                ('descricao', models.CharField(max_length=120, unique=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "tipo",
+                    models.CharField(
+                        choices=[
+                            ("ENTRADA", "Entrada"),
+                            ("SAIDA", "Saída"),
+                            ("INTERNA", "Interna"),
+                            ("TRANSITO", "Trânsito"),
+                            ("TRANSFERENCIA", "Transferência"),
+                        ],
+                        max_length=13,
+                    ),
+                ),
+                ("descricao", models.CharField(max_length=120, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='MovimentacaoInterna',
+            name="MovimentacaoInterna",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('observacao', models.TextField(blank=True, null=True)),
-                ('data_cadastro', models.DateTimeField(auto_now_add=True)),
-                ('data_movimentacao', models.DateTimeField(blank=True, null=True)),
-                ('cela_destino', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='celadestino', to='prisional.cela')),
-                ('cela_origem', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='celaorigem', to='prisional.cela')),
-                ('interno', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='cadastros.pessoa')),
-                ('tipo_movimentacao', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='movimentacao.tipomovimentacao')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                ("observacao", models.TextField(blank=True, null=True)),
+                ("data_cadastro", models.DateTimeField(auto_now_add=True)),
+                ("data_movimentacao", models.DateTimeField(blank=True, null=True)),
+                (
+                    "cela_destino",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="celadestino",
+                        to="prisional.cela",
+                    ),
+                ),
+                (
+                    "cela_origem",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="celaorigem",
+                        to="prisional.cela",
+                    ),
+                ),
+                (
+                    "interno",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="cadastros.pessoa",
+                    ),
+                ),
+                (
+                    "tipo_movimentacao",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="movimentacao.tipomovimentacao",
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='MovimentacaoExterna',
+            name="MovimentacaoExterna",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('descricao', models.TextField(blank=True, null=True)),
-                ('data_cadastro', models.DateTimeField(auto_now_add=True)),
-                ('data_movimentacao', models.DateTimeField(blank=True, null=True)),
-                ('estado_destino', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='localizacao.estado')),
-                ('interno', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='cadastros.pessoa')),
-                ('status_movimentacao', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='movimentacao.statusmovimentacao')),
-                ('tipo_movimentacao', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='movimentacao.tipomovimentacao')),
-                ('unidade_destino', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='unidadedestino', to='prisional.unidade')),
-                ('unidade_origem', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='unidadeorigem', to='prisional.unidade')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                ("descricao", models.TextField(blank=True, null=True)),
+                ("data_cadastro", models.DateTimeField(auto_now_add=True)),
+                ("data_movimentacao", models.DateTimeField(blank=True, null=True)),
+                (
+                    "estado_destino",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="localizacao.estado",
+                    ),
+                ),
+                (
+                    "interno",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="cadastros.pessoa",
+                    ),
+                ),
+                (
+                    "status_movimentacao",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="movimentacao.statusmovimentacao",
+                    ),
+                ),
+                (
+                    "tipo_movimentacao",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="movimentacao.tipomovimentacao",
+                    ),
+                ),
+                (
+                    "unidade_destino",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="unidadedestino",
+                        to="prisional.unidade",
+                    ),
+                ),
+                (
+                    "unidade_origem",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="unidadeorigem",
+                        to="prisional.unidade",
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='DocumentoMovimentacaoExterna',
+            name="DocumentoMovimentacaoExterna",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('arquivo', models.FileField(upload_to=util.upload.diretorio_upload)),
-                ('data_cadastro', models.DateTimeField(auto_now_add=True)),
-                ('movimentacao', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='movimentacao.movimentacaoexterna')),
-                ('pessoa', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='cadastros.pessoa')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                ("arquivo", models.FileField(upload_to=util.upload.diretorio_upload)),
+                ("data_cadastro", models.DateTimeField(auto_now_add=True)),
+                (
+                    "movimentacao",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="movimentacao.movimentacaoexterna",
+                    ),
+                ),
+                (
+                    "pessoa",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="cadastros.pessoa",
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

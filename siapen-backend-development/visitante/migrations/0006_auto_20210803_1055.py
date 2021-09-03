@@ -11,36 +11,98 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('visitante', '0005_auto_20210802_1900'),
+        ("visitante", "0005_auto_20210802_1900"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='visitante',
-            name='data_movimentacao',
-            field=models.DateTimeField(auto_now_add=True, default=datetime.datetime(2021, 8, 3, 13, 55, 19, 325111, tzinfo=utc)),
+            model_name="visitante",
+            name="data_movimentacao",
+            field=models.DateTimeField(
+                auto_now_add=True,
+                default=datetime.datetime(2021, 8, 3, 13, 55, 19, 325111, tzinfo=utc),
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='visitante',
-            name='solicitante_informado',
+            model_name="visitante",
+            name="solicitante_informado",
             field=models.BooleanField(default=False),
         ),
         migrations.AlterField(
-            model_name='visitante',
-            name='situacao',
-            field=models.CharField(blank=True, choices=[('ANALISE_DIRETORIA', 'ANÁLISE DIRETORIA'), ('ANALISE_INTELIGENCIA', 'ANÁLISE DE INTELIGÊNCIA'), ('CGIN', 'ANÁLISE SOSIAL'), ('DEFERIDO', 'DEFERIDO'), ('INDEFERIDO', 'INDEFERIDO'), ('INICIADO', 'INICIADO'), ('RECURSO', 'RECURSO'), ('RECURSO_EM_ANALISE', 'RECURSO - ANÁLISE DIRETORIA'), ('RECURDO_DEFERIDO', 'RECURSO DEFERIDO'), ('RECURDO_INDEFERIDO', 'RECURSO INDEFERIDO'), ('SOLICITANTE_INFORMADO', 'Visitante informado')], max_length=25, null=True),
+            model_name="visitante",
+            name="situacao",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("ANALISE_DIRETORIA", "ANÁLISE DIRETORIA"),
+                    ("ANALISE_INTELIGENCIA", "ANÁLISE DE INTELIGÊNCIA"),
+                    ("CGIN", "ANÁLISE SOSIAL"),
+                    ("DEFERIDO", "DEFERIDO"),
+                    ("INDEFERIDO", "INDEFERIDO"),
+                    ("INICIADO", "INICIADO"),
+                    ("RECURSO", "RECURSO"),
+                    ("RECURSO_EM_ANALISE", "RECURSO - ANÁLISE DIRETORIA"),
+                    ("RECURDO_DEFERIDO", "RECURSO DEFERIDO"),
+                    ("RECURDO_INDEFERIDO", "RECURSO INDEFERIDO"),
+                    ("SOLICITANTE_INFORMADO", "Visitante informado"),
+                ],
+                max_length=25,
+                null=True,
+            ),
         ),
         migrations.CreateModel(
-            name='VisitanteMovimentacao',
+            name="VisitanteMovimentacao",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('situacao', models.CharField(choices=[('ANALISE_DIRETORIA', 'ANÁLISE DIRETORIA'), ('ANALISE_INTELIGENCIA', 'ANÁLISE DE INTELIGÊNCIA'), ('CGIN', 'ANÁLISE SOSIAL'), ('DEFERIDO', 'DEFERIDO'), ('INDEFERIDO', 'INDEFERIDO'), ('INICIADO', 'INICIADO'), ('RECURSO', 'RECURSO'), ('RECURSO_EM_ANALISE', 'RECURSO - ANÁLISE DIRETORIA'), ('RECURDO_DEFERIDO', 'RECURSO DEFERIDO'), ('RECURDO_INDEFERIDO', 'RECURSO INDEFERIDO'), ('SOLICITANTE_INFORMADO', 'Visitante informado')], max_length=25)),
-                ('motivo', models.TextField(blank=True, null=True)),
-                ('data_contato', models.DateTimeField(blank=True, default=None, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='usuario_movimentacao_visitante_related', to=settings.AUTH_USER_MODEL)),
-                ('visitante', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='visitante.visitante')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "situacao",
+                    models.CharField(
+                        choices=[
+                            ("ANALISE_DIRETORIA", "ANÁLISE DIRETORIA"),
+                            ("ANALISE_INTELIGENCIA", "ANÁLISE DE INTELIGÊNCIA"),
+                            ("CGIN", "ANÁLISE SOSIAL"),
+                            ("DEFERIDO", "DEFERIDO"),
+                            ("INDEFERIDO", "INDEFERIDO"),
+                            ("INICIADO", "INICIADO"),
+                            ("RECURSO", "RECURSO"),
+                            ("RECURSO_EM_ANALISE", "RECURSO - ANÁLISE DIRETORIA"),
+                            ("RECURDO_DEFERIDO", "RECURSO DEFERIDO"),
+                            ("RECURDO_INDEFERIDO", "RECURSO INDEFERIDO"),
+                            ("SOLICITANTE_INFORMADO", "Visitante informado"),
+                        ],
+                        max_length=25,
+                    ),
+                ),
+                ("motivo", models.TextField(blank=True, null=True)),
+                (
+                    "data_contato",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="usuario_movimentacao_visitante_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "visitante",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="visitante.visitante",
+                    ),
+                ),
             ],
         ),
     ]

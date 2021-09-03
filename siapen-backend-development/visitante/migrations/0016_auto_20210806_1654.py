@@ -10,43 +10,125 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('visitante', '0015_merge_20210805_1118'),
+        ("visitante", "0015_merge_20210805_1118"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='visitante',
-            name='fase',
-            field=models.CharField(blank=True, choices=[('ANALISE_DIRETORIA', 'Análise da Diretoria'), ('ANALISE_INTELIGENCIA', 'Análise da Inteligência'), ('ASSISTENCIA_SOCIAL', 'Assistência Social'), ('DEFERIDO', 'Deferido'), ('INDEFERIDO', 'Indeferido'), ('INICIADO', 'Iniciado'), ('RECURSO', 'Recurso'), ('RECURSO_EM_ANALISE', 'Recurso - Análise da Diretoria'), ('RECURSO_DEFERIDO', 'Recurso Deferido'), ('RECURSO_INDEFERIDO', 'Recurso Indeferido'), ('SOLICITANTE_INFORMADO', 'Solicitante Informado')], max_length=25, null=True),
+            model_name="visitante",
+            name="fase",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("ANALISE_DIRETORIA", "Análise da Diretoria"),
+                    ("ANALISE_INTELIGENCIA", "Análise da Inteligência"),
+                    ("ASSISTENCIA_SOCIAL", "Assistência Social"),
+                    ("DEFERIDO", "Deferido"),
+                    ("INDEFERIDO", "Indeferido"),
+                    ("INICIADO", "Iniciado"),
+                    ("RECURSO", "Recurso"),
+                    ("RECURSO_EM_ANALISE", "Recurso - Análise da Diretoria"),
+                    ("RECURSO_DEFERIDO", "Recurso Deferido"),
+                    ("RECURSO_INDEFERIDO", "Recurso Indeferido"),
+                    ("SOLICITANTE_INFORMADO", "Solicitante Informado"),
+                ],
+                max_length=25,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='visitantemovimentacao',
-            name='fase',
-            field=models.CharField(choices=[('ANALISE_DIRETORIA', 'Análise da Diretoria'), ('ANALISE_INTELIGENCIA', 'Análise da Inteligência'), ('ASSISTENCIA_SOCIAL', 'Assistência Social'), ('DEFERIDO', 'Deferido'), ('INDEFERIDO', 'Indeferido'), ('INICIADO', 'Iniciado'), ('RECURSO', 'Recurso'), ('RECURSO_EM_ANALISE', 'Recurso - Análise da Diretoria'), ('RECURSO_DEFERIDO', 'Recurso Deferido'), ('RECURSO_INDEFERIDO', 'Recurso Indeferido'), ('SOLICITANTE_INFORMADO', 'Solicitante Informado')], max_length=25),
+            model_name="visitantemovimentacao",
+            name="fase",
+            field=models.CharField(
+                choices=[
+                    ("ANALISE_DIRETORIA", "Análise da Diretoria"),
+                    ("ANALISE_INTELIGENCIA", "Análise da Inteligência"),
+                    ("ASSISTENCIA_SOCIAL", "Assistência Social"),
+                    ("DEFERIDO", "Deferido"),
+                    ("INDEFERIDO", "Indeferido"),
+                    ("INICIADO", "Iniciado"),
+                    ("RECURSO", "Recurso"),
+                    ("RECURSO_EM_ANALISE", "Recurso - Análise da Diretoria"),
+                    ("RECURSO_DEFERIDO", "Recurso Deferido"),
+                    ("RECURSO_INDEFERIDO", "Recurso Indeferido"),
+                    ("SOLICITANTE_INFORMADO", "Solicitante Informado"),
+                ],
+                max_length=25,
+            ),
         ),
         migrations.CreateModel(
-            name='VisitanteRecurso',
+            name="VisitanteRecurso",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('ativo', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('delete_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('excluido', models.BooleanField(default=False)),
-                ('data_recurso', models.DateField()),
-                ('observacao', models.TextField(blank=True, null=True)),
-                ('documentos', models.ManyToManyField(blank=True, to='visitante.DocumentosVisitante')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('usuario_edicao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='updatedvisitante_visitanterecurso_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_exclusao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='deletevisitante_visitanterecurso_related', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("ativo", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "updated_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "delete_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("excluido", models.BooleanField(default=False)),
+                ("data_recurso", models.DateField()),
+                ("observacao", models.TextField(blank=True, null=True)),
+                (
+                    "documentos",
+                    models.ManyToManyField(
+                        blank=True, to="visitante.DocumentosVisitante"
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_edicao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="updatedvisitante_visitanterecurso_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_exclusao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="deletevisitante_visitanterecurso_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False},
         ),
         migrations.AddField(
-            model_name='visitante',
-            name='recurso',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='recurso_visitante_related', to='visitante.visitanterecurso'),
+            model_name="visitante",
+            name="recurso",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name="recurso_visitante_related",
+                to="visitante.visitanterecurso",
+            ),
         ),
     ]

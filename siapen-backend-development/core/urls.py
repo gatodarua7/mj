@@ -4,4 +4,4 @@ from .views import LogViewSet
 
 router = routers.DefaultRouter()
 
-router.register(r'auditoria', LogViewSet)
+router.register(r"auditoria", LogViewSet)

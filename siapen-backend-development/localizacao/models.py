@@ -15,7 +15,7 @@ class Estado(models.Model):
     sigla = models.CharField(max_length=3)
 
     class Meta:
-        unique_together = ['pais', 'nome']
+        unique_together = ["pais", "nome"]
 
     def __str__(self):
         return self.nome
@@ -26,8 +26,7 @@ class Cidade(models.Model):
     nome = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = ['estado', 'nome']
+        unique_together = ["estado", "nome"]
 
     def __str__(self):
-        return self.nome + ' / ' + self.estado.sigla
-
+        return self.nome + " / " + self.estado.sigla

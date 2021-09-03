@@ -9,31 +9,91 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('prisional', '0001_initial'),
+        ("prisional", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('movimentacao', '0005_fasespedido_cgin'),
+        ("movimentacao", "0005_fasespedido_cgin"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AnalisePedido',
+            name="AnalisePedido",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False, unique=True)),
-                ('ativo', models.BooleanField(default=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('delete_at', models.DateTimeField(blank=True, default=None, null=True)),
-                ('excluido', models.BooleanField(default=False)),
-                ('posicionamento', models.CharField(choices=[('FAVORAVEL', 'Favorável'), ('DESFAVORAVEL', 'Desfavorável')], max_length=20)),
-                ('parecer', models.TextField(max_length=8192)),
-                ('pedido_inclusao', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='movimentacao.pedidoinclusao')),
-                ('penitenciaria', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='prisional.unidade')),
-                ('usuario_cadastro', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
-                ('usuario_edicao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='updatedmovimentacao_analisepedido_related', to=settings.AUTH_USER_MODEL)),
-                ('usuario_exclusao', models.ForeignKey(blank=True, default=None, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='deletemovimentacao_analisepedido_related', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
+                    ),
+                ),
+                ("ativo", models.BooleanField(default=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "updated_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                (
+                    "delete_at",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("excluido", models.BooleanField(default=False)),
+                (
+                    "posicionamento",
+                    models.CharField(
+                        choices=[
+                            ("FAVORAVEL", "Favorável"),
+                            ("DESFAVORAVEL", "Desfavorável"),
+                        ],
+                        max_length=20,
+                    ),
+                ),
+                ("parecer", models.TextField(max_length=8192)),
+                (
+                    "pedido_inclusao",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="movimentacao.pedidoinclusao",
+                    ),
+                ),
+                (
+                    "penitenciaria",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="prisional.unidade",
+                    ),
+                ),
+                (
+                    "usuario_cadastro",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_edicao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="updatedmovimentacao_analisepedido_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "usuario_exclusao",
+                    models.ForeignKey(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name="deletemovimentacao_analisepedido_related",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
-        ),
+            options={"abstract": False},
+        )
     ]

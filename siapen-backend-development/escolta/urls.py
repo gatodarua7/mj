@@ -5,4 +5,4 @@ from escolta.views import EscoltasViewSet
 
 router = routers.DefaultRouter()
 
-router.register(r'escoltas', EscoltasViewSet)
+router.register(r"escoltas", EscoltasViewSet)

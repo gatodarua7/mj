@@ -6,10 +6,7 @@ class TestRegimePrisionalEndpoint(SiapenTestCase):
     def setUp(self) -> None:
         self.entidade = "REGIME_PRISIONAL"
         self.url = f"/api/cadastros/regime-prisional/"
-        self.data = {
-            "nome": "Prisional",
-            "ativo": True,
-        }
+        self.data = {"nome": "Prisional", "ativo": True}
         super(TestRegimePrisionalEndpoint, self).setUp()
 
     def test_a_create(self):

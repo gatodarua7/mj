@@ -5,56 +5,20 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('vinculos', '0002_remove_vinculo_vinculo'),
-    ]
+    dependencies = [("vinculos", "0002_remove_vinculo_vinculo")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='suspencaovinculo',
-            name='motivo',
-        ),
-        migrations.RemoveField(
-            model_name='suspencaovinculo',
-            name='vinculo',
-        ),
-        migrations.RemoveField(
-            model_name='vinculo',
-            name='TipoVinculo',
-        ),
-        migrations.RemoveField(
-            model_name='vinculo',
-            name='interno',
-        ),
-        migrations.RemoveField(
-            model_name='vinculo',
-            name='pessoa',
-        ),
-        migrations.RemoveField(
-            model_name='visitacao',
-            name='bloco',
-        ),
-        migrations.RemoveField(
-            model_name='visitacao',
-            name='tipo',
-        ),
-        migrations.RemoveField(
-            model_name='visitacao',
-            name='vinculo',
-        ),
-        migrations.DeleteModel(
-            name='MotivoSuspencaoVinculo',
-        ),
-        migrations.DeleteModel(
-            name='SuspencaoVinculo',
-        ),
-        migrations.DeleteModel(
-            name='TipoVisitacao',
-        ),
-        migrations.DeleteModel(
-            name='Vinculo',
-        ),
-        migrations.DeleteModel(
-            name='Visitacao',
-        ),
+        migrations.RemoveField(model_name="suspencaovinculo", name="motivo"),
+        migrations.RemoveField(model_name="suspencaovinculo", name="vinculo"),
+        migrations.RemoveField(model_name="vinculo", name="TipoVinculo"),
+        migrations.RemoveField(model_name="vinculo", name="interno"),
+        migrations.RemoveField(model_name="vinculo", name="pessoa"),
+        migrations.RemoveField(model_name="visitacao", name="bloco"),
+        migrations.RemoveField(model_name="visitacao", name="tipo"),
+        migrations.RemoveField(model_name="visitacao", name="vinculo"),
+        migrations.DeleteModel(name="MotivoSuspencaoVinculo"),
+        migrations.DeleteModel(name="SuspencaoVinculo"),
+        migrations.DeleteModel(name="TipoVisitacao"),
+        migrations.DeleteModel(name="Vinculo"),
+        migrations.DeleteModel(name="Visitacao"),
     ]

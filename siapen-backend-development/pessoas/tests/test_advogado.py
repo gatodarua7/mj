@@ -4,6 +4,7 @@ from rest_framework import status
 import json
 import requests
 
+
 class TestAdvogadoEndpoint(SiapenTestCase):
     fixtures = [
         "fixtures/usuarios/usuario.json",
@@ -38,17 +39,18 @@ class TestAdvogadoEndpoint(SiapenTestCase):
             "cpf": "94875968019",
             "necessidade_especial": ["b83cb47a-dbdb-49e4-9ef7-34fcec39443f"],
             "oabs": "",
-            "ativo": True
+            "ativo": True,
         }
         super(TestAdvogadoEndpoint, self).setUp()
 
-    
     def test_a_create(self):
         """
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -59,7 +61,7 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "JOSE"
         data["cpf"] = "94875968019"
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -71,7 +73,9 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         data["cpf"] = ""
         data["data_nascimento"] = ""
         data["nome"] = ""
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -81,7 +85,9 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["cpf"] = "11111111111"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -95,7 +101,9 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         data["nacionalidade"] = [33]
         data["estado"] = 28
         data["naturalidade"] = 12
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -112,16 +120,16 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         List de com acento
         """
 
-        url = f'{self.url}?search=Condominio'
+        url = f"{self.url}?search=Condominio"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=Jose'
+        url = f"{self.url}?search=Jose"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -130,7 +138,7 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -139,7 +147,7 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -150,13 +158,17 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["cpf"] = "14790844099"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             self.client.delete(url)
             url = f'{self.base_url+self.url}{resp_json["id"]}/'
-            resp = requests.put(url, data=json.dumps(data), proxies=self.proxies, headers=self.headers)
+            resp = requests.put(
+                url, data=json.dumps(data), proxies=self.proxies, headers=self.headers
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="update")
 
@@ -166,10 +178,10 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["cpf"] = "98925258099"
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            resp_json["nome"] = "JOSEFA" 
+            resp_json["nome"] = "JOSEFA"
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
@@ -183,7 +195,9 @@ class TestAdvogadoEndpoint(SiapenTestCase):
         data = self.data
         data["cpf"] = "05212487013"
         data["ativo"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -198,7 +212,9 @@ class TestAdvogadoEndpoint(SiapenTestCase):
 
         data = self.data
         data["cpf"] = "48020807004"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["cpf"] = "11111111111"

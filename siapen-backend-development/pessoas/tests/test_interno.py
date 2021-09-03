@@ -75,7 +75,9 @@ class TestInternoEndpoint(SiapenTestCase):
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
@@ -88,7 +90,9 @@ class TestInternoEndpoint(SiapenTestCase):
         data["nome"] = "JOSE"
         data["cpf"] = "93945356083"
         data["data_nascimento"] = "42/13/2001"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -100,7 +104,9 @@ class TestInternoEndpoint(SiapenTestCase):
         data["cpf"] = ""
         data["data_nascimento"] = ""
         data["nome"] = ""
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -112,7 +118,9 @@ class TestInternoEndpoint(SiapenTestCase):
         data["cpf"] = "93780825058"
         data["pai_falecido"] = True
         data["pai_nao_declarado"] = True
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -124,7 +132,9 @@ class TestInternoEndpoint(SiapenTestCase):
         data["cpf"] = "11932591001"
         data["mae_falecido"] = True
         data["mae_nao_declarado"] = True
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -134,7 +144,9 @@ class TestInternoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["cpf"] = "11111111111"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -148,7 +160,9 @@ class TestInternoEndpoint(SiapenTestCase):
         data["nacionalidade"] = [33]
         data["estado"] = 28
         data["naturalidade"] = 12
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -158,7 +172,7 @@ class TestInternoEndpoint(SiapenTestCase):
         """
         data = self.data
         data["cpf"] = "15797187019"
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -175,16 +189,16 @@ class TestInternoEndpoint(SiapenTestCase):
         List de com acento
         """
 
-        url = f'{self.url}?search=Condominio'
+        url = f"{self.url}?search=Condominio"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=Jose'
+        url = f"{self.url}?search=Jose"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -193,7 +207,7 @@ class TestInternoEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -202,7 +216,7 @@ class TestInternoEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -214,7 +228,9 @@ class TestInternoEndpoint(SiapenTestCase):
 
         data = self.data
         data["cpf"] = "76081278050"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -230,7 +246,7 @@ class TestInternoEndpoint(SiapenTestCase):
 
         data = self.data
         data["cpf"] = "98646233030"
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "Finha"
@@ -246,7 +262,7 @@ class TestInternoEndpoint(SiapenTestCase):
 
         data = self.data
         data["cpf"] = "62508348007"
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["cpf"] = "11111111111"
@@ -262,7 +278,7 @@ class TestInternoEndpoint(SiapenTestCase):
 
         data = self.data
         data["cpf"] = "45183106088"
-        resp = self.client.post(self.url, data=data, content_type='application/json')
+        resp = self.client.post(self.url, data=data, content_type="application/json")
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["data_nascimento"] = "21-09-2020"

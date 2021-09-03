@@ -7,13 +7,13 @@ from pessoas.interno.views import (
     OutroNomeViewSet,
     ContatosViewSet,
     SinaisParticularesViewSet,
-    RgViewSet
+    RgViewSet,
 )
 from pessoas.advogado.views import (
     AdvogadoViewSet,
     RgAdvogadoViewSet,
     EmailViewSet,
-    OABViewSet
+    OABViewSet,
 )
 
 

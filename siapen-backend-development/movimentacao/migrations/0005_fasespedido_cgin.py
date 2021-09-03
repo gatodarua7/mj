@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('movimentacao', '0004_auto_20210520_1042'),
-    ]
+    dependencies = [("movimentacao", "0004_auto_20210520_1042")]
 
     operations = [
         migrations.AddField(
-            model_name='fasespedido',
-            name='cgin',
+            model_name="fasespedido",
+            name="cgin",
             field=models.BooleanField(default=False),
-        ),
+        )
     ]

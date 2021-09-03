@@ -19,10 +19,7 @@ class TestDefeitoCelaEndpoint(SiapenTestCase):
     def setUp(self) -> None:
         self.entidade = "Defeito 1"
         self.url = f"/api/prisional/defeito/"
-        self.data = {
-            "descricao": "SISTEMA PENAL DE SERGIPANO",
-            "ativo": True,
-        }
+        self.data = {"descricao": "SISTEMA PENAL DE SERGIPANO", "ativo": True}
         super(TestDefeitoCelaEndpoint, self).setUp()
 
     def test_a_create(self):
@@ -30,7 +27,9 @@ class TestDefeitoCelaEndpoint(SiapenTestCase):
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -40,10 +39,11 @@ class TestDefeitoCelaEndpoint(SiapenTestCase):
         """
         data = self.data
         data["descricao"] = ""
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
-
 
     def test_a_list(self):
         """
@@ -57,19 +57,19 @@ class TestDefeitoCelaEndpoint(SiapenTestCase):
         """
         List de com acento
         """
-        url = f'{self.url}?search=DEFEITÓ'
+        url = f"{self.url}?search=DEFEITÓ"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp = self.client.get(url)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=defeito'
+        url = f"{self.url}?search=defeito"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -81,7 +81,7 @@ class TestDefeitoCelaEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -93,7 +93,7 @@ class TestDefeitoCelaEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -105,10 +105,7 @@ class TestDefeitoCelaEndpoint(SiapenTestCase):
         """
         Validando o processo de remoção de registro válido.
         """
-        data = {
-            "descricao": "Defeito 30",
-            "ativo": True,
-        }
+        data = {"descricao": "Defeito 30", "ativo": True}
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -117,15 +114,11 @@ class TestDefeitoCelaEndpoint(SiapenTestCase):
             self.assertEqual(resp.status_code, status.HTTP_200_OK)
             self.format_print(metodo="delete")
 
-
     def test_a_update(self):
         """
         Atualizando a descrição.
         """
-        data = {
-            "descricao": "Defeito 50",
-            "ativo": True,
-        }
+        data = {"descricao": "Defeito 50", "ativo": True}
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -139,10 +132,7 @@ class TestDefeitoCelaEndpoint(SiapenTestCase):
         """
         Atualizando a ativo.
         """
-        data = {
-            "descricao": "Defeito 70",
-            "ativo": True,
-        }
+        data = {"descricao": "Defeito 70", "ativo": True}
         resp = self.client.post(self.url, data=data)
 
         if status.is_success(resp.status_code):

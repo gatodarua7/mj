@@ -27,6 +27,7 @@ from imagehelpers.image import (
     image_to_b64,
 )
 
+
 class Genero(BaseModel):
     descricao = models.CharField(max_length=100)
 
@@ -114,7 +115,7 @@ class Pessoa(BaseModel):
             RegexValidator(
                 regex=r"[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}",
                 message="CPF inválido",
-            ),
+            )
         ],
     )
     rg = models.CharField(max_length=15, blank=True, null=True)
@@ -214,9 +215,7 @@ class Periculosidade(BaseModel):
 class Documentos(BaseModel):
     crypt = AESCipher()
     tipo = models.ForeignKey(
-        TipoDocumento,
-        on_delete=models.PROTECT,
-        related_name="tipo_documentos",
+        TipoDocumento, on_delete=models.PROTECT, related_name="tipo_documentos"
     )
     num_cod = models.CharField(max_length=30)
     observacao = models.CharField(max_length=100, blank=True, null=True, default="")
@@ -239,7 +238,6 @@ class Documentos(BaseModel):
             os.remove(DOCUMENTO)
 
         Documentos.objects.filter(id=self.id).update(arquivo=self.arquivo)
-        
 
     def encode_pdf(self, documento_local):
         import base64

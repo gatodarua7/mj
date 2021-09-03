@@ -196,7 +196,7 @@
         "excluido": false,
         "ativo": true
       }
-    },    
+    },
     {
       "pk": "51f35d8f-064f-4977-92b8-35a28d573ed1",
       "model": "vinculos.TipoVinculo",

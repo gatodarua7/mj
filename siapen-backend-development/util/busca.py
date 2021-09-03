@@ -101,5 +101,5 @@ def get_ids(list_dicts):
             list_ids.append(requisicao["id"])
     return list_ids
 
-def has_key(key, requisicao):  
+def has_key(key, requisicao):
     return key in requisicao

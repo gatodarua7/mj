@@ -19,7 +19,7 @@ class TestOutroNomeInternoEndpoint(SiapenTestCase):
         "fixtures/social/necessidade_especial.json",
         "fixtures/localizacao/paises.json",
         "fixtures/localizacao/municipios.json",
-        "fixtures/localizacao/estados.json"
+        "fixtures/localizacao/estados.json",
     ]
 
     def setUp(self) -> None:
@@ -27,7 +27,7 @@ class TestOutroNomeInternoEndpoint(SiapenTestCase):
         self.url = f"/api/pessoas/outro-nome/"
         self.data = {
             "interno": "1191484a-4ab1-4662-8c41-269fc1e66e23",
-            "nome": "Outro nome 1"
+            "nome": "Outro nome 1",
         }
         super(TestOutroNomeInternoEndpoint, self).setUp()
 
@@ -45,7 +45,7 @@ class TestOutroNomeInternoEndpoint(SiapenTestCase):
         Criação de objeto inválido.
         """
         data = self.data
-        data['interno'] = None
+        data["interno"] = None
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
@@ -55,11 +55,10 @@ class TestOutroNomeInternoEndpoint(SiapenTestCase):
         Criação de objeto inválido.
         """
         data = self.data
-        data['nome'] = ''
+        data["nome"] = ""
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
-
 
     def test_c_list(self):
         """

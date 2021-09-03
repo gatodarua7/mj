@@ -40,10 +40,18 @@ MSG_ESCOLTA = "É necessário preencher as informações de data/hora de início
 MSG_VOOS = "Para este tipo de aeronave selecionado é necessário cadastrar o(s) número(s) do(s) voo(s) comerciais."
 EMAIL_INVALIDO = "Email inválido"
 MSG_TAM_VOOS = "Nº do Vôo deve conter no máximo 20 caracteres."
-ERRO_MOVIMENTAR = "Esta manifestação só pode ser editada se estiver na fase ANÁLISE DE INTELIGÊNCIA."
-ERRO_EXCLUIR = "Esta manifestação só pode ser excluída se estiver na fase ANÁLISE DE INTELIGÊNCIA."
-ERRO_USUARIO_EDITAR = "A edição desta manifestação só pode ser feita pelo usuário que a criou."
-ERRO_USUARIO_EXCLUIR = "A exclusão desta manifestação só pode ser feita pelo usuário que a criou."
+ERRO_MOVIMENTAR = (
+    "Esta manifestação só pode ser editada se estiver na fase ANÁLISE DE INTELIGÊNCIA."
+)
+ERRO_EXCLUIR = (
+    "Esta manifestação só pode ser excluída se estiver na fase ANÁLISE DE INTELIGÊNCIA."
+)
+ERRO_USUARIO_EDITAR = (
+    "A edição desta manifestação só pode ser feita pelo usuário que a criou."
+)
+ERRO_USUARIO_EXCLUIR = (
+    "A exclusão desta manifestação só pode ser feita pelo usuário que a criou."
+)
 TIPO_PERMITIDO = "Apenas formatos png, jpeg, jpg e pdf são permitidos."
 TAM_PDF = "O arquivo informado deve ser menor que 15Mb."
 TAM_IMAGEM = "O arquivo informado deve ser menor que 1Mb."

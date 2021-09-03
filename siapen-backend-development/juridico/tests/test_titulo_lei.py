@@ -5,14 +5,10 @@ import requests
 
 
 class TestTituloLeiEndpoint(SiapenTestCase):
-
     def setUp(self) -> None:
         self.entidade = "TituloLei"
         self.url = f"/api/juridico/titulo/"
-        self.data = {
-            "nome": "Lei Áurea",
-            "norma_juridica": "LEI_COMPLEMENTAR",
-        }
+        self.data = {"nome": "Lei Áurea", "norma_juridica": "LEI_COMPLEMENTAR"}
         super(TestTituloLeiEndpoint, self).setUp()
 
     def test_a_create(self):
@@ -20,7 +16,9 @@ class TestTituloLeiEndpoint(SiapenTestCase):
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -31,7 +29,9 @@ class TestTituloLeiEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = None
         data["norma_juridica"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -42,7 +42,9 @@ class TestTituloLeiEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "teste"
         data["norma_juridica"] = "Norma 2"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -61,11 +63,15 @@ class TestTituloLeiEndpoint(SiapenTestCase):
 
         data = self.data
         data["nome"] = "Carta Magna"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="Update")
 
@@ -76,12 +82,16 @@ class TestTituloLeiEndpoint(SiapenTestCase):
 
         data = self.data
         data["nome"] = "Atualização de nome"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "Finha"
             url = f'{self.url}{resp_json["id"]}/'
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="Update")
 
@@ -93,11 +103,15 @@ class TestTituloLeiEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Lei inativada"
         data["ativo"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertEqual(resp.status_code, status.HTTP_200_OK)
             self.format_print(metodo="Update")
 
@@ -109,12 +123,16 @@ class TestTituloLeiEndpoint(SiapenTestCase):
         data = self.data
         data["norma_juridica"] = "DECRETO_LEGISLATIVO"
         data["nome"] = "DECRETO_LEGISLATIVO"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["norma_juridica"] = "Decreto Leg."
             url = f'{self.url}{resp_json["id"]}/'
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="Update")
 

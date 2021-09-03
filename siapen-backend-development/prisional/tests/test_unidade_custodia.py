@@ -20,10 +20,10 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         self.data = {
             "nome": "UNIDADE DE CUSTÓDIA DE BRASÍLIA",
             "sigla": "UCBSB",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 3956,
             "estado": 28,
-            "ativo": True
+            "ativo": True,
         }
         super(TestUnidadeCustodiaEndpoint, self).setUp()
 
@@ -32,7 +32,9 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -44,12 +46,14 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA 3",
             "sigla": "UCBSB3",
-            "sistema":"8f18cb04-439a-40ab-af1f-137481e353db",
+            "sistema": "8f18cb04-439a-40ab-af1f-137481e353db",
             "cidade": 3956,
-            "estado":28,
-            "ativo": True
+            "estado": 28,
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -60,12 +64,14 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA 4",
             "sigla": "UCBSB",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 3956,
-            "estado":28,
-            "ativo": True
+            "estado": 28,
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -76,12 +82,14 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA DE BRASÍLIA",
             "sigla": "UCBSBAR",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 756,
             "estado": 15,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -97,16 +105,16 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         """
         List de com acento
         """
-        url = f'{self.url}?search=CUSTÒDIA'
+        url = f"{self.url}?search=CUSTÒDIA"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=CUSTODIA'
+        url = f"{self.url}?search=CUSTODIA"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -115,7 +123,7 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -124,7 +132,7 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.get(url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -136,12 +144,14 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA DO DF",
             "sigla": "UCDF",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 3956,
             "estado": 28,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
@@ -165,19 +175,21 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA",
             "sigla": "XYZ",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 123,
             "estado": 14,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            resp_json["nome"] = "UNIDADE DE CUSTÓDIA ATUALIZADA" 
+            resp_json["nome"] = "UNIDADE DE CUSTÓDIA ATUALIZADA"
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_b_update(self):
         """
@@ -186,20 +198,22 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA",
             "sigla": "XYZ",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 123,
             "estado": 14,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            resp_json["sigla"] = "XPTO" 
+            resp_json["sigla"] = "XPTO"
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_c_update(self):
         """
@@ -208,20 +222,22 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA",
             "sigla": "XYZ",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 123,
             "estado": 14,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            resp_json["sistema"] = "87bdc2e5-4dbb-4405-9f5b-1a8f83830a0c" 
+            resp_json["sistema"] = "87bdc2e5-4dbb-4405-9f5b-1a8f83830a0c"
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_d_update(self):
         """
@@ -230,12 +246,14 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA",
             "sigla": "XYZ",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 123,
             "estado": 14,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -243,7 +261,7 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_e_update(self):
         """
@@ -252,12 +270,14 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA",
             "sigla": "XYZ",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 123,
             "estado": 14,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -265,7 +285,7 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_f_update(self):
         """
@@ -274,12 +294,14 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA",
             "sigla": "XYZ",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 123,
             "estado": 14,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -288,7 +310,7 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_g_update(self):
         """
@@ -297,19 +319,21 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA",
             "sigla": "XYZ",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 123,
             "estado": 14,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")
 
     def test_h_update(self):
         """
@@ -318,12 +342,14 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
         data = {
             "nome": "UNIDADE DE CUSTÓDIA",
             "sigla": "XYZ",
-            "sistema":"21796b1d-082d-43f3-804f-57c58d803087",
+            "sistema": "21796b1d-082d-43f3-804f-57c58d803087",
             "cidade": 123,
             "estado": 14,
-            "ativo": True
+            "ativo": True,
         }
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -331,4 +357,4 @@ class TestUnidadeCustodiaEndpoint(SiapenTestCase):
             resp_json["usuario_edicao"] = 2
             resp = self.client.patch(url, data=resp)
             self.assertTrue(status.is_success(resp.status_code))
-            self.format_print(metodo='Update')
+            self.format_print(metodo="Update")

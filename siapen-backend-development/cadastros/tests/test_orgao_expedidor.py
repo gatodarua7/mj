@@ -3,10 +3,7 @@ from rest_framework import status
 
 
 class TestOrgaoExpedidorEndpoint(SiapenTestCase):
-    fixtures = [
-        "fixtures/localizacao/paises.json",
-        "fixtures/localizacao/estados.json",
-    ]
+    fixtures = ["fixtures/localizacao/paises.json", "fixtures/localizacao/estados.json"]
 
     def setUp(self) -> None:
         self.entidade = "ORGAO_EXPEDIDOR"
@@ -102,7 +99,7 @@ class TestOrgaoExpedidorEndpoint(SiapenTestCase):
         resp = self.client.delete(url)
         self.assertEqual(resp.status_code, status.HTTP_404_NOT_FOUND)
         self.format_print(metodo="delete")
-    
+
     def test_h_update(self):
         """
         Atualizando objeto excluído.

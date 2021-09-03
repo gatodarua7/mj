@@ -22,26 +22,26 @@ class TestRgAdvogadoEndpoint(SiapenTestCase):
         "fixtures/social/orientacao_sexual.json",
         "fixtures/social/religiao.json",
         "fixtures/visitante/visitante.json",
-
     ]
+
     def setUp(self) -> None:
         self.entidade = "RgVisitante"
         self.url = f"/api/visitante/rg-visitante/"
         self.data = {
             "numero": "3610441",
             "orgao_expedidor": "96637461-43cb-4d55-893b-c09fe514ebf7",
-            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92"
-
+            "visitante": "2939da1f-552d-4997-b8de-3d956359ec92",
         }
         super(TestRgAdvogadoEndpoint, self).setUp()
 
-   
     def test_a_create(self):
         """
         Criação de objeto válido.
         """
-        data = self.data 
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        data = self.data
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -105,7 +105,9 @@ class TestRgAdvogadoEndpoint(SiapenTestCase):
         """
 
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'

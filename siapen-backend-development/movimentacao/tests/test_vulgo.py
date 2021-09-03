@@ -27,14 +27,14 @@ class TestVulgoEndpoint(SiapenTestCase):
 
         self.data = {
             "pedido_inclusao": "0afdff24-e1d5-401b-a4f3-639fb3236c0e",
-            "nome": self.obj_id
+            "nome": self.obj_id,
         }
         self.pedido = PedidoInclusao.objects.get(nome="JOSE MARIA DOS SANTOS")
         super(TestVulgoEndpoint, self).setUp()
 
     def test_a_create(self):
         vulgo = Vulgo.objects.get(id=self.obj_id)
-        self.assertTrue(isinstance(vulgo, Vulgo)) 
+        self.assertTrue(isinstance(vulgo, Vulgo))
 
     def test_c_list(self):
         """
@@ -70,7 +70,9 @@ class TestVulgoEndpoint(SiapenTestCase):
         """
         Deleta objeto
         """
-        vulgo = VulgosThroughModel.objects.filter(pedido_inclusao=self.pedido.id).delete()
+        vulgo = VulgosThroughModel.objects.filter(
+            pedido_inclusao=self.pedido.id
+        ).delete()
         self.assertEqual(len(vulgo) == 0, False)
         self.format_print(metodo="delete")
 
@@ -78,9 +80,8 @@ class TestVulgoEndpoint(SiapenTestCase):
         """
         Deleta objeto
         """
-        vulgo = VulgosThroughModel.objects.filter(pedido_inclusao=self.pedido.id).delete()
+        vulgo = VulgosThroughModel.objects.filter(
+            pedido_inclusao=self.pedido.id
+        ).delete()
         self.assertTrue(vulgo)
         self.format_print(metodo="delete")
-
-
-    

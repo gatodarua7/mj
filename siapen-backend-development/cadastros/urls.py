@@ -12,7 +12,7 @@ from cadastros.views import (
     PericulosidadeViewSet,
     DocumentosViewSet,
     SetorViewSet,
-    ComportamentoInternoViewSet
+    ComportamentoInternoViewSet,
 )
 
 router = routers.DefaultRouter()
@@ -30,4 +30,3 @@ router.register(r"regime-prisional", RegimePrisionalViewSet)
 router.register(r"periculosidade", PericulosidadeViewSet)
 router.register(r"documento", DocumentosViewSet)
 router.register(r"comportamento-interno", ComportamentoInternoViewSet)
-

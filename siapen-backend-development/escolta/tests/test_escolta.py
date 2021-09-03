@@ -26,7 +26,7 @@ class TestEscoltaEndpoint(SiapenTestCase):
         "fixtures/cadastro/cargo.json",
         "fixtures/cadastro/funcao.json",
         "fixtures/cadastro/setor.json",
-        "fixtures/social/raca.json"
+        "fixtures/social/raca.json",
     ]
 
     def setUp(self) -> None:
@@ -59,17 +59,30 @@ class TestEscoltaEndpoint(SiapenTestCase):
             "numero_escolta": "077/2021",
             "numero_sei": "54444.444444/4444-44",
             "ordem_missao": "TESTE",
-            "pedidos_inclusao": [{"tipo_inclusao": "EMERGENCIAL", "id": "0afdff24-e1d5-401b-a4f3-639fb3236c0e", "nome": "JOSE MARIA DOS SANTOS", "aguardando_escolta": True}],
+            "pedidos_inclusao": [
+                {
+                    "tipo_inclusao": "EMERGENCIAL",
+                    "id": "0afdff24-e1d5-401b-a4f3-639fb3236c0e",
+                    "nome": "JOSE MARIA DOS SANTOS",
+                    "aguardando_escolta": True,
+                }
+            ],
             "responsavel": "DEPEN",
-            "servidores_escolta_aerea": [{"id": "1191484a-4ab1-4662-8c41-269fc1e66e22", "nome": "JOSE MARIA", "cpf": "33245741022"}],
+            "servidores_escolta_aerea": [
+                {
+                    "id": "1191484a-4ab1-4662-8c41-269fc1e66e22",
+                    "nome": "JOSE MARIA",
+                    "cpf": "33245741022",
+                }
+            ],
             "servidores_escolta_terrestre": [],
             "status_aerea": "FINALIZADA",
             "status_terrestre": "FINALIZADA",
             "tipo_aeronave": "INSTITUCIONAL",
             "tipo_escolta": "INCLUSAO",
             "unidade_nome": ["UNIDADE DE CUSTÓDIA DE BRASÍLIA"],
-            "voos": []
-            }
+            "voos": [],
+        }
         super(TestEscoltaEndpoint, self).setUp()
 
     def test_a_create(self):
@@ -77,7 +90,9 @@ class TestEscoltaEndpoint(SiapenTestCase):
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
 
@@ -87,10 +102,11 @@ class TestEscoltaEndpoint(SiapenTestCase):
         """
         data = self.data
         data["pedidos_inclusao"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
-
 
     def test_c_create(self):
         """
@@ -99,10 +115,11 @@ class TestEscoltaEndpoint(SiapenTestCase):
         data = self.data
         data["pedidos_inclusao"] = "f4ff1afb-b510-44f0-b409-5a657c98004a"
         data["aguardando_escolta"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
-
 
     def test_d_list(self):
         """
@@ -111,7 +128,7 @@ class TestEscoltaEndpoint(SiapenTestCase):
         resp = self.client.get(self.url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
+
     def test_e_list(self):
         """
         List de objetos
@@ -119,7 +136,6 @@ class TestEscoltaEndpoint(SiapenTestCase):
         resp = self.client.get(self.url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
-    
 
     def test_a_delete(self):
         """
@@ -153,16 +169,29 @@ class TestEscoltaEndpoint(SiapenTestCase):
             "numero_escolta": "077/2021",
             "numero_sei": "54444.444444/4444-44",
             "ordem_missao": "TESTE",
-            "pedidos_inclusao": [{"tipo_inclusao": "EMERGENCIAL", "id": "0afdff24-e1d5-401b-a4f3-639fb3236c0e", "nome": "JOSE MARIA DOS SANTOS", "aguardando_escolta": True}],
+            "pedidos_inclusao": [
+                {
+                    "tipo_inclusao": "EMERGENCIAL",
+                    "id": "0afdff24-e1d5-401b-a4f3-639fb3236c0e",
+                    "nome": "JOSE MARIA DOS SANTOS",
+                    "aguardando_escolta": True,
+                }
+            ],
             "responsavel": "DEPEN",
-            "servidores_escolta_aerea": [{"id": "1191484a-4ab1-4662-8c41-269fc1e66e22", "nome": "JOSE MARIA", "cpf": "33245741022"}],
+            "servidores_escolta_aerea": [
+                {
+                    "id": "1191484a-4ab1-4662-8c41-269fc1e66e22",
+                    "nome": "JOSE MARIA",
+                    "cpf": "33245741022",
+                }
+            ],
             "servidores_escolta_terrestre": [],
             "status_aerea": "FINALIZADA",
             "status_terrestre": "FINALIZADA",
             "tipo_aeronave": "INSTITUCIONAL",
             "tipo_escolta": "INCLUSAO",
             "unidade_nome": ["UNIDADE DE CUSTÓDIA DE BRASÍLIA"],
-            "voos": []
+            "voos": [],
         }
         resp = self.client.post(self.url, data=data, format="json")
         if status.is_success(resp.status_code):

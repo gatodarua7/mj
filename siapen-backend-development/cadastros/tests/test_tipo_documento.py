@@ -25,7 +25,7 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         data = self.data
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_b_create(self):
         """
@@ -35,7 +35,7 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         self.client.post(self.url, data=self.data)
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_409_CONFLICT)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_d_create(self):
         """
@@ -45,7 +45,7 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         data["nome"] = ""
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_e_create(self):
         """
@@ -56,12 +56,12 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         data["ativo"] = False
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
-        self.format_print(metodo='create')
+        self.format_print(metodo="create")
 
     def test_a_list(self):
         """
         List de objetos
-        """        
+        """
         resp = self.client.get(self.url)
         self.assertTrue(status.is_success(resp.status_code))
         self.format_print(metodo="list")
@@ -71,19 +71,19 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         List de com acento
         """
 
-        url = f'{self.url}?search=CERTIDÃO'
+        url = f"{self.url}?search=CERTIDÃO"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp = self.client.get(url)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="list")
-    
+
     def test_c_list(self):
         """
         List de objetos sem acento
         """
-        url = f'{self.url}?search=CERTIDAO'
+        url = f"{self.url}?search=CERTIDAO"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -95,7 +95,7 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         """
         List de objetos ativos
         """
-        url = f'{self.url}?ativo=true'
+        url = f"{self.url}?ativo=true"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -107,7 +107,7 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         """
         List de objetos inativos
         """
-        url = f'{self.url}?ativo=false'
+        url = f"{self.url}?ativo=false"
         resp = self.client.post(self.url, data=self.data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
@@ -179,7 +179,7 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
-            resp_json["nome"] = "TESTANDO" 
+            resp_json["nome"] = "TESTANDO"
             resp = self.client.patch(url, data=resp_json)
             self.assertTrue(status.is_success(resp.status_code))
             self.format_print(metodo="update")
@@ -191,15 +191,18 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         data = self.data
         data["ativo"] = False
         resp = requests.post(
-            self.base_url+self.url,
+            self.base_url + self.url,
             data=json.dumps(data),
             proxies=self.proxies,
-            headers=self.headers)
+            headers=self.headers,
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "TESTE INATIVO"
             url = f'{self.base_url+self.url}{resp_json["id"]}/'
-            resp = requests.put(url, data=json.dumps(data), proxies=self.proxies, headers=self.headers)
+            resp = requests.put(
+                url, data=json.dumps(data), proxies=self.proxies, headers=self.headers
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="update")
 
@@ -211,7 +214,7 @@ class TestTipoDocumentoEndpoint(SiapenTestCase):
         resp = self.client.post(self.url, data=data)
         if status.is_success(resp.status_code):
             resp_json = resp.json()
-            url = f'{self.url}7124d8d8-21b4-4d6e-aa3a-687ad2ccccc4/'
+            url = f"{self.url}7124d8d8-21b4-4d6e-aa3a-687ad2ccccc4/"
             response = self.client.patch(url, data=resp_json)
             self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
             self.format_print(metodo="update")

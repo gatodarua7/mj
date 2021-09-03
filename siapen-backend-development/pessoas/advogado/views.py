@@ -3,10 +3,23 @@ from rest_framework.decorators import action
 from comum.models import Telefone
 import datetime
 from localizacao.models import Cidade, Estado, Pais
-from util.busca import check_duplicidade, formata_data, trata_campo, trata_campo_ativo, trata_telefone, get_ids, has_key
+from util.busca import (
+    check_duplicidade,
+    formata_data,
+    trata_campo,
+    trata_campo_ativo,
+    trata_telefone,
+    get_ids,
+    has_key,
+)
 from pessoas.advogado.models import Advogado, EmailAdvogado, OAB, RgAdvogado
 from django.db.models import Q
-from pessoas.advogado.serializers import AdvogadoSerializer, EmailSerializer, OABSerializer, RgAdvogadoSerializer
+from pessoas.advogado.serializers import (
+    AdvogadoSerializer,
+    EmailSerializer,
+    OABSerializer,
+    RgAdvogadoSerializer,
+)
 from django.shortcuts import render
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django_filters.rest_framework import DjangoFilterBackend
@@ -33,11 +46,10 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
     pagination_class = Paginacao
     queryset = Advogado.objects.filter(excluido=False)
     filter_backends = (SearchFilter, DjangoFilterBackend, OrderingFilter)
-    search_fields = ("nome", "cpf", "data_nascimento",
-                     "situacao","ativo")
-    filter_fields = ("nome","cpf", "data_nascimento","oabs", "situacao","ativo")
-    ordering_fields = ("nome", "cpf", "data_nascimento","oabs", "situacao","ativo")
-    ordering = ("nome","cpf", "data_nascimento","situacao","ativo")
+    search_fields = ("nome", "cpf", "data_nascimento", "situacao", "ativo")
+    filter_fields = ("nome", "cpf", "data_nascimento", "oabs", "situacao", "ativo")
+    ordering_fields = ("nome", "cpf", "data_nascimento", "oabs", "situacao", "ativo")
+    ordering = ("nome", "cpf", "data_nascimento", "situacao", "ativo")
 
     def create(self, request, *args, **kwargs):
         requisicao = request.data
@@ -50,8 +62,7 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
             if self.check_advogado_exists(requisicao):
                 return Response(
-                    {"cpf": mensagens.MSG4},
-                    status=status.HTTP_400_BAD_REQUEST,
+                    {"cpf": mensagens.MSG4}, status=status.HTTP_400_BAD_REQUEST
                 )
 
             if (
@@ -73,8 +84,7 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             requisicao = request.data
             if self.check_advogado_exists(requisicao):
                 return Response(
-                    {"detail": mensagens.MSG4},
-                    status=status.HTTP_409_CONFLICT,
+                    {"detail": mensagens.MSG4}, status=status.HTTP_409_CONFLICT
                 )
             if (
                 requisicao.get("naturalidade") and requisicao.get("estado")
@@ -115,7 +125,6 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 {"detail": mensagens.MSG_ERRO}, status=status.HTTP_400_BAD_REQUEST
             )
 
-
     def filter_queryset(self, queryset):
         queryset = super(AdvogadoViewSet, self).filter_queryset(queryset)
         parametros_busca = self.request.query_params
@@ -132,18 +141,23 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             advogado_list2.append(trata_campo(query.cpf))
             advogado_list.append(formata_data(trata_campo(query.data_nascimento)))
 
-            advogado_list.append(trata_campo(query.genero.descricao) if query.genero else "")
+            advogado_list.append(
+                trata_campo(query.genero.descricao) if query.genero else ""
+            )
             advogado_list.append(trata_campo(query.estado.nome) if query.estado else "")
             advogado_list.append(
-                trata_campo(query.naturalidade.nome) if query.naturalidade else "")
-            advogado_list.extend([
-                trata_campo(necessidade.nome)
-                for necessidade in query.necessidade_especial.all()
-            ])
+                trata_campo(query.naturalidade.nome) if query.naturalidade else ""
+            )
+            advogado_list.extend(
+                [
+                    trata_campo(necessidade.nome)
+                    for necessidade in query.necessidade_especial.all()
+                ]
+            )
 
-            advogado_list.extend([
-                    trata_campo(pais.nome) for pais in query.nacionalidade.all()
-                ])
+            advogado_list.extend(
+                [trata_campo(pais.nome) for pais in query.nacionalidade.all()]
+            )
 
             for endereco in query.enderecos.all():
                 advogado_list.append(trata_campo(endereco.logradouro))
@@ -154,7 +168,9 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 advogado_list.append(trata_campo(endereco.estado.sigla))
                 advogado_list.append(trata_campo(endereco.observacao))
                 advogado_list.append(trata_campo(endereco.complemento))
-                advogado_list2.append(trata_campo(endereco.cep.replace("-", "").replace(".", "")))
+                advogado_list2.append(
+                    trata_campo(endereco.cep.replace("-", "").replace(".", ""))
+                )
                 advogado_list.append(trata_campo(endereco.andar))
                 advogado_list.append(trata_campo(endereco.sala))
 
@@ -166,14 +182,16 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
             for oab in query.oabs.all():
                 advogado_list.append(trata_campo(oab.numero))
                 advogado_list.append(trata_campo(oab.estado.nome))
-            
+
             for rg in RgAdvogado.objects.filter(advogado_id=query.id, excluido=False):
                 advogado_list.append(trata_campo(rg.numero))
                 advogado_list.append(trata_campo(rg.orgao_expedidor.nome))
                 advogado_list.append(trata_campo(rg.orgao_expedidor.sigla))
                 advogado_list.append(trata_campo(rg.orgao_expedidor.estado))
 
-            for email in EmailAdvogado.objects.filter(advogado_id=query.id, excluido=False):
+            for email in EmailAdvogado.objects.filter(
+                advogado_id=query.id, excluido=False
+            ):
                 advogado_list.append(trata_campo(email.email))
 
             for item in advogado_list:
@@ -199,7 +217,7 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
         queryset = OrderingFilter().filter_queryset(self.request, queryset, self)
 
         return queryset
-    
+
     def check_advogado_exists(self, requisicao):
         cpf = check_duplicidade(requisicao.get("cpf"))
         return Advogado.objects.filter(
@@ -230,7 +248,7 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                 "oabs",
                 "nacionalidade",
                 "enderecos",
-                "telefones"
+                "telefones",
             ]
             for field in fields:
                 if not requisicao.get(field):
@@ -253,12 +271,18 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
         if requisicao.get("emails"):
             for email in requisicao["emails"]:
-                EmailAdvogado.objects.create(advogado_id=obj.id, email=email, usuario_cadastro=user.get_user(self))
+                EmailAdvogado.objects.create(
+                    advogado_id=obj.id,
+                    email=email,
+                    usuario_cadastro=user.get_user(self),
+                )
 
         if requisicao.get("rg"):
             for rg in requisicao["rg"]:
                 orgao_exp = OrgaoExpedidor.objects.get(id=rg.get("orgao_expedidor"))
-                rg_obj, created = RgAdvogado.objects.get_or_create(numero=rg.get("numero"), orgao_expedidor_id=orgao_exp.id)
+                rg_obj, created = RgAdvogado.objects.get_or_create(
+                    numero=rg.get("numero"), orgao_expedidor_id=orgao_exp.id
+                )
                 rg_obj.advogado = advogado
                 rg_obj.usuario_cadastro = user.get_user(self)
                 rg_obj.save()
@@ -305,7 +329,6 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
                     return retorno
         return retorno
 
-
     def create_many_fields(self, serializer):
         requisicao = self.request.data
 
@@ -340,21 +363,17 @@ class AdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet, Base):
 
         if self.request.data.get("rgs"):
             for rg in self.request.data.get("rgs"):
-                RgAdvogado.objects.filter(id=rg.get("id")).update(
-                    advogado_id=pk
-                )
+                RgAdvogado.objects.filter(id=rg.get("id")).update(advogado_id=pk)
 
         try:
             emails = ast.literal_eval(requisicao.get("emails"))
         except Exception:
-            emails = (
-                requisicao.get("emails")
-                if requisicao.get("emails")
-                else None
-            )
+            emails = requisicao.get("emails") if requisicao.get("emails") else None
 
         if emails:
-            for email in EmailAdvogado.objects.filter(~Q(email__in=emails) & Q(advogado_id=pk)):
+            for email in EmailAdvogado.objects.filter(
+                ~Q(email__in=emails) & Q(advogado_id=pk)
+            ):
                 EmailAdvogado.objects.filter(Q(pk=email.pk)).delete()
             for email in emails:
                 if email.strip():
@@ -437,16 +456,15 @@ class OABViewSet(LoggingMixin, viewsets.ModelViewSet):
                 {"detail": mensagens.MSG_ERRO}, status=status.HTTP_400_BAD_REQUEST
             )
 
-    def perform_create(self, serializer,  **kwargs):
+    def perform_create(self, serializer, **kwargs):
         estado = Estado.objects.get(id=self.request.data.get("estado"))
         kwargs["usuario_cadastro"] = user.get_user(self)
         kwargs["estado"] = estado
         serializer.save(**kwargs)
 
     def perform_update(self, serializer):
-        serializer.save(
-            usuario_edicao=user.get_user(self),
-        )
+        serializer.save(usuario_edicao=user.get_user(self))
+
 
 class RgAdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication, SessionAuthentication)
@@ -490,14 +508,11 @@ class RgAdvogadoViewSet(LoggingMixin, viewsets.ModelViewSet):
             )
 
     def perform_create(self, serializer):
-        serializer.save(
-            usuario_cadastro=user.get_user(self),
-        )
+        serializer.save(usuario_cadastro=user.get_user(self))
 
     def perform_update(self, serializer):
-        serializer.save(
-            usuario_edicao=user.get_user(self),
-        )
+        serializer.save(usuario_edicao=user.get_user(self))
+
 
 class EmailViewSet(LoggingMixin, viewsets.ModelViewSet):
     authentication_classes = (JWTAuthentication, SessionAuthentication)
@@ -541,11 +556,7 @@ class EmailViewSet(LoggingMixin, viewsets.ModelViewSet):
             )
 
     def perform_create(self, serializer):
-        serializer.save(
-            usuario_cadastro=user.get_user(self),
-        )
+        serializer.save(usuario_cadastro=user.get_user(self))
 
     def perform_update(self, serializer):
-        serializer.save(
-            usuario_edicao=user.get_user(self),
-        )
+        serializer.save(usuario_edicao=user.get_user(self))

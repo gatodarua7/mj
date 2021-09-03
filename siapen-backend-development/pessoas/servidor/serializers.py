@@ -25,8 +25,13 @@ class ServidorSerializer(FlexFieldsModelSerializer):
     class Meta:
         model = Servidor
         ordering = ["id", "nome"]
-        exclude = ["usuario_cadastro", "usuario_edicao", "usuario_exclusao",
-                    "usuario_ativacao", "usuario_inativacao"]
+        exclude = [
+            "usuario_cadastro",
+            "usuario_edicao",
+            "usuario_exclusao",
+            "usuario_ativacao",
+            "usuario_inativacao",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(ServidorSerializer, self).__init__(*args, **kwargs)
@@ -173,7 +178,7 @@ class ServidorSerializer(FlexFieldsModelSerializer):
 
     def get_cargo_nome(self, obj):
         return obj.cargos.cargo
-    
+
     def get_thumbnail(self, obj):
         thumbnail = None
         crypt = AESCipher()

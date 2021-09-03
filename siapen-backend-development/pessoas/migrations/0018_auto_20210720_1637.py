@@ -5,29 +5,27 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('pessoas', '0017_auto_20210707_1416'),
-    ]
+    dependencies = [("pessoas", "0017_auto_20210707_1416")]
 
     operations = [
         migrations.AlterField(
-            model_name='visitante',
-            name='mae_falecido',
+            model_name="visitante",
+            name="mae_falecido",
             field=models.BooleanField(blank=True, default=False, null=True),
         ),
         migrations.AlterField(
-            model_name='visitante',
-            name='mae_nao_declarado',
+            model_name="visitante",
+            name="mae_nao_declarado",
             field=models.BooleanField(blank=True, default=False, null=True),
         ),
         migrations.AlterField(
-            model_name='visitante',
-            name='pai_falecido',
+            model_name="visitante",
+            name="pai_falecido",
             field=models.BooleanField(blank=True, default=False, null=True),
         ),
         migrations.AlterField(
-            model_name='visitante',
-            name='pai_nao_declarado',
+            model_name="visitante",
+            name="pai_nao_declarado",
             field=models.BooleanField(blank=True, default=False, null=True),
         ),
     ]

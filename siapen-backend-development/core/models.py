@@ -95,7 +95,7 @@ class Log(models.Model):
     response_ms = models.IntegerField()
     path = models.CharField(max_length=200)
     remote_addr = models.TextField()
-    host =  models.CharField(max_length=200)
+    host = models.CharField(max_length=200)
     method = models.CharField(max_length=10, choices=Metodos.choices)
     query_params = models.TextField()
     data = models.TextField()
@@ -109,5 +109,5 @@ class Log(models.Model):
     response_old = models.TextField(null=True, blank=True)
 
     class Meta:
-       managed = False
-       db_table = 'rest_framework_tracking_apirequestlog'
+        managed = False
+        db_table = "rest_framework_tracking_apirequestlog"

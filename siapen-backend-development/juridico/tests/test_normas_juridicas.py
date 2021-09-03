@@ -8,7 +8,7 @@ class TestNormaJuridicaEndpoint(SiapenTestCase):
     fixtures = [
         "fixtures/usuarios/usuario.json",
         "fixtures/juridico/normas-juridicas.json",
-        "fixtures/juridico/titulo-lei.json"
+        "fixtures/juridico/titulo-lei.json",
     ]
 
     def setUp(self) -> None:
@@ -26,7 +26,9 @@ class TestNormaJuridicaEndpoint(SiapenTestCase):
         Criação de objeto válido.
         """
         data = self.data
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
 
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
         self.format_print(metodo="create")
@@ -39,7 +41,9 @@ class TestNormaJuridicaEndpoint(SiapenTestCase):
         data["nome"] = None
         data["norma_juridica"] = None
         data["descricao"] = None
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -50,7 +54,9 @@ class TestNormaJuridicaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "teste"
         data["norma_juridica"] = "568f98d3-a883-4b7d-8485-a138c5432264"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
 
@@ -69,12 +75,16 @@ class TestNormaJuridicaEndpoint(SiapenTestCase):
 
         data = self.data
         data["nome"] = "Carta Magna"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
             resp = self.client.delete(url)
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="Update")
 
@@ -85,13 +95,17 @@ class TestNormaJuridicaEndpoint(SiapenTestCase):
 
         data = self.data
         data["nome"] = "Atualização de nome"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["nome"] = "Finha"
             url = f'{self.url}{resp_json["id"]}/'
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
-            self.assertEqual(resp.status_code,status.HTTP_200_OK)
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
+            self.assertEqual(resp.status_code, status.HTTP_200_OK)
             self.format_print(metodo="Update")
 
     def test_h_update(self):
@@ -102,11 +116,15 @@ class TestNormaJuridicaEndpoint(SiapenTestCase):
         data = self.data
         data["nome"] = "Lei inativada"
         data["ativo"] = False
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             url = f'{self.url}{resp_json["id"]}/'
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="Update")
 
@@ -118,12 +136,16 @@ class TestNormaJuridicaEndpoint(SiapenTestCase):
         data = self.data
         data["norma_juridica"] = "568f98d3-a883-4b7d-8485-a138c5432264"
         data["nome"] = "DECRETO_LEGISLATIVO"
-        resp = self.client.post(self.url, data=json.dumps(data), content_type='application/json')
+        resp = self.client.post(
+            self.url, data=json.dumps(data), content_type="application/json"
+        )
         if status.is_success(resp.status_code):
             resp_json = resp.json()
             resp_json["norma_juridica"] = "Decreto Leg."
             url = f'{self.url}{resp_json["id"]}/'
-            resp = self.client.patch(url, data=json.dumps(resp_json), content_type='application/json')
+            resp = self.client.patch(
+                url, data=json.dumps(resp_json), content_type="application/json"
+            )
             self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
             self.format_print(metodo="Update")
 

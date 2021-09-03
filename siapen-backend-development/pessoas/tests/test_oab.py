@@ -3,21 +3,18 @@ from rest_framework import status
 import json
 import requests
 
+
 class TestOABEndpoint(SiapenTestCase):
     fixtures = [
         "fixtures/usuarios/usuario.json",
         "fixtures/localizacao/paises.json",
         "fixtures/localizacao/estados.json",
-
     ]
 
     def setUp(self) -> None:
         self.entidade = "OAB"
         self.url = f"/api/pessoas/oab/"
-        self.data = {
-            "numero": "12345",
-            "estado": 29
-        }
+        self.data = {"numero": "12345", "estado": 29}
         super(TestOABEndpoint, self).setUp()
 
     def test_a_create(self):
@@ -35,12 +32,11 @@ class TestOABEndpoint(SiapenTestCase):
         Criação de objeto invalido.
         """
         data = self.data
-        data["numero"] = ''
+        data["numero"] = ""
         data["estado"] = 29
         resp = self.client.post(self.url, data=data)
         self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
         self.format_print(metodo="create")
-
 
     def test_f_list(self):
         """

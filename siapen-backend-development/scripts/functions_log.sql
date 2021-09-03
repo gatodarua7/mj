@@ -1,10 +1,10 @@
-ALTER TABLE rest_framework_tracking_apirequestlog 
+ALTER TABLE rest_framework_tracking_apirequestlog
 ADD COLUMN response_old text;
 
 create or replace function func_get_response_old(log_id BIGINT)
-returns text as 
+returns text as
 $$
-select response 
+select response
 from rest_framework_tracking_apirequestlog
 where response like func_get_id($1) and id < $1 and view_method <> 'list'
 ORDER BY requested_at DESC
@@ -12,10 +12,10 @@ LIMIT 1;
 $$ language 'sql' STABLE;
 
 create or replace function func_get_id(log_id bigint)
-returns text as 
+returns text as
 $$
-SELECT CONCAT('%',SUBSTRING(response, 8, 36), '%')  
-FROM rest_framework_tracking_apirequestlog rfta  
+SELECT CONCAT('%',SUBSTRING(response, 8, 36), '%')
+FROM rest_framework_tracking_apirequestlog rfta
 where id = $1;
 $$ language 'sql' STABLE;
 
@@ -23,9 +23,9 @@ CREATE OR REPLACE FUNCTION function_update()
 RETURNS trigger AS
 $BODY$
 begin
-UPDATE rest_framework_tracking_apirequestlog 
+UPDATE rest_framework_tracking_apirequestlog
 SET response_old = func_get_response_old(new.id)
-WHERE id = NEW.id; 
+WHERE id = NEW.id;
 RETURN new;
 END;
 $BODY$

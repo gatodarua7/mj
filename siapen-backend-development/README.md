@@ -5,7 +5,7 @@ Repositório referente ao Backend do projeto SIAPEN do Ministério da Justiça e
 Esse repositório constitui a **API** (_Application Programing Interface_) do sistema, sendo construído:
 
 - Na linguagem de programação **Python**
-- Com o _framework_ de desenvolvimento web **Django**; 
+- Com o _framework_ de desenvolvimento web **Django**;
 - Com o _framework_ para construções de APIs **Django REST Framework**;
 
 ## Configuração Inicial
@@ -13,7 +13,7 @@ Esse repositório constitui a **API** (_Application Programing Interface_) do si
 - Crie um arquivo `.env` na raíz do projeto com as seguintes variáveis e preenchas os valores de acordo com o ambiente:
 
     - `ALLOWED_HOSTS=*`: Uma lista de strings (sem colchetes e sem aspas/apóstrofos) que representam os nomes de hosts/domínios que o sistema pode servir (exemplo de lista: `ALLOWED_HOSTS=hml.siapen.depen.gov.br,tst.siapen.depen.gov.br`).
-    - `DEBUG=True|False`: Seta o modo `DEBUG` do Django (`True` ou `False`). 
+    - `DEBUG=True|False`: Seta o modo `DEBUG` do Django (`True` ou `False`).
     - `SECRET_KEY=''`: Variável de segurança do Django (usar valores aleatórios).
     - `JWT_KEY=''`: Chave de segurança JWT.
     - `DB_NAME=''`: Nome do `database` no PostgreSQL.

@@ -1,11 +1,11 @@
  #!/bin/bash
 # Script para rodar os testes
 echo "RECRIANDO A BASE DE TESTES..."
-sh scripts/recria_db.sh 
+sh scripts/recria_db.sh
 echo ""
 
 echo "EFETUANDO A CARGA DOS DADOS..."
-sh scripts/carga.sh 
+sh scripts/carga.sh
 echo ""
 
 # Popula banco com fixtures e roda aplicação
